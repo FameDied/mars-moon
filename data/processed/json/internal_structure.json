@@ -1,0 +1,145 @@
+[
+  {
+    "body": "Moon",
+    "layer_name": "Regolith & Megaregolith",
+    "depth_min_km": 0.0,
+    "depth_max_km": 2.0,
+    "composition": "Fragmented rock powder, glass agglutinates, impact ejecta breccia",
+    "density_g_cm3": 1.9,
+    "physical_state": "Unconsolidated porous particulate",
+    "seismic_p_velocity_kms": 0.3,
+    "discovery_notes": "Apollo Active Seismic Experiments (ASE) and penetrometers"
+  },
+  {
+    "body": "Moon",
+    "layer_name": "Upper Anorthositic Crust",
+    "depth_min_km": 2.0,
+    "depth_max_km": 20.0,
+    "composition": "Ferroan Anorthosite (>90% plagioclase feldspar), troctolite",
+    "density_g_cm3": 2.75,
+    "physical_state": "Fractured Solid Silicate",
+    "seismic_p_velocity_kms": 5.1,
+    "discovery_notes": "Apollo Passive Seismic & GRAIL dual-spacecraft gravity mapping (mean thickness ~34-43 km nearside)"
+  },
+  {
+    "body": "Moon",
+    "layer_name": "Lower Crust",
+    "depth_min_km": 20.0,
+    "depth_max_km": 43.0,
+    "composition": "Noritic and gabbroic rocks, richer in pyroxene and iron",
+    "density_g_cm3": 3.05,
+    "physical_state": "Solid Crystalline Rock",
+    "seismic_p_velocity_kms": 6.8,
+    "discovery_notes": "GRAIL gravity models and Apollo seismic inversion"
+  },
+  {
+    "body": "Moon",
+    "layer_name": "Upper & Middle Mantle",
+    "depth_min_km": 43.0,
+    "depth_max_km": 1200.0,
+    "composition": "Olivine, orthopyroxene, clinopyroxene, ilmenite-rich cumulates",
+    "density_g_cm3": 3.35,
+    "physical_state": "Rigid Solid Silicate Mantle",
+    "seismic_p_velocity_kms": 8.0,
+    "discovery_notes": "Deep Moonquake source zone (~700-1100 km depth) triggered by Earth tidal stresses (Apollo PSE)"
+  },
+  {
+    "body": "Moon",
+    "layer_name": "Partial Melt Boundary Zone",
+    "depth_min_km": 1200.0,
+    "depth_max_km": 1400.0,
+    "composition": "Silicate mantle with 5-30% partial melt fraction, enriched in titanium/iron",
+    "density_g_cm3": 3.4,
+    "physical_state": "Viscoelastic / Partially Molten",
+    "seismic_p_velocity_kms": 7.2,
+    "discovery_notes": "Strong attenuation of seismic shear waves detected by Apollo seismic network reanalyses (Weber et al. 2011)"
+  },
+  {
+    "body": "Moon",
+    "layer_name": "Outer Liquid Core",
+    "depth_min_km": 1400.0,
+    "depth_max_km": 1500.0,
+    "composition": "Molten iron-nickel alloy with ~5-6% sulfur",
+    "density_g_cm3": 6.9,
+    "physical_state": "Liquid Metallic Alloy",
+    "seismic_p_velocity_kms": 4.1,
+    "discovery_notes": "Radius ~330 km, discovered by Apollo seismic and Lunar Prospector/GRAIL laser ranging libration analyses"
+  },
+  {
+    "body": "Moon",
+    "layer_name": "Inner Solid Core",
+    "depth_min_km": 1500.0,
+    "depth_max_km": 1737.4,
+    "composition": "Solid metallic crystalline iron (Fe-Ni)",
+    "density_g_cm3": 7.8,
+    "physical_state": "Solid Metallic Sphere",
+    "seismic_p_velocity_kms": 4.3,
+    "discovery_notes": "Radius ~240 km, confirmed by NASA GRAIL and French CNRS seismic array re-evaluations (Brossier et al. 2023)"
+  },
+  {
+    "body": "Mars",
+    "layer_name": "Sedimentary & Fractured Regolith",
+    "depth_min_km": 0.0,
+    "depth_max_km": 10.0,
+    "composition": "Basaltic sands, clays, sulfates, heavily altered impact-brecciated rock",
+    "density_g_cm3": 2.4,
+    "physical_state": "Porous Fractured Rock (high porosity ~25%)",
+    "seismic_p_velocity_kms": 2.8,
+    "discovery_notes": "InSight SEIS P-to-S receiver functions (Knapmeyer-Endrun et al. 2021)"
+  },
+  {
+    "body": "Mars",
+    "layer_name": "Middle Crust",
+    "depth_min_km": 10.0,
+    "depth_max_km": 24.0,
+    "composition": "Denser basaltic and andesitic crystalline igneous rock",
+    "density_g_cm3": 2.85,
+    "physical_state": "Solid Crystalline Silicate",
+    "seismic_p_velocity_kms": 5.4,
+    "discovery_notes": "InSight SEIS mid-crustal seismic interface"
+  },
+  {
+    "body": "Mars",
+    "layer_name": "Lower Crust",
+    "depth_min_km": 24.0,
+    "depth_max_km": 42.0,
+    "composition": "Gabbroic, noritic, and felsic underplated lower crust",
+    "density_g_cm3": 3.1,
+    "physical_state": "Solid Ductile Silicate",
+    "seismic_p_velocity_kms": 6.6,
+    "discovery_notes": "Global crustal thickness varies from ~20 km beneath Isidis to >70 km beneath Tharsis bulge (mean ~39-48 km)"
+  },
+  {
+    "body": "Mars",
+    "layer_name": "Upper & Transition Mantle",
+    "depth_min_km": 42.0,
+    "depth_max_km": 1050.0,
+    "composition": "Iron-rich olivine and pyroxenes (FeO ~18 wt% - twice as rich in iron as Earth's mantle)",
+    "density_g_cm3": 3.55,
+    "physical_state": "Solid Convecting Silicate Mantle",
+    "seismic_p_velocity_kms": 7.9,
+    "discovery_notes": "InSight SEIS deep mantle teleseismic phases"
+  },
+  {
+    "body": "Mars",
+    "layer_name": "Lower Mantle / Basal Thermal Layer",
+    "depth_min_km": 1050.0,
+    "depth_max_km": 1560.0,
+    "composition": "Ringwoodite, majorite garnet, and silicate perovskite (bridgmanite absent or very thin)",
+    "density_g_cm3": 4.1,
+    "physical_state": "Viscoelastic Dense Silicate",
+    "seismic_p_velocity_kms": 8.5,
+    "discovery_notes": "Discovered molten silicate basal layer wrapping core boundary (Khan et al., Samuel et al. 2023)"
+  },
+  {
+    "body": "Mars",
+    "layer_name": "Liquid Metallic Core",
+    "depth_min_km": 1560.0,
+    "depth_max_km": 3389.5,
+    "composition": "Liquid iron-nickel alloy enriched with ~18-21 wt% light elements (sulfur, oxygen, carbon, hydrogen)",
+    "density_g_cm3": 6.1,
+    "physical_state": "Liquid Metallic Core",
+    "seismic_p_velocity_kms": 4.8,
+    "discovery_notes": "Core radius determined by InSight core-reflected seismic waves (SKS, ScS) to be 1,780 to 1,830 km; completely molten with no solid inner core detected."
+  }
+]

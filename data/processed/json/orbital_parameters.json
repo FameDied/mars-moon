@@ -1,0 +1,552 @@
+[
+  {
+    "body": "Moon",
+    "category": "Orbital Parameters",
+    "parameter": "Semimajor axis",
+    "raw_parameter": "Semimajor axis (106 km)",
+    "value_str": "0.3844",
+    "unit": "106 km",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Moon",
+    "category": "Orbital Parameters",
+    "parameter": "Perigee",
+    "raw_parameter": "Perigee (106 km)*",
+    "value_str": "0.3633",
+    "unit": "106 km",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Moon",
+    "category": "Orbital Parameters",
+    "parameter": "Apogee",
+    "raw_parameter": "Apogee (106 km)*",
+    "value_str": "0.4055",
+    "unit": "106 km",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Moon",
+    "category": "Orbital Parameters",
+    "parameter": "Revolution period",
+    "raw_parameter": "Revolution period (days)",
+    "value_str": "27.3217",
+    "unit": "days",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Moon",
+    "category": "Orbital Parameters",
+    "parameter": "Synodic period",
+    "raw_parameter": "Synodic period (days)",
+    "value_str": "29.53",
+    "unit": "days",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Moon",
+    "category": "Orbital Parameters",
+    "parameter": "Mean orbital velocity",
+    "raw_parameter": "Mean orbital velocity (km/s)",
+    "value_str": "1.022",
+    "unit": "km/s",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Moon",
+    "category": "Orbital Parameters",
+    "parameter": "Max. orbital velocity",
+    "raw_parameter": "Max. orbital velocity (km/s)",
+    "value_str": "1.082",
+    "unit": "km/s",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Moon",
+    "category": "Orbital Parameters",
+    "parameter": "Min. orbital velocity",
+    "raw_parameter": "Min. orbital velocity (km/s)",
+    "value_str": "0.970",
+    "unit": "km/s",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Moon",
+    "category": "Orbital Parameters",
+    "parameter": "Inclination to ecliptic",
+    "raw_parameter": "Inclination to ecliptic (deg)",
+    "value_str": "5.145",
+    "unit": "deg",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Moon",
+    "category": "Orbital Parameters",
+    "parameter": "Inclination to Earth equator",
+    "raw_parameter": "Inclination to Earth equator (deg)",
+    "value_str": "18.28 - 28.58",
+    "unit": "deg",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Moon",
+    "category": "Orbital Parameters",
+    "parameter": "Orbit eccentricity",
+    "raw_parameter": "Orbit eccentricity",
+    "value_str": "0.0549",
+    "unit": "",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Moon",
+    "category": "Orbital Parameters",
+    "parameter": "Sidereal rotation period",
+    "raw_parameter": "Sidereal rotation period (hrs)",
+    "value_str": "655.720",
+    "unit": "hrs",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Moon",
+    "category": "Orbital Parameters",
+    "parameter": "Obliquity to orbit",
+    "raw_parameter": "Obliquity to orbit (deg)",
+    "value_str": "6.68",
+    "unit": "deg",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Moon",
+    "category": "Orbital Parameters",
+    "parameter": "Recession rate from Earth",
+    "raw_parameter": "Recession rate from Earth (cm/yr)",
+    "value_str": "3.8",
+    "unit": "cm/yr",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Mars",
+    "category": "Orbital Parameters",
+    "parameter": "Semimajor axis",
+    "raw_parameter": "Semimajor axis (106 km)",
+    "value_str": "227.956",
+    "unit": "106 km",
+    "earth_comparison_value": "149.598",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Mars",
+    "category": "Orbital Parameters",
+    "parameter": "Sidereal orbit period",
+    "raw_parameter": "Sidereal orbit period (days)",
+    "value_str": "686.980",
+    "unit": "days",
+    "earth_comparison_value": "365.256",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Mars",
+    "category": "Orbital Parameters",
+    "parameter": "Tropical orbit period*",
+    "raw_parameter": "Tropical orbit period* (days)",
+    "value_str": "686.972",
+    "unit": "days",
+    "earth_comparison_value": "365.242",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Mars",
+    "category": "Orbital Parameters",
+    "parameter": "Perihelion",
+    "raw_parameter": "Perihelion (106 km)",
+    "value_str": "206.650",
+    "unit": "106 km",
+    "earth_comparison_value": "147.095",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Mars",
+    "category": "Orbital Parameters",
+    "parameter": "Aphelion",
+    "raw_parameter": "Aphelion (106 km)",
+    "value_str": "249.261",
+    "unit": "106 km",
+    "earth_comparison_value": "152.100",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Mars",
+    "category": "Orbital Parameters",
+    "parameter": "Synodic period",
+    "raw_parameter": "Synodic period (days)",
+    "value_str": "779.94",
+    "unit": "days",
+    "earth_comparison_value": "-",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Mars",
+    "category": "Orbital Parameters",
+    "parameter": "Mean orbital velocity",
+    "raw_parameter": "Mean orbital velocity (km/s)",
+    "value_str": "24.08",
+    "unit": "km/s",
+    "earth_comparison_value": "29.78",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Mars",
+    "category": "Orbital Parameters",
+    "parameter": "Max. orbital velocity",
+    "raw_parameter": "Max. orbital velocity (km/s)",
+    "value_str": "26.50",
+    "unit": "km/s",
+    "earth_comparison_value": "30.29",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Mars",
+    "category": "Orbital Parameters",
+    "parameter": "Min. orbital velocity",
+    "raw_parameter": "Min. orbital velocity (km/s)",
+    "value_str": "21.97",
+    "unit": "km/s",
+    "earth_comparison_value": "29.29",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Mars",
+    "category": "Orbital Parameters",
+    "parameter": "Orbit inclination",
+    "raw_parameter": "Orbit inclination (deg)",
+    "value_str": "1.848",
+    "unit": "deg",
+    "earth_comparison_value": "0.000",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Mars",
+    "category": "Orbital Parameters",
+    "parameter": "Orbit eccentricity",
+    "raw_parameter": "Orbit eccentricity",
+    "value_str": "0.0935",
+    "unit": "",
+    "earth_comparison_value": "0.0167",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Mars",
+    "category": "Orbital Parameters",
+    "parameter": "Sidereal rotation period",
+    "raw_parameter": "Sidereal rotation period (hrs)",
+    "value_str": "24.6229",
+    "unit": "hrs",
+    "earth_comparison_value": "23.9345",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Mars",
+    "category": "Orbital Parameters",
+    "parameter": "Length of day",
+    "raw_parameter": "Length of day (hrs)",
+    "value_str": "24.6597",
+    "unit": "hrs",
+    "earth_comparison_value": "24.0000",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Mars",
+    "category": "Orbital Parameters",
+    "parameter": "Obliquity to orbit",
+    "raw_parameter": "Obliquity to orbit (deg)",
+    "value_str": "25.19",
+    "unit": "deg",
+    "earth_comparison_value": "23.44",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Mars",
+    "category": "Orbital Parameters",
+    "parameter": "Inclination of equator",
+    "raw_parameter": "Inclination of equator (deg)",
+    "value_str": "25.19",
+    "unit": "deg",
+    "earth_comparison_value": "23.44",
+    "source": "NASA GSFC Planetary Fact Sheet"
+  },
+  {
+    "body": "Phobos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Semimajor axis*",
+    "raw_parameter": "Semimajor axis* (km)",
+    "value_str": "9378",
+    "unit": "km",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Deimos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Semimajor axis*",
+    "raw_parameter": "Semimajor axis* (km)",
+    "value_str": "23459",
+    "unit": "km",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Phobos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Sidereal orbit period",
+    "raw_parameter": "Sidereal orbit period (days)",
+    "value_str": "0.31891",
+    "unit": "days",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Deimos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Sidereal orbit period",
+    "raw_parameter": "Sidereal orbit period (days)",
+    "value_str": "1.26244",
+    "unit": "days",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Phobos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Sidereal rotation period",
+    "raw_parameter": "Sidereal rotation period (days)",
+    "value_str": "0.31891",
+    "unit": "days",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Deimos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Sidereal rotation period",
+    "raw_parameter": "Sidereal rotation period (days)",
+    "value_str": "1.26244",
+    "unit": "days",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Phobos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Orbital inclination",
+    "raw_parameter": "Orbital inclination (deg)",
+    "value_str": "1.08",
+    "unit": "deg",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Deimos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Orbital inclination",
+    "raw_parameter": "Orbital inclination (deg)",
+    "value_str": "1.79",
+    "unit": "deg",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Phobos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Orbital eccentricity",
+    "raw_parameter": "Orbital eccentricity",
+    "value_str": "0.0151",
+    "unit": "",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Deimos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Orbital eccentricity",
+    "raw_parameter": "Orbital eccentricity",
+    "value_str": "0.0005",
+    "unit": "",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Phobos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Subplanetary axis radius",
+    "raw_parameter": "Subplanetary axis radius (km)",
+    "value_str": "13.0",
+    "unit": "km",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Deimos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Subplanetary axis radius",
+    "raw_parameter": "Subplanetary axis radius (km)",
+    "value_str": "7.8",
+    "unit": "km",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Phobos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Along-orbit axis radius",
+    "raw_parameter": "Along-orbit axis radius (km)",
+    "value_str": "11.4",
+    "unit": "km",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Deimos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Along-orbit axis radius",
+    "raw_parameter": "Along-orbit axis radius (km)",
+    "value_str": "6.0",
+    "unit": "km",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Phobos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Polar axis radius",
+    "raw_parameter": "Polar axis radius (km)",
+    "value_str": "9.1",
+    "unit": "km",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Deimos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Polar axis radius",
+    "raw_parameter": "Polar axis radius (km)",
+    "value_str": "5.1",
+    "unit": "km",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Phobos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Mass",
+    "raw_parameter": "Mass (1015 kg)",
+    "value_str": "10.6",
+    "unit": "1015 kg",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Deimos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Mass",
+    "raw_parameter": "Mass (1015 kg)",
+    "value_str": "2.4",
+    "unit": "1015 kg",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Phobos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Mean density",
+    "raw_parameter": "Mean density (kg/m3)",
+    "value_str": "1900",
+    "unit": "kg/m3",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Deimos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Mean density",
+    "raw_parameter": "Mean density (kg/m3)",
+    "value_str": "1750",
+    "unit": "kg/m3",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Phobos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Geometric albedo",
+    "raw_parameter": "Geometric albedo",
+    "value_str": "0.07",
+    "unit": "",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Deimos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Geometric albedo",
+    "raw_parameter": "Geometric albedo",
+    "value_str": "0.08",
+    "unit": "",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Phobos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Visual magnitude V",
+    "raw_parameter": "Visual magnitude V(1,0)",
+    "value_str": "+11.8",
+    "unit": "1,0",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Deimos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Visual magnitude V",
+    "raw_parameter": "Visual magnitude V(1,0)",
+    "value_str": "+12.89",
+    "unit": "1,0",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Phobos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Apparent visual magnitude",
+    "raw_parameter": "Apparent visual magnitude (V0)",
+    "value_str": "11.3",
+    "unit": "V0",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  },
+  {
+    "body": "Deimos",
+    "category": "Satellite Orbital Properties",
+    "parameter": "Apparent visual magnitude",
+    "raw_parameter": "Apparent visual magnitude (V0)",
+    "value_str": "12.40",
+    "unit": "V0",
+    "earth_comparison_value": "",
+    "source": "NASA GSFC Mars Moons Fact Sheet"
+  }
+]

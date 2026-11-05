@@ -1,0 +1,56 @@
+body,category,parameter,raw_parameter,value_str,unit,earth_comparison_value,source
+Moon,Orbital Parameters,Semimajor axis,Semimajor axis (106 km),0.3844,106 km,,NASA GSFC Planetary Fact Sheet
+Moon,Orbital Parameters,Perigee,Perigee (106 km)*,0.3633,106 km,,NASA GSFC Planetary Fact Sheet
+Moon,Orbital Parameters,Apogee,Apogee (106 km)*,0.4055,106 km,,NASA GSFC Planetary Fact Sheet
+Moon,Orbital Parameters,Revolution period,Revolution period (days),27.3217,days,,NASA GSFC Planetary Fact Sheet
+Moon,Orbital Parameters,Synodic period,Synodic period (days),29.53,days,,NASA GSFC Planetary Fact Sheet
+Moon,Orbital Parameters,Mean orbital velocity,Mean orbital velocity (km/s),1.022,km/s,,NASA GSFC Planetary Fact Sheet
+Moon,Orbital Parameters,Max. orbital velocity,Max. orbital velocity (km/s),1.082,km/s,,NASA GSFC Planetary Fact Sheet
+Moon,Orbital Parameters,Min. orbital velocity,Min. orbital velocity (km/s),0.970,km/s,,NASA GSFC Planetary Fact Sheet
+Moon,Orbital Parameters,Inclination to ecliptic,Inclination to ecliptic (deg),5.145,deg,,NASA GSFC Planetary Fact Sheet
+Moon,Orbital Parameters,Inclination to Earth equator,Inclination to Earth equator (deg),18.28 - 28.58,deg,,NASA GSFC Planetary Fact Sheet
+Moon,Orbital Parameters,Orbit eccentricity,Orbit eccentricity,0.0549,,,NASA GSFC Planetary Fact Sheet
+Moon,Orbital Parameters,Sidereal rotation period,Sidereal rotation period (hrs),655.720,hrs,,NASA GSFC Planetary Fact Sheet
+Moon,Orbital Parameters,Obliquity to orbit,Obliquity to orbit (deg),6.68,deg,,NASA GSFC Planetary Fact Sheet
+Moon,Orbital Parameters,Recession rate from Earth,Recession rate from Earth (cm/yr),3.8,cm/yr,,NASA GSFC Planetary Fact Sheet
+Mars,Orbital Parameters,Semimajor axis,Semimajor axis (106 km),227.956,106 km,149.598,NASA GSFC Planetary Fact Sheet
+Mars,Orbital Parameters,Sidereal orbit period,Sidereal orbit period (days),686.980,days,365.256,NASA GSFC Planetary Fact Sheet
+Mars,Orbital Parameters,Tropical orbit period*,Tropical orbit period* (days),686.972,days,365.242,NASA GSFC Planetary Fact Sheet
+Mars,Orbital Parameters,Perihelion,Perihelion (106 km),206.650,106 km,147.095,NASA GSFC Planetary Fact Sheet
+Mars,Orbital Parameters,Aphelion,Aphelion (106 km),249.261,106 km,152.100,NASA GSFC Planetary Fact Sheet
+Mars,Orbital Parameters,Synodic period,Synodic period (days),779.94,days,-,NASA GSFC Planetary Fact Sheet
+Mars,Orbital Parameters,Mean orbital velocity,Mean orbital velocity (km/s),24.08,km/s,29.78,NASA GSFC Planetary Fact Sheet
+Mars,Orbital Parameters,Max. orbital velocity,Max. orbital velocity (km/s),26.50,km/s,30.29,NASA GSFC Planetary Fact Sheet
+Mars,Orbital Parameters,Min. orbital velocity,Min. orbital velocity (km/s),21.97,km/s,29.29,NASA GSFC Planetary Fact Sheet
+Mars,Orbital Parameters,Orbit inclination,Orbit inclination (deg),1.848,deg,0.000,NASA GSFC Planetary Fact Sheet
+Mars,Orbital Parameters,Orbit eccentricity,Orbit eccentricity,0.0935,,0.0167,NASA GSFC Planetary Fact Sheet
+Mars,Orbital Parameters,Sidereal rotation period,Sidereal rotation period (hrs),24.6229,hrs,23.9345,NASA GSFC Planetary Fact Sheet
+Mars,Orbital Parameters,Length of day,Length of day (hrs),24.6597,hrs,24.0000,NASA GSFC Planetary Fact Sheet
+Mars,Orbital Parameters,Obliquity to orbit,Obliquity to orbit (deg),25.19,deg,23.44,NASA GSFC Planetary Fact Sheet
+Mars,Orbital Parameters,Inclination of equator,Inclination of equator (deg),25.19,deg,23.44,NASA GSFC Planetary Fact Sheet
+Phobos,Satellite Orbital Properties,Semimajor axis*,Semimajor axis* (km),9378,km,,NASA GSFC Mars Moons Fact Sheet
+Deimos,Satellite Orbital Properties,Semimajor axis*,Semimajor axis* (km),23459,km,,NASA GSFC Mars Moons Fact Sheet
+Phobos,Satellite Orbital Properties,Sidereal orbit period,Sidereal orbit period (days),0.31891,days,,NASA GSFC Mars Moons Fact Sheet
+Deimos,Satellite Orbital Properties,Sidereal orbit period,Sidereal orbit period (days),1.26244,days,,NASA GSFC Mars Moons Fact Sheet
+Phobos,Satellite Orbital Properties,Sidereal rotation period,Sidereal rotation period (days),0.31891,days,,NASA GSFC Mars Moons Fact Sheet
+Deimos,Satellite Orbital Properties,Sidereal rotation period,Sidereal rotation period (days),1.26244,days,,NASA GSFC Mars Moons Fact Sheet
+Phobos,Satellite Orbital Properties,Orbital inclination,Orbital inclination (deg),1.08,deg,,NASA GSFC Mars Moons Fact Sheet
+Deimos,Satellite Orbital Properties,Orbital inclination,Orbital inclination (deg),1.79,deg,,NASA GSFC Mars Moons Fact Sheet
+Phobos,Satellite Orbital Properties,Orbital eccentricity,Orbital eccentricity,0.0151,,,NASA GSFC Mars Moons Fact Sheet
+Deimos,Satellite Orbital Properties,Orbital eccentricity,Orbital eccentricity,0.0005,,,NASA GSFC Mars Moons Fact Sheet
+Phobos,Satellite Orbital Properties,Subplanetary axis radius,Subplanetary axis radius (km),13.0,km,,NASA GSFC Mars Moons Fact Sheet
+Deimos,Satellite Orbital Properties,Subplanetary axis radius,Subplanetary axis radius (km),7.8,km,,NASA GSFC Mars Moons Fact Sheet
+Phobos,Satellite Orbital Properties,Along-orbit axis radius,Along-orbit axis radius (km),11.4,km,,NASA GSFC Mars Moons Fact Sheet
+Deimos,Satellite Orbital Properties,Along-orbit axis radius,Along-orbit axis radius (km),6.0,km,,NASA GSFC Mars Moons Fact Sheet
+Phobos,Satellite Orbital Properties,Polar axis radius,Polar axis radius (km),9.1,km,,NASA GSFC Mars Moons Fact Sheet
+Deimos,Satellite Orbital Properties,Polar axis radius,Polar axis radius (km),5.1,km,,NASA GSFC Mars Moons Fact Sheet
+Phobos,Satellite Orbital Properties,Mass,Mass (1015 kg),10.6,1015 kg,,NASA GSFC Mars Moons Fact Sheet
+Deimos,Satellite Orbital Properties,Mass,Mass (1015 kg),2.4,1015 kg,,NASA GSFC Mars Moons Fact Sheet
+Phobos,Satellite Orbital Properties,Mean density,Mean density (kg/m3),1900,kg/m3,,NASA GSFC Mars Moons Fact Sheet
+Deimos,Satellite Orbital Properties,Mean density,Mean density (kg/m3),1750,kg/m3,,NASA GSFC Mars Moons Fact Sheet
+Phobos,Satellite Orbital Properties,Geometric albedo,Geometric albedo,0.07,,,NASA GSFC Mars Moons Fact Sheet
+Deimos,Satellite Orbital Properties,Geometric albedo,Geometric albedo,0.08,,,NASA GSFC Mars Moons Fact Sheet
+Phobos,Satellite Orbital Properties,Visual magnitude V,"Visual magnitude V(1,0)",+11.8,"1,0",,NASA GSFC Mars Moons Fact Sheet
+Deimos,Satellite Orbital Properties,Visual magnitude V,"Visual magnitude V(1,0)",+12.89,"1,0",,NASA GSFC Mars Moons Fact Sheet
+Phobos,Satellite Orbital Properties,Apparent visual magnitude,Apparent visual magnitude (V0),11.3,V0,,NASA GSFC Mars Moons Fact Sheet
+Deimos,Satellite Orbital Properties,Apparent visual magnitude,Apparent visual magnitude (V0),12.40,V0,,NASA GSFC Mars Moons Fact Sheet

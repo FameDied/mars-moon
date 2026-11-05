@@ -1,0 +1,268 @@
+*******************************************************************************
+ Revised: June 02, 2025                 Mars                            499 / 4
+ 
+ PHYSICAL DATA (updated 2025-Jun-02):
+  Vol. mean radius (km) = 3389.92+-0.04   Density (g/cm^3)      =  3.933(5+-4)
+  Mass x10^23 (kg)      =    6.4171       Flattening, f         =  1/169.779
+  Volume (x10^10 km^3)  =   16.318        Equatorial radius (km)=  3396.19
+  Sidereal rot. period  =   24.622962 hr  Sid. rot. rate, rad/s =  0.0000708822 
+  Mean solar day (sol)  =   88775.24415 s Polar gravity m/s^2   =  3.758
+  Core radius (km)      = ~1700           Equ. gravity  m/s^2   =  3.71
+  Geometric Albedo      =    0.150                                              
+
+  GM (km^3/s^2)         = 42828.375662    Mass ratio (Sun/Mars) = 3098703.59
+  GM 1-sigma (km^3/s^2) = +- 0.00028      Mass of atmosphere, kg= ~ 2.5 x 10^16
+  Mean temperature (K)  =  210            Atmos. pressure (bar) =    0.0056 
+  Obliquity to orbit    =   25.19 deg     Max. angular diam.    =  17.9"
+  Mean sidereal orb per =    1.88081578 y Visual mag. V(1,0)    =  -1.52
+  Mean sidereal orb per =  686.98 d       Orbital speed,  km/s  =  24.13
+  Hill's sphere rad. Rp =  319.8          Escape speed, km/s    =   5.027
+                                 Perihelion  Aphelion    Mean
+  Solar Constant (W/m^2)         717         493         589
+  Maximum Planetary IR (W/m^2)   470         315         390
+  Minimum Planetary IR (W/m^2)    30          30          30
+*******************************************************************************
+
+
+*******************************************************************************
+Ephemeris / API_USER Thu Nov  5 08:19:24 2026 Pasadena, USA      / Horizons    
+*******************************************************************************
+Target body name: Mars (499)                      {source: mar099}
+Center body name: Earth (399)                     {source: DE441}
+Center-site name: GEOCENTRIC
+*******************************************************************************
+Start time      : A.D. 2026-Jan-01 00:00:00.0000 UT      
+Stop  time      : A.D. 2026-Dec-31 00:00:00.0000 UT      
+Step-size       : 7200 minutes
+*******************************************************************************
+Target pole/equ : IAU_MARS                        {West-longitude positive}
+Target radii    : 3396.19, 3396.19, 3376.2 km     {Equator_a, b, pole_c}       
+Center geodetic : 0.0, 0.0, -6378.137             {E-lon(deg),Lat(deg),Alt(km)}
+Center cylindric: 0.0, 0.0, 0.0                   {E-lon(deg),Dxy(km),Dz(km)}
+Center pole/equ : ITRF93                          {East-longitude positive}
+Center radii    : 6378.137, 6378.137, 6356.752 km {Equator_a, b, pole_c}       
+Target primary  : Sun
+Vis. interferer : MOON (R_eq= 1737.400) km        {source: DE441}
+Rel. light bend : Sun                             {source: DE441}
+Rel. lght bnd GM: 1.3271E+11 km^3/s^2                                          
+Atmos refraction: NO (AIRLESS)
+RA format       : HMS
+Time format     : CAL 
+Calendar mode   : Mixed Julian/Gregorian
+EOP file        : eop.261104.p270131                                           
+EOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-NOV-04. PREDICTS-> 2027-JAN-30
+Units conversion: 1 au= 149597870.700 km, c= 299792.458 km/s, 1 day= 86400.0 s 
+Table cut-offs 1: Elevation (-90.0deg=NO ),Airmass (>38.000=NO), Daylight (NO )
+Table cut-offs 2: Solar elongation (  0.0,180.0=NO ),Local Hour Angle( 0.0=NO )
+Table cut-offs 3: RA/DEC angular rate (     0.0=NO )                           
+*************************************************************************************************************************************************
+ Date__(UT)__HR:MN     R.A._____(ICRF)_____DEC    APmag   S-brt                r        rdot             delta      deldot     S-O-T /r     S-T-O
+*************************************************************************************************************************************************
+$$SOE
+ 2026-Jan-01 00:00     18 53 57.37 -23 45 06.0    1.072   3.756   1.428708512639  -1.7927204  2.41069876736921  -1.3609865    2.2993 /T    1.5830
+ 2026-Jan-06 00:00     19 10 37.69 -23 22 18.7    1.036   3.724   1.423637732863  -1.7183187  2.40655234166430  -1.5083937    1.2641 /T    0.8735
+ 2026-Jan-11 00:00     19 27 15.75 -22 52 55.2    1.019   3.711   1.418789356589  -1.6387084  2.40199238563962  -1.6493711    1.0203 /L    0.7067
+ 2026-Jan-16 00:00     19 43 49.88 -22 17 03.3    1.078   3.774   1.414178224026  -1.5540335  2.39702943542548  -1.7870426    1.8704 /L    1.3002
+ 2026-Jan-21 00:00     20 00 18.40 -21 34 54.1    1.118   3.819   1.409818719296  -1.4644660  2.39167881696703  -1.9167002    2.9753 /L    2.0756
+ 2026-Jan-26 00:00     20 16 39.75 -20 46 42.5    1.137   3.843   1.405724688294  -1.3702068  2.38597676164684  -2.0284823    4.1206 /L    2.8840
+ 2026-Jan-31 00:00     20 32 52.69 -19 52 45.6    1.159   3.870   1.401909355727  -1.2714853  2.37998877571394  -2.1145714    5.2678 /L    3.6984
+ 2026-Feb-05 00:00     20 48 56.44 -18 53 21.8    1.133   3.849   1.398385242377  -1.1685595  2.37377957026525  -2.1848288    6.4071 /L    4.5117
+ 2026-Feb-10 00:00     21 04 50.56 -17 48 50.6    1.086   3.807   1.395164084094  -1.0617146  2.36737066946457  -2.2541656    7.5359 /L    5.3214
+ 2026-Feb-15 00:00     21 20 34.66 -16 39 33.6    1.042   3.768   1.392256753953  -0.9512628  2.36075954522305  -2.3246356    8.6531 /L    6.1264
+ 2026-Feb-20 00:00     21 36 08.45 -15 25 54.7    1.064   3.796   1.389673187622  -0.8375410  2.35394767278282  -2.3918087    9.7579 /L    6.9253
+ 2026-Feb-25 00:00     21 51 31.77 -14 08 19.4    1.108   3.845   1.387422311479  -0.7209110  2.34696043084531  -2.4440833   10.8494 /L    7.7166
+ 2026-Mar-02 00:00     22 06 44.79 -12 47 13.2    1.104   3.846   1.385511974952  -0.6017565  2.33985067285851  -2.4777593   11.9273 /L    8.4999
+ 2026-Mar-07 00:00     22 21 48.06 -11 23 00.4    1.136   3.884   1.383948891203  -0.4804801  2.33265492552914  -2.5064899   12.9930 /L    9.2756
+ 2026-Mar-12 00:00     22 36 42.30 -09 56 05.4    1.139   3.892   1.382738587622  -0.3574998  2.32536783437778  -2.5419493   14.0483 /L   10.0443
+ 2026-Mar-17 00:00     22 51 28.18 -08 26 53.7    1.136   3.895   1.381885364729  -0.2332469  2.31796558874097  -2.5861392   15.0949 /L   10.8062
+ 2026-Mar-22 00:00     23 06 06.35 -06 55 51.9    1.154   3.918   1.381392263182  -0.1081623  2.31042835671239  -2.6334717   16.1333 /L   11.5606
+ 2026-Mar-27 00:00     23 20 37.49 -05 23 26.8    1.204   3.974   1.381261039865   0.0173066  2.30276670940848  -2.6707252   17.1638 /L   12.3070
+ 2026-Apr-01 00:00     23 35 02.50 -03 50 03.4    1.247   4.024   1.381492153847   0.1427089  2.29501221770094  -2.6997977   18.1870 /L   13.0452
+ 2026-Apr-06 00:00     23 49 22.50 -02 16 05.1    1.248   4.029   1.382084762652   0.2675945  2.28716831862202  -2.7348994   19.2051 /L   13.7765
+ 2026-Apr-11 00:00     00 03 38.59 -00 41 54.9    1.242   4.029   1.383036728952   0.3915176  2.27920260323901  -2.7849530   20.2205 /L   14.5014
+ 2026-Apr-16 00:00     00 17 51.76 +00 52 03.1    1.244   4.037   1.384344637500   0.5140393  2.27106769945560  -2.8518835   21.2354 /L   15.2205
+ 2026-Apr-21 00:00     00 32 02.83 +02 25 24.3    1.216   4.016   1.386003821909   0.6347324  2.26272368990538  -2.9270213   22.2509 /L   15.9331
+ 2026-Apr-26 00:00     00 46 12.55 +03 57 44.8    1.228   4.035   1.388008400823   0.7531834  2.25416883513488  -2.9973311   23.2673 /L   16.6387
+ 2026-May-01 00:00     01 00 21.89 +05 28 43.1    1.225   4.038   1.390351323091   0.8689960  2.24541115555493  -3.0697689   24.2860 /L   17.3379
+ 2026-May-06 00:00     01 14 31.85 +06 57 59.0    1.272   4.091   1.393024421257   0.9817937  2.23642565006599  -3.1568395   25.3093 /L   18.0318
+ 2026-May-11 00:00     01 28 43.34 +08 25 12.3    1.284   4.110   1.396018472586   1.0912226  2.22715833191841  -3.2656878   26.3397 /L   18.7212
+ 2026-May-16 00:00     01 42 57.06 +09 50 02.4    1.315   4.149   1.399323266970   1.1969530  2.21754289332125  -3.3972779   27.3798 /L   19.4062
+ 2026-May-21 00:00     01 57 13.41 +11 12 08.2    1.339   4.180   1.402927680232   1.2986816  2.20752880014893  -3.5385055   28.4307 /L   20.0863
+ 2026-May-26 00:00     02 11 32.75 +12 31 10.5    1.336   4.186   1.406819749881   1.3961314  2.19710815041511  -3.6794370   29.4929 /L   20.7611
+ 2026-May-31 00:00     02 25 55.56 +13 46 52.2    1.314   4.172   1.410986752048   1.4890521  2.18626984131337  -3.8298052   30.5676 /L   21.4311
+ 2026-Jun-05 00:00     02 40 22.27 +14 58 57.6    1.279   4.146   1.415415281199   1.5772219  2.17497083260736  -3.9999245   31.6574 /L   22.0975
+ 2026-Jun-10 00:00     02 54 53.13 +16 07 11.0    1.305   4.182   1.420091332844   1.6604480  2.16314406924804  -4.1959795   32.7648 /L   22.7607
+ 2026-Jun-15 00:00     03 09 28.06 +17 11 16.9    1.337   4.223   1.425000386948   1.7385658  2.15071384851137  -4.4162823   33.8922 /L   23.4208
+ 2026-Jun-20 00:00     03 24 06.64 +18 11 00.5    1.330   4.227   1.430127489987   1.8114396  2.13763259082136  -4.6438498   35.0408 /L   24.0766
+ 2026-Jun-25 00:00     03 38 48.42 +19 06 09.6    1.373   4.281   1.435457335095   1.8789607  2.12389245890231  -4.8739546   36.2109 /L   24.7277
+ 2026-Jun-30 00:00     03 53 33.04 +19 56 34.6    1.373   4.294   1.440974340088   1.9410467  2.10947208976499  -5.1166621   37.4038 /L   25.3747
+ 2026-Jul-05 00:00     04 08 20.08 +20 42 06.7    1.339   4.272   1.446662722227   1.9976408  2.09432174820220  -5.3808492   38.6219 /L   26.0183
+ 2026-Jul-10 00:00     04 23 08.84 +21 22 38.4    1.314   4.261   1.452506569295   2.0487099  2.07837026064817  -5.6718694   39.8678 /L   26.6586
+ 2026-Jul-15 00:00     04 37 58.28 +21 58 03.3    1.324   4.286   1.458489906634   2.0942434  2.06154508412803  -5.9832429   41.1441 /L   27.2949
+ 2026-Jul-20 00:00     04 52 47.07 +22 28 17.2    1.354   4.332   1.464596759710   2.1342520  2.04381442106195  -6.2970052   42.4515 /L   27.9256
+ 2026-Jul-25 00:00     05 07 34.01 +22 53 19.0    1.362   4.357   1.470811212478   2.1687656  2.02517600909876  -6.6134655   43.7904 /L   28.5501
+ 2026-Jul-30 00:00     05 22 18.08 +23 13 09.3    1.362   4.375   1.477117461362   2.1978317  2.00560886661917  -6.9417158   45.1622 /L   29.1687
+ 2026-Aug-04 00:00     05 36 58.19 +23 27 50.6    1.343   4.376   1.483499864231   2.2215142  1.98506644430037  -7.2902753   46.5692 /L   29.7814
+ 2026-Aug-09 00:00     05 51 33.09 +23 37 26.5    1.273   4.326   1.489942984885   2.2398918  1.96348261669186  -7.6625161   48.0145 /L   30.3876
+ 2026-Aug-14 00:00     06 06 01.22 +23 42 03.0    1.246   4.321   1.496431633831   2.2530564  1.94080283915919  -8.0459157   49.5005 /L   30.9857
+ 2026-Aug-19 00:00     06 20 21.00 +23 41 48.8    1.210   4.308   1.502950905636   2.2611126  1.91702062064844  -8.4252661   51.0281 /L   31.5734
+ 2026-Aug-24 00:00     06 34 31.17 +23 36 54.5    1.243   4.367   1.509486211158   2.2641748  1.89214590237101  -8.8039246   52.5978 /L   32.1497
+ 2026-Aug-29 00:00     06 48 30.71 +23 27 31.7    1.272   4.423   1.516023302757   2.2623647  1.86616915791700  -9.1900162   54.2112 /L   32.7140
+ 2026-Sep-03 00:00     07 02 18.67 +23 13 52.8    1.239   4.418   1.522548295064   2.2558113  1.83905584155893  -9.5923082   55.8712 /L   33.2655
+ 2026-Sep-08 00:00     07 15 53.92 +22 56 12.2    1.253   4.463   1.529047683660   2.2446494  1.81075664121260 -10.0095558   57.5813 /L   33.8024
+ 2026-Sep-13 00:00     07 29 15.12 +22 34 46.5    1.196   4.439   1.535508361054   2.2290189  1.78125134570604 -10.4244416   59.3445 /L   34.3214
+ 2026-Sep-18 00:00     07 42 21.13 +22 09 53.9    1.133   4.411   1.541917629779   2.2090640  1.75056628760467 -10.8266447   61.1621 /L   34.8193
+ 2026-Sep-23 00:00     07 55 11.15 +21 41 52.6    1.086   4.400   1.548263212821   2.1849318  1.71873361313683 -11.2203842   63.0353 /L   35.2941
+ 2026-Sep-28 00:00     08 07 44.61 +21 11 00.8    1.088   4.442   1.554533261160   2.1567713  1.68576713388432 -11.6136163   64.9664 /L   35.7436
+ 2026-Oct-03 00:00     08 20 00.92 +20 37 37.3    1.095   4.490   1.560716358714   2.1247329  1.65165470818757 -12.0145316   66.9594 /L   36.1655
+ 2026-Oct-08 00:00     08 31 59.19 +20 02 03.0    1.074   4.513   1.566801524849   2.0889679  1.61638174983581 -12.4142837   69.0196 /L   36.5555
+ 2026-Oct-13 00:00     08 43 38.33 +19 24 40.8    1.045   4.532   1.572778214823   2.0496270  1.57997954238183 -12.7942703   71.1512 /L   36.9081
+ 2026-Oct-18 00:00     08 54 57.47 +18 45 53.6    0.995   4.532   1.578636318932   2.0068608  1.54251758935970 -13.1484912   73.3568 /L   37.2180
+ 2026-Oct-23 00:00     09 05 55.94 +18 06 03.4    0.899   4.489   1.584366160267   1.9608185  1.50406590604046 -13.4807117   75.6397 /L   37.4806
+ 2026-Oct-28 00:00     09 16 33.14 +17 25 31.8    0.849   4.495   1.589958490927   1.9116478  1.46467704809565 -13.7994534   78.0041 /L   37.6911
+ 2026-Nov-02 00:00     09 26 48.22 +16 44 41.8    0.787   4.493   1.595404486859   1.8594943  1.42437937425787 -14.1089287   80.4573 /L   37.8435
+ 2026-Nov-07 00:00     09 36 39.77 +16 03 59.7    0.786   4.555   1.600695741572   1.8045018  1.38322147649190 -14.3914920   83.0080 /L   37.9290
+ 2026-Nov-12 00:00     09 46 06.16 +15 23 53.6    0.769   4.605   1.605824260421   1.7468121  1.34130853082724 -14.6302023   85.6638 /L   37.9378
+ 2026-Nov-17 00:00     09 55 05.80 +14 44 50.2    0.683   4.589   1.610782456563   1.6865657  1.29877579638391 -14.8207967   88.4317 /L   37.8598
+ 2026-Nov-22 00:00     10 03 37.11 +14 07 15.9    0.640   4.620   1.615563145792   1.6239008  1.25575975804917 -14.9657971   91.3191 /L   37.6854
+ 2026-Nov-27 00:00     10 11 38.33 +13 31 37.3    0.527   4.585   1.620159537999   1.5589520  1.21238132990040 -15.0730810   94.3360 /L   37.4036
+ 2026-Dec-02 00:00     10 19 07.00 +12 58 24.9    0.410   4.550   1.624565227367   1.4918507  1.16875125602112 -15.1363462   97.4966 /L   37.0008
+ 2026-Dec-07 00:00     10 25 59.86 +12 28 13.7    0.308   4.535   1.628774183361   1.4227256  1.12503337438704 -15.1300469  100.8175 /L   36.4596
+ 2026-Dec-12 00:00     10 32 13.29 +12 01 38.9    0.243   4.559   1.632780743029   1.3517029  1.08145498585921 -15.0379969  104.3142 /L   35.7614
+ 2026-Dec-17 00:00     10 37 43.60 +11 39 14.2    0.186   4.597   1.636579603915   1.2789058  1.03827472855107 -14.8536906  108.0021 /L   34.8874
+ 2026-Dec-22 00:00     10 42 26.88 +11 21 32.2    0.100   4.607   1.640165816971   1.2044558  0.99576130116447 -14.5765646  111.8975 /L   33.8183
+ 2026-Dec-27 00:00     10 46 18.82 +11 09 06.0   -0.002   4.605   1.643534779496   1.1284714  0.95417906268337 -14.2075176  116.0200 /L   32.5333
+$$EOE
+*************************************************************************************************************************************************
+Column meaning:
+ 
+TIME
+
+  Times PRIOR to 1962 are UT1, a mean-solar time closely related to the
+prior but now-deprecated GMT. Times AFTER 1962 are in UTC, the current
+civil or "wall-clock" time-scale. UTC is kept within 0.9 seconds of UT1
+using integer leap-seconds for 1972 and later years.
+
+  Conversion from the internal Barycentric Dynamical Time (TDB) of solar
+system dynamics to the non-uniform civil UT time-scale requested for output
+has not been determined for UTC times after the next July or January 1st.
+Therefore, the last known leap-second is used as a constant over future
+intervals.
+
+  Time tags refer to the UT time-scale conversion from TDB on Earth
+regardless of observer location within the solar system, although clock
+rates may differ due to the local gravity field and no analog to "UT"
+may be defined for that location.
+
+  Any 'b' symbol in the 1st-column denotes a B.C. date. First-column blank
+(" ") denotes an A.D. date.
+ 
+CALENDAR SYSTEM
+
+  Mixed calendar mode was active such that calendar dates after AD 1582-Oct-15
+(if any) are in the modern Gregorian system. Dates prior to 1582-Oct-5 (if any)
+are in the Julian calendar system, which is automatically extended for dates
+prior to its adoption on 45-Jan-1 BC.  The Julian calendar is useful for
+matching historical dates. The Gregorian calendar more accurately corresponds
+to the Earth's orbital motion and seasons. A "Gregorian-only" calendar mode is
+available if such physical events are the primary interest.
+
+  NOTE: "n.a." in output means quantity "not available" at the print-time.
+ 
+ 'R.A._____(ICRF)_____DEC' =
+  Astrometric right ascension and declination of the target center with
+respect to the observing site (coordinate origin) in the reference frame of
+the planetary ephemeris (ICRF). Compensated for down-leg light-time delay
+aberration.
+
+  Units: RA  in hours-minutes-seconds of time,    HH MM SS.ff{ffff}
+         DEC in degrees-minutes-seconds of arc,  sDD MN SC.f{ffff}
+ 
+ 'APmag   S-brt' =
+  The targets' approximate apparent visual magnitude and surface brightness.
+For planets and natural satellites, output is restricted to solar phase angles
+covered by observational data. Outside the observed phase angle range, "n.a."
+may be output to avoid extrapolation beyond the limit of model validity.
+
+   For Earth-based observers, the estimated dimming due to atmospheric
+absorption (extinction) is available as a separate, requestable quantity.
+
+   Surface brightness is the average airless visual magnitude of a
+square-arcsecond of the illuminated portion of the apparent disk. It is
+computed only if the target radius is known.
+
+   Units: MAGNITUDES & MAGNITUDES PER SQUARE ARCSECOND
+ 
+ 'r        rdot' =
+   The Sun's apparent range ("r", light-time aberrated) and range-rate ("rdot")
+relative to the target center, as seen by the observer. A positive "rdot" means
+the target center was moving away from the Sun, negative means moving toward
+the Sun.  Units: AU and KM/S
+ 
+ 'delta      deldot' =
+   Apparent range ("delta", light-time aberrated) and range-rate ("delta-dot")
+of the target center relative to the observer. A positive "deldot" means the
+target center is moving away from the observer, negative indicates movement
+toward the observer.  Units: AU and KM/S
+ 
+ 'S-O-T /r' =
+   Sun-Observer-Target apparent SOLAR ELONGATION ANGLE seen from the observers'
+location at print-time.
+
+   The '/r' column provides a code indicating the targets' apparent position
+relative to the Sun in the observers' sky, as described below:
+
+   Case A: For an observing location on the surface of a rotating body, that
+body rotational sense is considered:
+
+    /T indicates target TRAILS Sun   (evening sky: rises and sets AFTER Sun)
+    /L indicates target LEADS Sun    (morning sky: rises and sets BEFORE Sun)
+
+   Case B: For an observing point that does not have a rotational model (such
+as a spacecraft), the "leading" and "trailing" condition is defined by the
+observers' heliocentric ORBITAL motion:
+
+    * If continuing in the observers' current direction of heliocentric
+       motion would encounter the targets' apparent longitude first, followed
+       by the Sun's, the target LEADS the Sun as seen by the observer.
+
+    * If the Sun's apparent longitude would be encountered first, followed
+       by the targets', the target TRAILS the Sun.
+
+   Two other codes can be output:
+    /* indicates observer is Sun-centered    (undefined)
+    /? Target is aligned with Sun center     (no lead or trail)
+
+   The S-O-T solar elongation angle is numerically the minimum separation
+angle of the Sun and target in the sky in any direction. It does NOT indicate
+the amount of separation in the leading or trailing directions, which would
+be defined along the equator of a spherical coordinate system.
+
+   Units: DEGREES
+ 
+ 'S-T-O' =
+   The Sun-Target-Observer angle; the interior vertex angle at target center
+formed by a vector from the target to the apparent center of the Sun (at
+reflection time on the target) and the apparent vector from target to the
+observer at print-time. Slightly different from true PHASE ANGLE (requestable
+separately) at the few arcsecond level in that it includes stellar aberration
+on the down-leg from target to observer.  Units: DEGREES
+
+Computations by ...
+
+    Solar System Dynamics Group, Horizons On-Line Ephemeris System
+    4800 Oak Grove Drive, Jet Propulsion Laboratory
+    Pasadena, CA  91109   USA
+
+    General site: https://ssd.jpl.nasa.gov/
+    Mailing list: https://ssd.jpl.nasa.gov/email_list.html
+    System news : https://ssd.jpl.nasa.gov/horizons/news.html
+    User Guide  : https://ssd.jpl.nasa.gov/horizons/manual.html
+    Connect     : browser        https://ssd.jpl.nasa.gov/horizons/app.html#/x
+                  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html
+                  command-line   telnet ssd.jpl.nasa.gov 6775
+                  e-mail/batch   https://ssd.jpl.nasa.gov/ftp/ssd/horizons_batch.txt
+                  scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS
+    Inquiries   : Jon.D.Giorgini@jpl.nasa.gov
+
+*************************************************************************************************************************************************

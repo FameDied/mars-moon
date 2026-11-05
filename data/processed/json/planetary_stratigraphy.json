@@ -1,0 +1,102 @@
+[
+  {
+    "body": "Moon",
+    "era_name": "Pre-Nectarian Era",
+    "start_ga": 4.53,
+    "end_ga": 3.92,
+    "duration_ma": 610.0,
+    "defining_events": "Giant impact origin of the Earth-Moon system (Theia collision); Lunar Magma Ocean (LMO); flotation of anorthosite crust; formation of 30+ giant impact basins including South Pole-Aitken (SPA, 2,500 km diameter).",
+    "key_formations_and_rocks": "Ferroan Anorthosite (FAN), primordial crustal suites (Mg-suite troctolites/norites), South Pole-Aitken Basin floor ejecta.",
+    "seismic_and_thermal_state": "High internal radiogenic heat flow, partial core dynamo active, extreme bombardment rate."
+  },
+  {
+    "body": "Moon",
+    "era_name": "Nectarian Period",
+    "start_ga": 3.92,
+    "end_ga": 3.85,
+    "duration_ma": 70.0,
+    "defining_events": "Formation of the Nectaris impact basin (type locality); formation of Serenitatis, Crisium, Humorum, and Humboldtianum multi-ring basins.",
+    "key_formations_and_rocks": "Janssen Formation (Nectaris ejecta), Apollo 16 Descartes breccias, impact melt sheets.",
+    "seismic_and_thermal_state": "Initial cryptomaria basalt flows; mantle melting triggered by depressurization under giant basins."
+  },
+  {
+    "body": "Moon",
+    "era_name": "Early Imbrian Epoch",
+    "start_ga": 3.85,
+    "end_ga": 3.8,
+    "duration_ma": 50.0,
+    "defining_events": "Cataclysmic Imbrium basin impact (1,160 km diameter); widespread blanketing of the lunar nearside; formation of Orientale multi-ring basin (youngest giant basin).",
+    "key_formations_and_rocks": "Fra Mauro Formation (Apollo 14 sampled Imbrium ejecta), Hevelius Formation (Orientale ejecta), Montes Apenninus uplift.",
+    "seismic_and_thermal_state": "Peak of Late Heavy Bombardment (LHB); deep crustal fractures provided conduits for mantle magma ascent."
+  },
+  {
+    "body": "Moon",
+    "era_name": "Late Imbrian Epoch",
+    "start_ga": 3.8,
+    "end_ga": 3.2,
+    "duration_ma": 600.0,
+    "defining_events": "Peak epoch of lunar mare volcanism. Massive flood basalt flows filling Imbrium, Tranquillitatis, Serenitatis, and Oceanus Procellarum basins.",
+    "key_formations_and_rocks": "Mare basalts (high-Ti and low-Ti basalts, KREEP basalts - potassium, rare-earth elements, phosphorus), pyroclastic glass deposits.",
+    "seismic_and_thermal_state": "Active lunar dynamo generating surface magnetic fields (up to 50 \u00b5T); thick lithosphere growth."
+  },
+  {
+    "body": "Moon",
+    "era_name": "Eratosthenian Period",
+    "start_ga": 3.2,
+    "end_ga": 1.1,
+    "duration_ma": 2100.0,
+    "defining_events": "Gradual cessation of mare flood volcanism (young basalts in Procellarum dated to ~2.0 Ga by Chang'e 5); crater degradation; ray systems darkened by space weathering.",
+    "key_formations_and_rocks": "Eratosthenes crater (type specimen), Mons R\u00fcmker volcanic domes, Chang'e 5 basalts, Marius Hills cinder cones.",
+    "seismic_and_thermal_state": "Core dynamo shutdown; global thermal contraction and lithospheric thickening to >800 km."
+  },
+  {
+    "body": "Moon",
+    "era_name": "Copernican Period",
+    "start_ga": 1.1,
+    "end_ga": 0.0,
+    "duration_ma": 1100.0,
+    "defining_events": "Youngest lunar period characterized by impact craters possessing bright, prominent, optically immature ray systems visible across the disk.",
+    "key_formations_and_rocks": "Copernicus crater (~800 Ma), Tycho crater (~108 Ma), Aristarchus, Jackson, Giordano Bruno (~800-year-old candidate); fresh impact melt pools.",
+    "seismic_and_thermal_state": "Tectonically quiescent; lobate scarp thrust faults indicate slow ongoing global contraction; micro-meteorite bombardment and solar wind space weathering."
+  },
+  {
+    "body": "Mars",
+    "era_name": "Pre-Noachian Era",
+    "start_ga": 4.5,
+    "end_ga": 4.1,
+    "duration_ma": 400.0,
+    "defining_events": "Core-mantle-crust differentiation; core dynamo generates strong magnetic field; formation of Crustal Dichotomy (Borealis Basin impact); giant impact basins (Hellas, Utopia, Argyre, Isidis).",
+    "key_formations_and_rocks": "Ancient crustal orthopyroxenites (represented by Martian meteorite ALH84001, dated to ~4.09 Ga); magnetized southern highland crust.",
+    "seismic_and_thermal_state": "Vigorous mantle convection; high geothermal gradient; primary outgassing of thick CO2-H2O proto-atmosphere."
+  },
+  {
+    "body": "Mars",
+    "era_name": "Noachian Period",
+    "start_ga": 4.1,
+    "end_ga": 3.7,
+    "duration_ma": 400.0,
+    "defining_events": "Warm and wet early climate; high atmospheric surface pressure (>1 bar); dendritic river valley networks; precipitation/rainfall or snowmelt; open-basin paleolakes (Jezero, Gale, Eberswalde); Tharsis volcanic rise begins.",
+    "key_formations_and_rocks": "Widespread phyllosilicates (smectite clays, Fe/Mg-rich clays), layered crater floor deposits, heavily cratered southern highlands (Noachis Terra).",
+    "seismic_and_thermal_state": "Core dynamo ceases (~3.9 Ga); solar wind stripping begins to accelerate atmospheric escape; neutral-to-alkaline groundwater chemistry."
+  },
+  {
+    "body": "Mars",
+    "era_name": "Hesperian Period",
+    "start_ga": 3.7,
+    "end_ga": 3.0,
+    "duration_ma": 700.0,
+    "defining_events": "Climatic transition to colder, hyper-arid conditions. Global sulfur volcanism; colossal episodic groundwater discharge carving massive Outflow Channels (Kasei Valles, Ares Vallis, Mangala Valles); Tharsis volcanism reaches apex.",
+    "key_formations_and_rocks": "Extensive flood basalt plains (Hesperia Planum); hydrated sulfate minerals (jarosite, gypsum, kieserite); Valles Marineris canyon rifting initiated.",
+    "seismic_and_thermal_state": "Atmospheric acidification; thin atmosphere; cold dry conditions interspersed with catastrophic sub-glacial or hydrothermal flooding."
+  },
+  {
+    "body": "Mars",
+    "era_name": "Amazonian Period",
+    "start_ga": 3.0,
+    "end_ga": 0.0,
+    "duration_ma": 3000.0,
+    "defining_events": "Hyper-arid, freezing global desert lasting 3 billion years. Dominance of eolian (wind) erosion, sand dune migration (undae), and dust transport; chaotic obliquity variations (15\u00b0 to 45\u00b0) driving ice migration between poles and mid-latitudes.",
+    "key_formations_and_rocks": "Olympus Mons and Tharsis volcano calderas; North and South Polar Layered Deposits (NPLD, SPLD); Medusae Fossae Formation; ferric oxide (nanophase hematite) dust imparting red color.",
+    "seismic_and_thermal_state": "Thick lithosphere (>200 km); localized volcanism into geologically recent times (<50 Ma); ongoing low-level seismicity (Cerberus Fossae marsquakes detected by InSight)."
+  }
+]

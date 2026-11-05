@@ -1,0 +1,60 @@
+[
+  {
+    "body": "Moon",
+    "atmosphere_classification": "Surface Boundary Exosphere (Collisionless Gas)",
+    "surface_pressure_range": "3 x 10^-15 bar (day) to 10^-12 bar (night) / ~10^-10 Pa",
+    "total_mass_kg": 25000.0,
+    "scale_height_km": 50.0,
+    "diurnal_temperature_range_k": "100 K (-173\u00b0C) at lunar night to 390 K (+117\u00b0C) at lunar noon",
+    "cold_trap_temperatures_k": "40 K (-233\u00b0C) in permanently shadowed regions (e.g. Hermite, Cabeus)",
+    "primary_composition": {
+      "Helium-4 (4He)": "40,000 particles/cm3 (solar wind capture)",
+      "Neon-20 (20Ne)": "40,000 particles/cm3 (solar wind capture)",
+      "Hydrogen (H2)": "35,000 particles/cm3 (solar wind capture)",
+      "Argon-40 (40Ar)": "40,000 particles/cm3 (radiogenic degassing from 40K decay in interior)",
+      "Neon-22 (22Ne)": "3,000 particles/cm3",
+      "Methane (CH4)": "1,000 particles/cm3",
+      "Ammonia (NH3)": "1,000 particles/cm3",
+      "Carbon dioxide (CO2)": "1,000 particles/cm3"
+    },
+    "optical_trace_species": {
+      "Sodium (Na)": "Resonant scattering at 589 nm (D-lines), surface density ~70 atoms/cm3",
+      "Potassium (K)": "Resonant scattering at 766 nm, surface density ~17 atoms/cm3"
+    },
+    "dust_environment": "Electrostatic levitation of sub-micron regolith dust particles across lunar terminator (detected by Apollo 17 LEAM and LADEE LDEX)",
+    "radiation_environment": "Galactic Cosmic Rays (GCR) + Solar Energetic Particles (SEP): ~60 \u00b5Sv/h (~1.36 mSv/day, ~496 mSv/year), detected by LRO CRaTER and Chang'e-4 LND",
+    "key_missions": "Apollo 17 CCGE, LADEE (2013-2014), LRO LAMP & Diviner, Chandrayaan-1 CHACE"
+  },
+  {
+    "body": "Mars",
+    "atmosphere_classification": "Thin, Dynamic Terrestrial Carbon Dioxide Atmosphere",
+    "surface_pressure_range": "610 Pa (6.1 mbar) mean; varies seasonally from 400 Pa (Olympus Mons summit) to 1155 Pa (Hellas Planitia floor)",
+    "total_mass_kg": 2.5e+16,
+    "scale_height_km": 11.1,
+    "diurnal_temperature_range_k": "130 K (-143\u00b0C) polar winter night to 293 K (+20\u00b0C) equatorial summer noon; global mean 210 K (-63\u00b0C)",
+    "primary_composition": {
+      "Carbon dioxide (CO2)": "95.32% by volume",
+      "Nitrogen (N2)": "2.60%",
+      "Argon (40Ar)": "1.90%",
+      "Oxygen (O2)": "0.16%",
+      "Carbon monoxide (CO)": "0.08%"
+    },
+    "trace_gases_and_isotopes": {
+      "Water vapor (H2O)": "Variable 100 to 210 ppm (highly seasonal, transported between poles)",
+      "Nitric oxide (NO)": "100 ppm",
+      "Neon (Ne)": "2.5 ppm",
+      "Hydrogen deuteride (HD)": "0.85 ppm",
+      "Krypton (Kr)": "0.3 ppm",
+      "Formaldehyde (HCHO)": "0.13 ppm",
+      "Xenon (Xe)": "0.08 ppm",
+      "Ozone (O3)": "0.04 - 0.2 ppm (seasonal peak in polar winter)",
+      "Methane (CH4)": "Mean background 0.41 ppb with localized episodic plumes up to 21 ppb (Curiosity SAM-TLS detections)",
+      "D/H isotopic ratio": "5.5 times Vienna Standard Mean Ocean Water (VSMOW), proving loss of >80% of Mars' primordial water inventory",
+      "13C/12C isotopic ratio": "Enriched in heavy 13C due to hydrodynamic atmospheric escape and photochemical sputtering",
+      "38Ar/36Ar ratio": "Enriched by ~30% relative to primordial solar values due to pick-up ion escape into space"
+    },
+    "dust_and_meteorology": "Global dust storm cycles (e.g. 1971 Mariner 9, 2001, 2007, 2018 MER Opportunity termination); frequent dust devils up to 8 km altitude; CO2 dry-ice snowfall at winter poles",
+    "radiation_environment": "Surface dose: ~0.21 mSv/day (~76 mSv/year) during solar quiet, rising during Solar Particle Events; Curiosity RAD measurements show partial shielding by ~20 g/cm2 atmospheric column",
+    "key_missions": "Viking 1 & 2, Mars Global Surveyor, Mars Express (PFS, SPICAM), MRO (MCS), Curiosity (REMS, SAM), MAVEN (NGIMS, IUVS), InSight, Perseverance (MEDA)"
+  }
+]

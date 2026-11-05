@@ -1,0 +1,22 @@
+[
+  {
+    "body": "Moon",
+    "raw_header": "*******************************************************************************\n Revised: July 31, 2013             Moon / (Earth)                          301\n \n GEOPHYSICAL DATA (updated 2018-Aug-15):\n  Vol. mean radius, km  = 1737.53+-0.03    Mass, x10^22 kg       =    7.349\n  Radius (gravity), k",
+    "source": "NASA JPL Solar System Dynamics (SSD) Group Horizons System"
+  },
+  {
+    "body": "Mars",
+    "raw_header": "*******************************************************************************\n Revised: June 02, 2025                 Mars                            499 / 4\n \n PHYSICAL DATA (updated 2025-Jun-02):\n  Vol. mean radius (km) = 3389.92+-0.04   Density (g/cm^3)      =  3.933(5+-4)\n  Mass x10^23 (kg)",
+    "source": "NASA JPL Solar System Dynamics (SSD) Group Horizons System"
+  },
+  {
+    "body": "Phobos",
+    "raw_header": "*******************************************************************************\n Revised: Jun 02, 2025             Phobos / (Mars)                          401\n\n SATELLITE PHYSICAL PROPERTIES:\n  Radius (km)             = 13.1 x11.1 x9.3 Density (g cm^-3)   =  1.90 +- 0.08\n  Mass (10^20 kg )        =",
+    "source": "NASA JPL Solar System Dynamics (SSD) Group Horizons System"
+  },
+  {
+    "body": "Deimos",
+    "raw_header": "*******************************************************************************\n Revised: Jun 02, 2025             Deimos / (Mars)                          402\n\n SATELLITE PHYSICAL PROPERTIES:\n  Radius (km)             = 7.8 x 6.0 x 5.1 Density (g cm^-3)   =  1.76 +- 0.30\n  Mass (10^20 kg )        =",
+    "source": "NASA JPL Solar System Dynamics (SSD) Group Horizons System"
+  }
+]

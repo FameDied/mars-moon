@@ -1,0 +1,42 @@
+[
+  {
+    "map_id": "luna_lola_global_topography",
+    "body": "Moon",
+    "map_title": "LRO LOLA Global Lunar Topographic Relief Map",
+    "instrument": "Lunar Orbiter Laser Altimeter (LOLA / LRO)",
+    "local_file_path": "data/maps/luna_lola_global_topography.jpg",
+    "remote_url": "http://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000954/GSFC_20171208_Archive_e000954~medium.jpg",
+    "file_size_bytes": 156754,
+    "source_authority": "NASA Goddard Space Flight Center"
+  },
+  {
+    "map_id": "mars_mola_global_topography",
+    "body": "Mars",
+    "map_title": "MGS MOLA Global Martian Topographic Shaded Relief Map",
+    "instrument": "Mars Orbiter Laser Altimeter (MOLA / MGS)",
+    "local_file_path": "data/maps/mars_mola_global_topography.jpg",
+    "remote_url": "http://images-assets.nasa.gov/image/PIA02031/PIA02031~medium.jpg",
+    "file_size_bytes": 348269,
+    "source_authority": "NASA Jet Propulsion Laboratory / GSFC"
+  },
+  {
+    "map_id": "mars_mola_surface_relief",
+    "body": "Mars",
+    "map_title": "MGS MOLA Surface Topography Color Elevation Grid",
+    "instrument": "MOLA / MGS",
+    "local_file_path": "data/maps/mars_mola_surface_relief.jpg",
+    "remote_url": "http://images-assets.nasa.gov/image/PIA00957/PIA00957~medium.jpg",
+    "file_size_bytes": 97742,
+    "source_authority": "NASA Jet Propulsion Laboratory"
+  },
+  {
+    "map_id": "mars_usgs_mola_colorhillshade",
+    "body": "Mars",
+    "map_title": "USGS Astrogeology Mars MGS MOLA Global Color Shaded Relief (1024px)",
+    "instrument": "MOLA / USGS Planetary GIS",
+    "local_file_path": "data/maps/mars_usgs_mola_colorhillshade.jpg",
+    "remote_url": "https://astrogeology.usgs.gov/ckan/dataset/0c30e797-b7d7-4d06-87c2-d3b01abcd797/resource/c384f456-8182-4e40-94de-727b74dab4ec/download/mars_mgs_colorhillshade_mola_1024.jpg",
+    "file_size_bytes": 135513,
+    "source_authority": "USGS Astrogeology Science Center"
+  }
+]
