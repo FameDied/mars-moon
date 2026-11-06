@@ -5,6 +5,7 @@ import json
 import csv
 import pyarrow as pa
 import pyarrow.parquet as pq
+import h3
 
 DATASETS = {
     "Mars": "data/raw/usgs/Mars/MARS_nomenclature_center_pts.shp",
@@ -12,6 +13,7 @@ DATASETS = {
 }
 
 all_features = []
+seen_feature_ids = set()
 
 for body, shp_path in DATASETS.items():
     print(f"Processing {body} nomenclature from {shp_path}...")
@@ -23,16 +25,25 @@ for body, shp_path in DATASETS.items():
         rec_dict = dict(zip(fields, shape_rec.record))
         pt = shape_rec.shape.points[0] if shape_rec.shape.points else (rec_dict.get('center_lon'), rec_dict.get('center_lat'))
         
+        fid = rec_dict.get("link", "").split("/")[-1] if rec_dict.get("link") else None
+        if fid and fid in seen_feature_ids:
+            continue
+        if fid:
+            seen_feature_ids.add(fid)
+
         # Clean coordinates
         lon = float(pt[0]) if pt[0] is not None else float(rec_dict.get('center_lon', 0.0) or 0.0)
         lat = float(pt[1]) if pt[1] is not None else float(rec_dict.get('center_lat', 0.0) or 0.0)
         
         # Standardize longitude (-180 to 180 for standard GIS alongside 0 to 360 east longitude)
         lon_180 = lon if lon <= 180.0 else lon - 360.0
+
+        # Compute Uber H3 spatial index at resolution 6 (~3.2 km hexagon)
+        h3_hex = h3.latlng_to_cell(lat, lon_180, 6)
         
         feature_item = {
             "body": body,
-            "feature_id": rec_dict.get("link", "").split("/")[-1] if rec_dict.get("link") else None,
+            "feature_id": fid,
             "name": str(rec_dict.get("name", "")).strip(),
             "clean_name": str(rec_dict.get("clean_name", "")).strip(),
             "feature_type": str(rec_dict.get("type", "")).strip(),
@@ -41,6 +52,7 @@ for body, shp_path in DATASETS.items():
             "center_lat": round(lat, 5),
             "center_lon": round(lon, 5),
             "center_lon_180": round(lon_180, 5),
+            "h3_index": h3_hex,
             "min_lat": round(float(rec_dict.get("min_lat", 0.0) or 0.0), 5),
             "max_lat": round(float(rec_dict.get("max_lat", 0.0) or 0.0), 5),
             "min_lon": round(float(rec_dict.get("min_lon", 0.0) or 0.0), 5),

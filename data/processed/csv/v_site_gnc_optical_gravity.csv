@@ -1,0 +1,58 @@
+feature_id,body,site_name,center_lat,center_lon,trn_visual_entropy_score,solar_incidence_glare_risk,free_air_gravity_anomaly_mgal,bouguer_gravity_anomaly_mgal,local_vertical_deflection_arcsec
+38,Mars,Acidalia Planitia Northern Lowlands,49.76,339.26,0.41,Low (Atmospheric Diffuse Light),-40.0,240.0,7.5
+220,Mars,Amazonis Planitia Smooth Lava Plain,25.7461,197.0872,0.18,Low (Atmospheric Diffuse Light),-15.0,145.0,3.2
+247,Moon,Amundsen Crater Rim Plateau (Artemis Candidate),-84.4398,83.0691,0.75,High (Low-Sun Grazing Glare & Shadow Dropouts),-65.0,115.0,31.0
+348,Mars,Arcadia Planitia Flatlands (SpaceX Starship Target),49.02,188.15,0.36,Low (Atmospheric Diffuse Light),-25.0,160.0,5.8
+358,Mars,Ares Vallis Catastrophic Floodplain (Mars Pathfinder),10.2924,334.3917,0.65,Low (Atmospheric Diffuse Light),-28.0,195.0,12.0
+380,Moon,Aristarchus Pyroclastic Plateau,23.7299,312.5099,0.88,Moderate (Standard Diffuse Contrast),75.0,280.0,45.0
+796,Moon,Boguslawsky Crater Flank (Chandrayaan-3 Landing Region),-72.9012,43.2572,0.66,Moderate (Standard Diffuse Contrast),-22.0,120.0,19.5
+844,Moon,Boussingault Crater Concentric Wall Terrace,-70.2063,53.7342,0.69,Moderate (Standard Diffuse Contrast),-25.0,115.0,22.0
+953,Moon,Cabeus Crater Floor (LCROSS Centaur Impact Zone),-85.3303,317.8673,0.08,Critical (Zero-Sun Total Darkness - Optical LVS Blind),-42.0,110.0,22.0
+1203,Mars,Chryse Planitia (Viking 1 & Pathfinder Plain),28.4333,319.6927,0.38,Low (Atmospheric Diffuse Light),-35.0,180.0,6.4
+1296,Moon,Copernicus Crater Terraced Floor & Ejecta,9.6209,339.9214,0.9,Moderate (Topographic Wall Shadowing),48.0,210.0,52.0
+1439,Moon,de Gerlache Rim (Artemis Candidate Site 001),-88.4849,271.6553,0.78,High (Low-Sun Grazing Glare & Shadow Dropouts),-34.0,138.0,32.0
+1484,Moon,Demonax Crater Polar Highlands Terrace,-78.0864,59.3552,0.71,Moderate (Standard Diffuse Contrast),-30.0,110.0,25.0
+1498,Moon,Descartes Cayley Plains (Apollo 16 Highlands),-11.7428,15.6667,0.65,Moderate (Standard Diffuse Contrast),-32.0,-185.0,15.0
+1509,Mars,Deuteronilus Mensae (Lobate Debris Apron Glaciers),45.1095,23.9184,0.82,Low (Atmospheric Diffuse Light),-30.0,185.0,38.0
+1784,Mars,Elysium Planitia (InSight Seismology Site),2.979,154.7372,0.35,Low (Atmospheric Diffuse Light),35.0,210.0,7.8
+1810,Mars,Eos Chasma Outflow Channel Basin,-12.1472,320.8263,0.88,Moderate (Chasma Wall Shadowing),-85.0,210.0,85.0
+1919,Moon,Faustini Rim Plateau (Artemis Candidate),-87.1832,84.3099,0.72,High (Low-Sun Grazing Glare & Shadow Dropouts),-45.0,135.0,28.0
+2007,Moon,Fra Mauro Formation (Apollo 14 Imbrium Ejecta),-6.061,343.0262,0.62,Moderate (Standard Diffuse Contrast),15.0,140.0,11.5
+2071,Mars,Gale Crater Aeolis Palus (MSL Curiosity),-5.3672,137.811,0.86,Low (Atmospheric Diffuse Light),-12.0,195.0,44.0
+2289,Mars,Gusev Crater Floor (MER Spirit),-14.5308,175.5244,0.55,Low (Atmospheric Diffuse Light),18.0,240.0,14.0
+2432,Mars,Hellas Planitia Basin Floor (Deepest Depression on Mars),-42.4301,70.5025,0.4,Low (Atmospheric Diffuse Light),-385.0,680.0,36.0
+2471,Moon,Hermite Crater (Extreme Cryogenic Cold Trap 26 K),86.1659,266.6848,0.05,Critical (Zero-Sun Total Darkness - Optical LVS Blind),-38.0,105.0,24.0
+2735,Mars,Isidis Planitia Smooth Basin Plain,13.9357,88.3772,0.42,Low (Atmospheric Diffuse Light),285.0,520.0,24.0
+3091,Mars,"Korolev Crater (Massive 2,200 km³ Water Ice Dome)",72.7677,164.584,0.72,High (High Albedo Pure Ice Glare & Polar Low Sun),-55.0,240.0,28.0
+3603,Moon,Malapert Massif Peak (Artemis Prime Candidate),-84.9998,11.4031,0.74,Moderate (High Topographic Standoff),-28.0,122.0,42.5
+3646,Moon,Manzinus Crater Southern Highlands Plain,-67.51,26.3736,0.64,Moderate (Standard Diffuse Contrast),-19.0,118.0,18.0
+3671,Moon,Mare Crisium (Luna 24 / CLPS Firefly Blue Ghost Target),16.1774,59.1037,0.38,High (Zero-Phase Opposition Surge Washout),342.0,580.0,44.0
+3673,Moon,Mare Fecunditatis (Luna 16 Core Site),-7.835,53.6691,0.39,High (Zero-Phase Opposition Surge Washout),88.0,280.0,12.0
+3678,Moon,Mare Imbrium (Apollo 15 & Chang'e 3 Basaltic Plain),34.7244,345.0914,0.48,Moderate (Standard Diffuse Contrast),218.0,480.0,28.0
+3685,Moon,Mare Orientale Multi-Ring Impact Basin Floor,-19.8655,265.3297,0.76,Moderate (Basin Ring Shadow Contrast),175.0,390.0,88.0
+3686,Moon,Mare Serenitatis (Taurus-Littrow Valley / Apollo 17),27.2879,18.3596,0.72,Moderate (Topographic Wall Shadowing),312.0,560.0,58.0
+3691,Moon,Mare Tranquillitatis (Apollo 11 Tranquillity Base),8.3487,30.8346,0.42,High (Zero-Phase Opposition Surge Washout),125.0,340.0,14.2
+3763,Mars,Mawrth Vallis Ancient Clay Outflow Flank,22.4304,343.0274,0.89,Low (Atmospheric Diffuse Light),-15.0,190.0,16.0
+3812,Mars,Melas Chasma Central Basin Floor,-10.5178,287.4613,0.9,Moderate (Chasma Wall Shadowing),-95.0,230.0,98.0
+3854,Mars,Meridiani Planum (MER Opportunity Spherule Plain),-0.04,356.86,0.34,Low (Atmospheric Diffuse Light),-22.0,175.0,4.5
+3983,Moon,Mons Hadley (Apollo 15 Rille Foothills Hazard),26.6948,4.1183,0.82,Moderate (Topographic Rille Shadowing),145.0,310.0,65.0
+4321,Moon,Nobile Crater Ridge (VIPER Polar Target),-85.2752,53.2725,0.77,High (Low-Sun Grazing Glare & Shadow Dropouts),-32.0,130.0,27.5
+4395,Moon,Oceanus Procellarum (Apollo 12 & Chang'e 5 Plains),20.6714,303.3226,0.4,High (Zero-Phase Opposition Surge Washout),42.0,245.0,8.5
+4453,Mars,Olympus Mons Summit Caldera (EDL Prohibited by Altitude),18.6528,226.1975,0.85,Low (Atmospheric Diffuse Light),1520.0,1150.0,142.0
+4627,Moon,Peary Crater North Polar Ridge,88.6251,24.4024,0.73,Moderate (North Polar Persistent Illumination),-18.0,95.0,21.0
+4987,Moon,Reiner Gamma Swirl (Mini-Magnetosphere CLPS Target),7.3853,301.0417,0.58,Moderate (High Albedo Swirl Opposition Surge),38.0,230.0,6.5
+5450,Moon,Shackleton Connecting Ridge (Artemis Candidate),-89.67,129.78,0.76,High (Low-Sun Grazing Glare & Shadow Dropouts),-38.5,145.2,34.2
+5494,Moon,Shoemaker Crater Rim & Cold Trap Fringe,-88.137,45.911,0.7,High (Low-Sun Grazing Glare & Shadow Dropouts),-35.0,128.0,26.5
+5782,Moon,Sverdrup Crater Flank (Artemis Candidate),-88.3209,206.6125,0.74,High (Low-Sun Grazing Glare & Shadow Dropouts),-36.0,132.0,30.0
+5931,Mars,Terra Sabaea Ancient Cratered Highlands,2.7188,51.3035,0.78,Low (Atmospheric Diffuse Light),-45.0,-120.0,18.0
+6163,Moon,Tycho Crater Rim & Blocky Ray Ejecta,-43.2958,348.7847,0.94,High (High Albedo Copernican Ejecta Washout),62.0,195.0,68.0
+6260,Mars,Utopia Planitia (Viking 2 & Zhurong Landing Plain),46.7363,117.5168,0.44,Low (Atmospheric Diffuse Light),-145.0,380.0,11.0
+6288,Mars,Valles Marineris Main Chasma Floor Hazard,-14.0059,301.4123,0.92,Moderate (Deep Chasma Wall Shadowing),-110.0,180.0,115.0
+6541,Moon,Wiechert Crater South Ridge,-84.0334,164.701,0.72,High (Low-Sun Grazing Glare & Shadow Dropouts),-44.0,120.0,27.0
+14162,Mars,Cerberus Palus Platy Flood Lava Plain,5.7765,148.1452,0.62,Low (Atmospheric Diffuse Light),25.0,195.0,11.5
+14300,Mars,Jezero Crater Delta (Mars 2020 Perseverance),18.4082,77.6873,0.91,Low (Atmospheric Diffuse Light),48.0,320.0,18.5
+14306,Mars,Alba Mons Low-Slope Volcanic Flank,41.082,249.2906,0.58,Low (Atmospheric Diffuse Light),585.0,410.0,62.0
+14502,Moon,Haworth Crater Cold Trap & Rim Crest,-87.45,354.83,0.68,High (Low-Sun Grazing Glare & Shadow Dropouts),-40.0,125.0,29.0
+14535,Moon,Kocher Crater Rim Crest,-84.4671,225.9756,0.73,High (Low-Sun Grazing Glare & Shadow Dropouts),-41.0,124.0,28.5
+15325,Moon,Slater Crater Connecting Ridge,-88.0792,111.2881,0.75,High (Low-Sun Grazing Glare & Shadow Dropouts),-39.0,136.0,31.5
+15821,Mars,Oxia Planum (ExoMars Rosalind Franklin Primary Site),17.28,334.29,0.68,Low (Atmospheric Diffuse Light),-18.0,210.0,9.5

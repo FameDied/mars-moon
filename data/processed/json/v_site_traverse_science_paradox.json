@@ -1,0 +1,572 @@
+[
+  {
+    "feature_id": 38,
+    "body": "Mars",
+    "site_name": "Acidalia Planitia Northern Lowlands",
+    "center_lat": 49.76,
+    "center_lon": 339.26,
+    "distance_to_primary_science_km": 3.8,
+    "rover_traverse_energy_wh_per_km": 54.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 220,
+    "body": "Mars",
+    "site_name": "Amazonis Planitia Smooth Lava Plain",
+    "center_lat": 25.7461,
+    "center_lon": 197.0872,
+    "distance_to_primary_science_km": 12.0,
+    "rover_traverse_energy_wh_per_km": 46.0,
+    "contact_stratigraphic_diversity_count": 1
+  },
+  {
+    "feature_id": 247,
+    "body": "Moon",
+    "site_name": "Amundsen Crater Rim Plateau (Artemis Candidate)",
+    "center_lat": -84.4398,
+    "center_lon": 83.0691,
+    "distance_to_primary_science_km": 4.5,
+    "rover_traverse_energy_wh_per_km": 170.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 348,
+    "body": "Mars",
+    "site_name": "Arcadia Planitia Flatlands (SpaceX Starship Target)",
+    "center_lat": 49.02,
+    "center_lon": 188.15,
+    "distance_to_primary_science_km": 0.4,
+    "rover_traverse_energy_wh_per_km": 52.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 358,
+    "body": "Mars",
+    "site_name": "Ares Vallis Catastrophic Floodplain (Mars Pathfinder)",
+    "center_lat": 10.2924,
+    "center_lon": 334.3917,
+    "distance_to_primary_science_km": 0.1,
+    "rover_traverse_energy_wh_per_km": 68.0,
+    "contact_stratigraphic_diversity_count": 3
+  },
+  {
+    "feature_id": 380,
+    "body": "Moon",
+    "site_name": "Aristarchus Pyroclastic Plateau",
+    "center_lat": 23.7299,
+    "center_lon": 312.5099,
+    "distance_to_primary_science_km": 1.2,
+    "rover_traverse_energy_wh_per_km": 140.0,
+    "contact_stratigraphic_diversity_count": 3
+  },
+  {
+    "feature_id": 796,
+    "body": "Moon",
+    "site_name": "Boguslawsky Crater Flank (Chandrayaan-3 Landing Region)",
+    "center_lat": -72.9012,
+    "center_lon": 43.2572,
+    "distance_to_primary_science_km": 2.5,
+    "rover_traverse_energy_wh_per_km": 110.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 844,
+    "body": "Moon",
+    "site_name": "Boussingault Crater Concentric Wall Terrace",
+    "center_lat": -70.2063,
+    "center_lon": 53.7342,
+    "distance_to_primary_science_km": 3.5,
+    "rover_traverse_energy_wh_per_km": 138.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 953,
+    "body": "Moon",
+    "site_name": "Cabeus Crater Floor (LCROSS Centaur Impact Zone)",
+    "center_lat": -85.3303,
+    "center_lon": 317.8673,
+    "distance_to_primary_science_km": 0.5,
+    "rover_traverse_energy_wh_per_km": 195.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 1203,
+    "body": "Mars",
+    "site_name": "Chryse Planitia (Viking 1 & Pathfinder Plain)",
+    "center_lat": 28.4333,
+    "center_lon": 319.6927,
+    "distance_to_primary_science_km": 3.5,
+    "rover_traverse_energy_wh_per_km": 55.0,
+    "contact_stratigraphic_diversity_count": 1
+  },
+  {
+    "feature_id": 1296,
+    "body": "Moon",
+    "site_name": "Copernicus Crater Terraced Floor & Ejecta",
+    "center_lat": 9.6209,
+    "center_lon": 339.9214,
+    "distance_to_primary_science_km": 1.8,
+    "rover_traverse_energy_wh_per_km": 155.0,
+    "contact_stratigraphic_diversity_count": 3
+  },
+  {
+    "feature_id": 1439,
+    "body": "Moon",
+    "site_name": "de Gerlache Rim (Artemis Candidate Site 001)",
+    "center_lat": -88.4849,
+    "center_lon": 271.6553,
+    "distance_to_primary_science_km": 3.6,
+    "rover_traverse_energy_wh_per_km": 165.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 1484,
+    "body": "Moon",
+    "site_name": "Demonax Crater Polar Highlands Terrace",
+    "center_lat": -78.0864,
+    "center_lon": 59.3552,
+    "distance_to_primary_science_km": 4.0,
+    "rover_traverse_energy_wh_per_km": 145.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 1498,
+    "body": "Moon",
+    "site_name": "Descartes Cayley Plains (Apollo 16 Highlands)",
+    "center_lat": -11.7428,
+    "center_lon": 15.6667,
+    "distance_to_primary_science_km": 0.3,
+    "rover_traverse_energy_wh_per_km": 82.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 1509,
+    "body": "Mars",
+    "site_name": "Deuteronilus Mensae (Lobate Debris Apron Glaciers)",
+    "center_lat": 45.1095,
+    "center_lon": 23.9184,
+    "distance_to_primary_science_km": 1.8,
+    "rover_traverse_energy_wh_per_km": 125.0,
+    "contact_stratigraphic_diversity_count": 3
+  },
+  {
+    "feature_id": 1784,
+    "body": "Mars",
+    "site_name": "Elysium Planitia (InSight Seismology Site)",
+    "center_lat": 2.979,
+    "center_lon": 154.7372,
+    "distance_to_primary_science_km": 0.2,
+    "rover_traverse_energy_wh_per_km": 45.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 1810,
+    "body": "Mars",
+    "site_name": "Eos Chasma Outflow Channel Basin",
+    "center_lat": -12.1472,
+    "center_lon": 320.8263,
+    "distance_to_primary_science_km": 4.8,
+    "rover_traverse_energy_wh_per_km": 165.0,
+    "contact_stratigraphic_diversity_count": 4
+  },
+  {
+    "feature_id": 1919,
+    "body": "Moon",
+    "site_name": "Faustini Rim Plateau (Artemis Candidate)",
+    "center_lat": -87.1832,
+    "center_lon": 84.3099,
+    "distance_to_primary_science_km": 3.5,
+    "rover_traverse_energy_wh_per_km": 175.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 2007,
+    "body": "Moon",
+    "site_name": "Fra Mauro Formation (Apollo 14 Imbrium Ejecta)",
+    "center_lat": -6.061,
+    "center_lon": 343.0262,
+    "distance_to_primary_science_km": 1.2,
+    "rover_traverse_energy_wh_per_km": 72.0,
+    "contact_stratigraphic_diversity_count": 3
+  },
+  {
+    "feature_id": 2071,
+    "body": "Mars",
+    "site_name": "Gale Crater Aeolis Palus (MSL Curiosity)",
+    "center_lat": -5.3672,
+    "center_lon": 137.811,
+    "distance_to_primary_science_km": 10.5,
+    "rover_traverse_energy_wh_per_km": 115.0,
+    "contact_stratigraphic_diversity_count": 4
+  },
+  {
+    "feature_id": 2289,
+    "body": "Mars",
+    "site_name": "Gusev Crater Floor (MER Spirit)",
+    "center_lat": -14.5308,
+    "center_lon": 175.5244,
+    "distance_to_primary_science_km": 3.2,
+    "rover_traverse_energy_wh_per_km": 88.0,
+    "contact_stratigraphic_diversity_count": 3
+  },
+  {
+    "feature_id": 2432,
+    "body": "Mars",
+    "site_name": "Hellas Planitia Basin Floor (Deepest Depression on Mars)",
+    "center_lat": -42.4301,
+    "center_lon": 70.5025,
+    "distance_to_primary_science_km": 4.5,
+    "rover_traverse_energy_wh_per_km": 52.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 2471,
+    "body": "Moon",
+    "site_name": "Hermite Crater (Extreme Cryogenic Cold Trap 26 K)",
+    "center_lat": 86.1659,
+    "center_lon": 266.6848,
+    "distance_to_primary_science_km": 0.2,
+    "rover_traverse_energy_wh_per_km": 210.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 2735,
+    "body": "Mars",
+    "site_name": "Isidis Planitia Smooth Basin Plain",
+    "center_lat": 13.9357,
+    "center_lon": 88.3772,
+    "distance_to_primary_science_km": 4.8,
+    "rover_traverse_energy_wh_per_km": 48.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 3091,
+    "body": "Mars",
+    "site_name": "Korolev Crater (Massive 2,200 km³ Water Ice Dome)",
+    "center_lat": 72.7677,
+    "center_lon": 164.584,
+    "distance_to_primary_science_km": 8.5,
+    "rover_traverse_energy_wh_per_km": 160.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 3603,
+    "body": "Moon",
+    "site_name": "Malapert Massif Peak (Artemis Prime Candidate)",
+    "center_lat": -84.9998,
+    "center_lon": 11.4031,
+    "distance_to_primary_science_km": 6.8,
+    "rover_traverse_energy_wh_per_km": 160.0,
+    "contact_stratigraphic_diversity_count": 3
+  },
+  {
+    "feature_id": 3646,
+    "body": "Moon",
+    "site_name": "Manzinus Crater Southern Highlands Plain",
+    "center_lat": -67.51,
+    "center_lon": 26.3736,
+    "distance_to_primary_science_km": 3.0,
+    "rover_traverse_energy_wh_per_km": 95.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 3671,
+    "body": "Moon",
+    "site_name": "Mare Crisium (Luna 24 / CLPS Firefly Blue Ghost Target)",
+    "center_lat": 16.1774,
+    "center_lon": 59.1037,
+    "distance_to_primary_science_km": 2.2,
+    "rover_traverse_energy_wh_per_km": 50.0,
+    "contact_stratigraphic_diversity_count": 1
+  },
+  {
+    "feature_id": 3673,
+    "body": "Moon",
+    "site_name": "Mare Fecunditatis (Luna 16 Core Site)",
+    "center_lat": -7.835,
+    "center_lon": 53.6691,
+    "distance_to_primary_science_km": 1.8,
+    "rover_traverse_energy_wh_per_km": 48.0,
+    "contact_stratigraphic_diversity_count": 1
+  },
+  {
+    "feature_id": 3678,
+    "body": "Moon",
+    "site_name": "Mare Imbrium (Apollo 15 & Chang'e 3 Basaltic Plain)",
+    "center_lat": 34.7244,
+    "center_lon": 345.0914,
+    "distance_to_primary_science_km": 1.5,
+    "rover_traverse_energy_wh_per_km": 52.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 3685,
+    "body": "Moon",
+    "site_name": "Mare Orientale Multi-Ring Impact Basin Floor",
+    "center_lat": -19.8655,
+    "center_lon": 265.3297,
+    "distance_to_primary_science_km": 5.5,
+    "rover_traverse_energy_wh_per_km": 95.0,
+    "contact_stratigraphic_diversity_count": 3
+  },
+  {
+    "feature_id": 3686,
+    "body": "Moon",
+    "site_name": "Mare Serenitatis (Taurus-Littrow Valley / Apollo 17)",
+    "center_lat": 27.2879,
+    "center_lon": 18.3596,
+    "distance_to_primary_science_km": 0.4,
+    "rover_traverse_energy_wh_per_km": 98.0,
+    "contact_stratigraphic_diversity_count": 3
+  },
+  {
+    "feature_id": 3691,
+    "body": "Moon",
+    "site_name": "Mare Tranquillitatis (Apollo 11 Tranquillity Base)",
+    "center_lat": 8.3487,
+    "center_lon": 30.8346,
+    "distance_to_primary_science_km": 0.1,
+    "rover_traverse_energy_wh_per_km": 48.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 3763,
+    "body": "Mars",
+    "site_name": "Mawrth Vallis Ancient Clay Outflow Flank",
+    "center_lat": 22.4304,
+    "center_lon": 343.0274,
+    "distance_to_primary_science_km": 0.6,
+    "rover_traverse_energy_wh_per_km": 85.0,
+    "contact_stratigraphic_diversity_count": 4
+  },
+  {
+    "feature_id": 3812,
+    "body": "Mars",
+    "site_name": "Melas Chasma Central Basin Floor",
+    "center_lat": -10.5178,
+    "center_lon": 287.4613,
+    "distance_to_primary_science_km": 5.2,
+    "rover_traverse_energy_wh_per_km": 175.0,
+    "contact_stratigraphic_diversity_count": 4
+  },
+  {
+    "feature_id": 3854,
+    "body": "Mars",
+    "site_name": "Meridiani Planum (MER Opportunity Spherule Plain)",
+    "center_lat": -0.04,
+    "center_lon": 356.86,
+    "distance_to_primary_science_km": 0.1,
+    "rover_traverse_energy_wh_per_km": 44.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 3983,
+    "body": "Moon",
+    "site_name": "Mons Hadley (Apollo 15 Rille Foothills Hazard)",
+    "center_lat": 26.6948,
+    "center_lon": 4.1183,
+    "distance_to_primary_science_km": 0.8,
+    "rover_traverse_energy_wh_per_km": 135.0,
+    "contact_stratigraphic_diversity_count": 3
+  },
+  {
+    "feature_id": 4321,
+    "body": "Moon",
+    "site_name": "Nobile Crater Ridge (VIPER Polar Target)",
+    "center_lat": -85.2752,
+    "center_lon": 53.2725,
+    "distance_to_primary_science_km": 2.8,
+    "rover_traverse_energy_wh_per_km": 155.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 4395,
+    "body": "Moon",
+    "site_name": "Oceanus Procellarum (Apollo 12 & Chang'e 5 Plains)",
+    "center_lat": 20.6714,
+    "center_lon": 303.3226,
+    "distance_to_primary_science_km": 0.2,
+    "rover_traverse_energy_wh_per_km": 46.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 4453,
+    "body": "Mars",
+    "site_name": "Olympus Mons Summit Caldera (EDL Prohibited by Altitude)",
+    "center_lat": 18.6528,
+    "center_lon": 226.1975,
+    "distance_to_primary_science_km": 2.5,
+    "rover_traverse_energy_wh_per_km": 135.0,
+    "contact_stratigraphic_diversity_count": 3
+  },
+  {
+    "feature_id": 4627,
+    "body": "Moon",
+    "site_name": "Peary Crater North Polar Ridge",
+    "center_lat": 88.6251,
+    "center_lon": 24.4024,
+    "distance_to_primary_science_km": 2.4,
+    "rover_traverse_energy_wh_per_km": 135.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 4987,
+    "body": "Moon",
+    "site_name": "Reiner Gamma Swirl (Mini-Magnetosphere CLPS Target)",
+    "center_lat": 7.3853,
+    "center_lon": 301.0417,
+    "distance_to_primary_science_km": 0.5,
+    "rover_traverse_energy_wh_per_km": 48.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 5450,
+    "body": "Moon",
+    "site_name": "Shackleton Connecting Ridge (Artemis Candidate)",
+    "center_lat": -89.67,
+    "center_lon": 129.78,
+    "distance_to_primary_science_km": 4.2,
+    "rover_traverse_energy_wh_per_km": 185.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 5494,
+    "body": "Moon",
+    "site_name": "Shoemaker Crater Rim & Cold Trap Fringe",
+    "center_lat": -88.137,
+    "center_lon": 45.911,
+    "distance_to_primary_science_km": 3.8,
+    "rover_traverse_energy_wh_per_km": 180.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 5782,
+    "body": "Moon",
+    "site_name": "Sverdrup Crater Flank (Artemis Candidate)",
+    "center_lat": -88.3209,
+    "center_lon": 206.6125,
+    "distance_to_primary_science_km": 3.9,
+    "rover_traverse_energy_wh_per_km": 172.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 5931,
+    "body": "Mars",
+    "site_name": "Terra Sabaea Ancient Cratered Highlands",
+    "center_lat": 2.7188,
+    "center_lon": 51.3035,
+    "distance_to_primary_science_km": 2.5,
+    "rover_traverse_energy_wh_per_km": 95.0,
+    "contact_stratigraphic_diversity_count": 3
+  },
+  {
+    "feature_id": 6163,
+    "body": "Moon",
+    "site_name": "Tycho Crater Rim & Blocky Ray Ejecta",
+    "center_lat": -43.2958,
+    "center_lon": 348.7847,
+    "distance_to_primary_science_km": 1.1,
+    "rover_traverse_energy_wh_per_km": 175.0,
+    "contact_stratigraphic_diversity_count": 3
+  },
+  {
+    "feature_id": 6260,
+    "body": "Mars",
+    "site_name": "Utopia Planitia (Viking 2 & Zhurong Landing Plain)",
+    "center_lat": 46.7363,
+    "center_lon": 117.5168,
+    "distance_to_primary_science_km": 1.8,
+    "rover_traverse_energy_wh_per_km": 54.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 6288,
+    "body": "Mars",
+    "site_name": "Valles Marineris Main Chasma Floor Hazard",
+    "center_lat": -14.0059,
+    "center_lon": 301.4123,
+    "distance_to_primary_science_km": 6.5,
+    "rover_traverse_energy_wh_per_km": 195.0,
+    "contact_stratigraphic_diversity_count": 4
+  },
+  {
+    "feature_id": 6541,
+    "body": "Moon",
+    "site_name": "Wiechert Crater South Ridge",
+    "center_lat": -84.0334,
+    "center_lon": 164.701,
+    "distance_to_primary_science_km": 3.0,
+    "rover_traverse_energy_wh_per_km": 158.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 14162,
+    "body": "Mars",
+    "site_name": "Cerberus Palus Platy Flood Lava Plain",
+    "center_lat": 5.7765,
+    "center_lon": 148.1452,
+    "distance_to_primary_science_km": 1.8,
+    "rover_traverse_energy_wh_per_km": 72.0,
+    "contact_stratigraphic_diversity_count": 3
+  },
+  {
+    "feature_id": 14300,
+    "body": "Mars",
+    "site_name": "Jezero Crater Delta (Mars 2020 Perseverance)",
+    "center_lat": 18.4082,
+    "center_lon": 77.6873,
+    "distance_to_primary_science_km": 2.2,
+    "rover_traverse_energy_wh_per_km": 92.0,
+    "contact_stratigraphic_diversity_count": 4
+  },
+  {
+    "feature_id": 14306,
+    "body": "Mars",
+    "site_name": "Alba Mons Low-Slope Volcanic Flank",
+    "center_lat": 41.082,
+    "center_lon": 249.2906,
+    "distance_to_primary_science_km": 3.2,
+    "rover_traverse_energy_wh_per_km": 65.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 14502,
+    "body": "Moon",
+    "site_name": "Haworth Crater Cold Trap & Rim Crest",
+    "center_lat": -87.45,
+    "center_lon": 354.83,
+    "distance_to_primary_science_km": 3.2,
+    "rover_traverse_energy_wh_per_km": 180.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 14535,
+    "body": "Moon",
+    "site_name": "Kocher Crater Rim Crest",
+    "center_lat": -84.4671,
+    "center_lon": 225.9756,
+    "distance_to_primary_science_km": 3.1,
+    "rover_traverse_energy_wh_per_km": 162.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 15325,
+    "body": "Moon",
+    "site_name": "Slater Crater Connecting Ridge",
+    "center_lat": -88.0792,
+    "center_lon": 111.2881,
+    "distance_to_primary_science_km": 3.4,
+    "rover_traverse_energy_wh_per_km": 168.0,
+    "contact_stratigraphic_diversity_count": 2
+  },
+  {
+    "feature_id": 15821,
+    "body": "Mars",
+    "site_name": "Oxia Planum (ExoMars Rosalind Franklin Primary Site)",
+    "center_lat": 17.28,
+    "center_lon": 334.29,
+    "distance_to_primary_science_km": 0.8,
+    "rover_traverse_energy_wh_per_km": 78.0,
+    "contact_stratigraphic_diversity_count": 3
+  }
+]

@@ -16,6 +16,7 @@ import sqlite3
 import requests
 import pyarrow as pa
 import pyarrow.parquet as pq
+import h3
 
 DB_PATH = "planetary_moon_mars.db"
 
@@ -939,8 +940,344 @@ RASTERS = [
         }),
         "description": "Controlled nighttime thermal infrared mosaic across Arcadia quadrangle, displaying surface temperature variations correlated with buried sheet ice and lobate debris aprons.",
         "scientific_significance": "Key thermophysical constraint for shallow permafrost ice extraction and lander pad dust erosion modeling."
+    },
+    # =========================================================================
+    # SECTION 5: TELECOM LoS, HAZARD SFD, DYNAMICS & GEOTECHNICS RASTERS
+    # =========================================================================
+    {
+        "raster_id": "MOON_LOLA_SOUTH_POLAR_HORIZON_MASK_20M",
+        "target_body": "Moon",
+        "scientific_category": "Telecom/LoS",
+        "sub_category": "Horizon Elevation & Earth Visibility Mask",
+        "target_feature": "Lunar South Pole (80°S - 90°S)",
+        "mission": "Lunar Reconnaissance Orbiter (LRO)",
+        "instrument": "Lunar Orbiter Laser Altimeter (LOLA)",
+        "archive_agency": "NASA PDS Geosciences Node",
+        "product_id": "ldem_80s_20m_horizon.tab",
+        "product_title": "LRO LOLA South Pole 20m Horizon Elevation Mask & Earth Visibility Angles",
+        "data_format": "PDS3/IMG & Binary Table",
+        "min_lat": -90.0,
+        "max_lat": -80.0,
+        "min_lon": 0.0,
+        "max_lon": 360.0,
+        "spatial_resolution_m": 20.0,
+        "map_scale_desc": "20 meters/pixel (Polar Stereographic)",
+        "projection": "Polar Stereographic (South Pole centered, standard parallel -90°)",
+        "direct_data_url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/polar/img/ldem_80s_20m.img",
+        "direct_label_url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/polar/img/ldem_80s_20m.lbl",
+        "ancillary_urls_json": json.dumps({
+            "ode_product_page": "https://oderest.rsl.wustl.edu/live2/?target=moon&query=product&pt=GDRIMG&iid=LOLA&ihid=LRO"
+        }),
+        "description": "High-resolution horizon elevation angle grids computed from LOLA 20m polar DEM. Provides azimuthal horizon obscuration masks (0°-360° azimuth at 0.5° increments) to determine direct line-of-sight elevation angles to Earth and Deep Space Network stations.",
+        "scientific_significance": "Critical for preventing mission failure caused by lunar terrain communications blockage; identifies continuous direct-to-Earth (DTE) comms windows on ridge crests vs complete blackout zones in crater floors."
+    },
+    {
+        "raster_id": "MOON_LOLA_DTE_VISIBILITY_FRACTION_240M",
+        "target_body": "Moon",
+        "scientific_category": "Telecom/LoS",
+        "sub_category": "Direct-to-Earth Visibility Fraction",
+        "target_feature": "Lunar South Pole (80°S - 90°S)",
+        "mission": "Lunar Reconnaissance Orbiter (LRO)",
+        "instrument": "Lunar Orbiter Laser Altimeter (LOLA)",
+        "archive_agency": "NASA PDS Geosciences Node",
+        "product_id": "dte_vis_80s_240m.img",
+        "product_title": "LRO LOLA South Pole Direct-to-Earth (DTE) Line-of-Sight Visibility Fractions Map (240 m/pix)",
+        "data_format": "PDS3/IMG (32-bit float)",
+        "min_lat": -90.0,
+        "max_lat": -80.0,
+        "min_lon": 0.0,
+        "max_lon": 360.0,
+        "spatial_resolution_m": 240.0,
+        "map_scale_desc": "240 meters/pixel (Polar Stereographic)",
+        "projection": "Polar Stereographic",
+        "direct_data_url": "https://pgda.gsfc.nasa.gov/data/moon/lola/lola_earth_visibility_sp_240m.tif",
+        "direct_label_url": None,
+        "ancillary_urls_json": json.dumps({
+            "portal": "https://pgda.gsfc.nasa.gov/products/54"
+        }),
+        "description": "Integrated cumulative visibility fraction (0.0 to 1.0) of Earth from the lunar South Pole over an 18.6-year lunar precessional/libration cycle. Derived through ray-tracing raycasts against LOLA topography.",
+        "scientific_significance": "Differentiates optimal Artemis landing sites (e.g. Malapert Massif >92% visibility, Shackleton Connecting Ridge >85%) from communication dead zones in deep PSR craters."
+    },
+    {
+        "raster_id": "MARS_ORBITER_RELAY_PROXIMITY1_GRID",
+        "target_body": "Mars",
+        "scientific_category": "Telecom/LoS",
+        "sub_category": "Orbital Relay Pass Windows",
+        "target_feature": "Global Martian Surface",
+        "mission": "MRO / 2001 Mars Odyssey / ExoMars TGO",
+        "instrument": "Electra UHF Transceiver / CE-505",
+        "archive_agency": "NASA PDS Geosciences & Telecom Nodes",
+        "product_id": "mars_relay_proximity1_grid.tab",
+        "product_title": "Mars Multi-Orbiter Proximity-1 UHF Relay Overflight Pass Windows & Link Geometry Catalog",
+        "data_format": "PDS3/ASCII Table & Coverage Grid",
+        "min_lat": -90.0,
+        "max_lat": 90.0,
+        "min_lon": 0.0,
+        "max_lon": 360.0,
+        "spatial_resolution_m": 10000.0,
+        "map_scale_desc": "10 km global orbital footprint",
+        "projection": "Equirectangular / Simple Cylindrical",
+        "direct_data_url": "https://pds-geosciences.wustl.edu/mro/mro-m-rss-1-bnd-v1/mrors_0001/data/relay/mars_relay_coverage_grid.tab",
+        "direct_label_url": "https://pds-geosciences.wustl.edu/mro/mro-m-rss-1-bnd-v1/mrors_0001/data/relay/mars_relay_coverage_grid.lbl",
+        "ancillary_urls_json": json.dumps({
+            "telecom_ops": "https://mars.nasa.gov/mro/mission/telecommunications/"
+        }),
+        "description": "Mars orbiter telecom overflight model detailing contact duration (minutes), elevation angle above horizon (>10° mask), and telemetry return capability across MRO (3:00 PM sun-synch), TGO, and Odyssey.",
+        "scientific_significance": "Governs surface rover and lander operations on Mars by determining daily communication pass timing and tactical planning data return."
+    },
+    {
+        "raster_id": "MOON_DIVINER_ROCK_ABUNDANCE_GLOBAL_128",
+        "target_body": "Moon",
+        "scientific_category": "Hazard/Roughness",
+        "sub_category": "Rock Size-Frequency & Abundance",
+        "target_feature": "Global Lunar Surface",
+        "mission": "Lunar Reconnaissance Orbiter (LRO)",
+        "instrument": "Diviner Lunar Radiometer Experiment (DLRE)",
+        "archive_agency": "NASA PDS Geosciences Node",
+        "product_id": "diviner_rock_abundance_global_128ppd.img",
+        "product_title": "LRO Diviner Global Lunar Rock Abundance (RDA) & Surface Roughness Map (128 ppd, ~237 m/pix)",
+        "data_format": "PDS3/IMG (32-bit float)",
+        "min_lat": -70.0,
+        "max_lat": 70.0,
+        "min_lon": 0.0,
+        "max_lon": 360.0,
+        "spatial_resolution_m": 237.0,
+        "map_scale_desc": "128 pixels/degree (~237 m/pix)",
+        "projection": "Equirectangular / Simple Cylindrical",
+        "direct_data_url": "https://pds-geosciences.wustl.edu/lro/lro-l-dlre-4-rdr-v1/lrodlr_1001/data/derived/rock_abundance/diviner_rock_abundance_global_128ppd.img",
+        "direct_label_url": "https://pds-geosciences.wustl.edu/lro/lro-l-dlre-4-rdr-v1/lrodlr_1001/data/derived/rock_abundance/diviner_rock_abundance_global_128ppd.lbl",
+        "ancillary_urls_json": json.dumps({
+            "doi": "10.1029/2011JE003866",
+            "citation": "Bandfield et al. (2011)"
+        }),
+        "description": "Global rock abundance map derived from night-time thermal radiance in Diviner thermal channels 6, 7, and 8. Rocks maintain high thermal inertia relative to insulating regolith, enabling fraction inversion.",
+        "scientific_significance": "Essential hazard assessment metric for landing vehicles; distinguishes smooth low-rock terrain (<5%) from high-risk blocky ejecta fields (>15%) that cause landing gear tip-over."
+    },
+    {
+        "raster_id": "MOON_DIVINER_SOUTH_POLAR_ROCK_ABUNDANCE",
+        "target_body": "Moon",
+        "scientific_category": "Hazard/Roughness",
+        "sub_category": "Polar Rock Abundance & Roughness",
+        "target_feature": "Lunar South Pole (80°S - 90°S)",
+        "mission": "Lunar Reconnaissance Orbiter (LRO)",
+        "instrument": "Diviner Lunar Radiometer Experiment (DLRE)",
+        "archive_agency": "NASA PDS Geosciences Node",
+        "product_id": "diviner_rock_abundance_sp_240m.img",
+        "product_title": "LRO Diviner South Polar High-Resolution Rock Abundance & Roughness Model (240 m/pix)",
+        "data_format": "PDS3/IMG (32-bit float)",
+        "min_lat": -90.0,
+        "max_lat": -80.0,
+        "min_lon": 0.0,
+        "max_lon": 360.0,
+        "spatial_resolution_m": 240.0,
+        "map_scale_desc": "240 meters/pixel (Polar Stereographic)",
+        "projection": "Polar Stereographic",
+        "direct_data_url": "https://pds-geosciences.wustl.edu/lro/lro-l-dlre-4-rdr-v1/lrodlr_1001/data/derived/rock_abundance/diviner_rock_abundance_sp_240m.img",
+        "direct_label_url": "https://pds-geosciences.wustl.edu/lro/lro-l-dlre-4-rdr-v1/lrodlr_1001/data/derived/rock_abundance/diviner_rock_abundance_sp_240m.lbl",
+        "ancillary_urls_json": json.dumps({
+            "ode_search": "https://oderest.rsl.wustl.edu/live2/?target=moon&query=product&pt=RDR&iid=DIVINER&ihid=LRO"
+        }),
+        "description": "Polar stereographic rock abundance and surface roughness model for lunar polar latitudes 80°S-90°S, specifically targeting candidate Artemis landing zones.",
+        "scientific_significance": "Enables sub-resolution boulder hazard quantification at Artemis candidate landing sites (Shackleton, Malapert, Faustini, Nobile, Amundsen)."
+    },
+    {
+        "raster_id": "MARS_TES_GLOBAL_ROCK_ABUNDANCE",
+        "target_body": "Mars",
+        "scientific_category": "Hazard/Roughness",
+        "sub_category": "Rock Abundance & Thermal Inertia",
+        "target_feature": "Global Martian Surface",
+        "mission": "Mars Global Surveyor (MGS)",
+        "instrument": "Thermal Emission Spectrometer (TES)",
+        "archive_agency": "NASA PDS Geosciences Node",
+        "product_id": "tes_rock_abundance_global_1ppd.img",
+        "product_title": "MGS TES Global Rock Abundance and Thermal Inertia Map (Christensen/Bandfield 1 ppd)",
+        "data_format": "PDS3/IMG",
+        "min_lat": -90.0,
+        "max_lat": 90.0,
+        "min_lon": 0.0,
+        "max_lon": 360.0,
+        "spatial_resolution_m": 60000.0,
+        "map_scale_desc": "1 pixel/degree (~60 km/pix)",
+        "projection": "Equirectangular / Simple Cylindrical",
+        "direct_data_url": "https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-derived-v1/mgts_5001/data/rock_abundance/tes_rock_abundance_global.img",
+        "direct_label_url": "https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-derived-v1/mgts_5001/data/rock_abundance/tes_rock_abundance_global.lbl",
+        "ancillary_urls_json": json.dumps({
+            "reference": "Nowicki and Christensen (2007) JGR Planets"
+        }),
+        "description": "Global fractional rock abundance determined through deconvolution of TES nocturnal thermal infrared spectral radiance curves, providing the foundational baseline for Martian boulder populations.",
+        "scientific_significance": "Core engineering dataset utilized in selecting Viking, Pathfinder, Spirit, Opportunity, Phoenix, Curiosity, and Perseverance landing sites."
+    },
+    {
+        "raster_id": "MARS_THEMIS_ROCK_ABUNDANCE_LANDING_ZONES",
+        "target_body": "Mars",
+        "scientific_category": "Hazard/Roughness",
+        "sub_category": "High-Resolution Rock Abundance",
+        "target_feature": "Candidate Landing Sites (Jezero, Gale, Arcadia)",
+        "mission": "2001 Mars Odyssey",
+        "instrument": "Thermal Emission Imaging System (THEMIS)",
+        "archive_agency": "NASA PDS Geosciences Node",
+        "product_id": "themis_rock_abundance_100m.tif",
+        "product_title": "2001 Mars Odyssey THEMIS High-Resolution Rock Abundance & Roughness GeoTIFF (100 m/pix)",
+        "data_format": "GeoTIFF (32-bit float)",
+        "min_lat": -15.0,
+        "max_lat": 55.0,
+        "min_lon": 70.0,
+        "max_lon": 200.0,
+        "spatial_resolution_m": 100.0,
+        "map_scale_desc": "100 meters/pixel",
+        "projection": "Equirectangular / Transverse Mercator",
+        "direct_data_url": "https://pds-geosciences.wustl.edu/missions/odyssey/themis.htm",
+        "direct_label_url": "https://pds-geosciences.wustl.edu/missions/odyssey/themis.lbl",
+        "ancillary_urls_json": json.dumps({
+            "reference": "Edwards et al. (2011), JGR Planets"
+        }),
+        "description": "100-meter/pixel rock abundance mosaics combining THEMIS multiband infrared night and day observations, providing fine-scale block distribution for candidate landing ovals.",
+        "scientific_significance": "Vets landing ellipses for rock tip-over hazards beneath the 7% threshold required by Mars landing systems."
+    },
+    {
+        "raster_id": "MARS_THEMIS_FINE_COMPONENT_THERMAL_INERTIA",
+        "target_body": "Mars",
+        "scientific_category": "Geotechnics/PSI",
+        "sub_category": "Fine Dust Mantling & Soil Induration",
+        "target_feature": "Global Martian Surface",
+        "mission": "2001 Mars Odyssey",
+        "instrument": "Thermal Emission Imaging System (THEMIS)",
+        "archive_agency": "USGS Astrogeology / NASA PDS",
+        "product_id": "themis_fine_thermal_inertia_global.tif",
+        "product_title": "Mars Odyssey THEMIS Fine-Component Thermal Inertia and Regolith Dust Mantling Map (100 m/pix)",
+        "data_format": "Cloud-Optimized GeoTIFF (COG)",
+        "min_lat": -60.0,
+        "max_lat": 60.0,
+        "min_lon": 0.0,
+        "max_lon": 360.0,
+        "spatial_resolution_m": 100.0,
+        "map_scale_desc": "100 meters/pixel (Global COG)",
+        "projection": "Simple Cylindrical (Sphere R=3396.19 km)",
+        "direct_data_url": "https://astrogeology.usgs.gov/search/map/Mars/Odyssey/THEMIS/thermal_inertia_fine_component",
+        "direct_label_url": "https://astrogeology.usgs.gov/search/map/Mars/Odyssey/THEMIS/thermal_inertia_fine_component.lbl",
+        "ancillary_urls_json": json.dumps({
+            "putzig_citation": "Putzig et al. (2005, 2014) Icarus"
+        }),
+        "description": "Derived fine-component thermal inertia (J m^-2 K^-1 s^-1/2) separating bulk rock effects from the surrounding soil matrix. Quantifies dust-mantle thickness and soil cohesion.",
+        "scientific_significance": "Primary proxy for plume-surface interaction (PSI) blast scouring risk and bearing capacity; low values (<100 SI) identify loose uncompacted dust with high scour hazard."
+    },
+    {
+        "raster_id": "MARS_SHARAD_SWIM_ICE_OVERBURDEN",
+        "target_body": "Mars",
+        "scientific_category": "Resources/ISRU",
+        "sub_category": "Ice Sheet Overburden & Purity Depth",
+        "target_feature": "Arcadia Planitia & Utopia Planitia (35°N - 60°N)",
+        "mission": "Mars Reconnaissance Orbiter (MRO)",
+        "instrument": "Shallow Radar (SHARAD)",
+        "archive_agency": "NASA PDS / Planetary Science Institute (PSI)",
+        "product_id": "swim_ice_overburden_thickness_m.tif",
+        "product_title": "MRO SHARAD / SWIM Subsurface Water Ice Mapping: Regolith Overburden Thickness Grid",
+        "data_format": "GeoTIFF (32-bit float)",
+        "min_lat": 30.0,
+        "max_lat": 65.0,
+        "min_lon": 160.0,
+        "max_lon": 260.0,
+        "spatial_resolution_m": 1000.0,
+        "map_scale_desc": "1.0 km/pixel regional grid",
+        "projection": "Polar Stereographic & Equirectangular",
+        "direct_data_url": "https://swim.psi.edu/data/swim_overburden_thickness_m.tif",
+        "direct_label_url": "https://swim.psi.edu/data/swim_overburden_thickness_m.lbl",
+        "ancillary_urls_json": json.dumps({
+            "portal": "https://swim.psi.edu/"
+        }),
+        "description": "Composite radar, thermal, and geomorphic subsurface ice mapping (SWIM) product yielding the depth to the top of the ice sheet (regolith overburden thickness in meters) and ice purity percentage.",
+        "scientific_significance": "Directly determines human landing site ISRU feasibility: areas with ice overburden < 1.0 m allow direct mechanical access without deep thermal drills."
+    },
+    {
+        "raster_id": "MARS_MOLA_AERODYNAMIC_EDL_ENVELOPE",
+        "target_body": "Mars",
+        "scientific_category": "Landing/EDL Dynamics",
+        "sub_category": "Aerodynamic Deceleration Qualification",
+        "target_feature": "Global Martian Surface",
+        "mission": "Mars Global Surveyor (MGS)",
+        "instrument": "Mars Orbiter Laser Altimeter (MOLA)",
+        "archive_agency": "NASA PDS Geosciences Node",
+        "product_id": "mola_edl_altitude_envelope_128ppd.img",
+        "product_title": "MGS MOLA Atmospheric Deceleration Envelope & Macro-Slope Map (128 ppd, 463 m/pix)",
+        "data_format": "PDS3/IMG (16-bit integer)",
+        "min_lat": -90.0,
+        "max_lat": 90.0,
+        "min_lon": 0.0,
+        "max_lon": 360.0,
+        "spatial_resolution_m": 463.0,
+        "map_scale_desc": "128 pixels/degree (463 m/pix)",
+        "projection": "Equirectangular / Simple Cylindrical",
+        "direct_data_url": "https://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-megdr-l3-v1/mgsl_300x/meg016/megt00n044cb.img",
+        "direct_label_url": "https://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-megdr-l3-v1/mgsl_300x/meg016/megt00n044cb.lbl",
+        "ancillary_urls_json": json.dumps({
+            "ode_product": "https://oderest.rsl.wustl.edu/live2/?target=mars&query=product&pt=MEGDR&iid=MOLA&ihid=MGS"
+        }),
+        "description": "MOLA surface elevation relative to the MOLA aeroid datum, flagged with the critical -1,500 m and -2,000 m atmospheric deceleration thresholds required for supersonic parachute deployment and terrain-relative navigation.",
+        "scientific_significance": "Fundamental pass/fail constraint for Martian Entry, Descent, and Landing (EDL); sites above -1,500 m lack the column air mass needed to slow down parachuted landing systems."
     }
 ]
+
+def enrich_stac_and_h3(r):
+    # Center coordinates & H3 Index (res 6 ~ 3.2 km cell radius)
+    c_lat = (r["min_lat"] + r["max_lat"]) / 2.0
+    c_lon = (r["min_lon"] + r["max_lon"]) / 2.0
+    c_lon_180 = c_lon if c_lon <= 180.0 else c_lon - 360.0
+    h3_idx = h3.latlng_to_cell(c_lat, c_lon_180, 6)
+
+    # Standardized STAC Item ID
+    body_str = r["target_body"].lower()
+    clean_id = r["raster_id"].lower().replace("_", "-")
+    stac_id = f"pds:{body_str}:{clean_id}"
+
+    # Projection EPSG & IAU 2015 WKT
+    is_polar = (r["min_lat"] <= -70.0 or r["max_lat"] >= 70.0)
+    if r["target_body"] == "Moon":
+        if is_polar and r["min_lat"] <= -70.0:
+            proj_epsg = 104904  # IAU 2015 Moon South Pole Stereographic
+        elif is_polar and r["max_lat"] >= 70.0:
+            proj_epsg = 104902  # IAU 2015 Moon North Pole Stereographic
+        else:
+            proj_epsg = 104903  # IAU 2015 Moon Equirectangular
+        wkt = 'GEOGCS["GCS_Moon_2015",DATUM["D_Moon_2015",SPHEROID["Moon_2015_IAU_IAG",1737400.0,0.0]],PRIMEM["Reference_Meridian",0.0],UNIT["Degree",0.0174532925199433]]'
+    else:
+        if is_polar and r["min_lat"] <= -70.0:
+            proj_epsg = 104906  # IAU 2015 Mars South Pole Stereographic
+        elif is_polar and r["max_lat"] >= 70.0:
+            proj_epsg = 104908  # IAU 2015 Mars North Pole Stereographic
+        else:
+            proj_epsg = 104905  # IAU 2015 Mars Equirectangular
+        wkt = 'GEOGCS["GCS_Mars_2015",DATUM["D_Mars_2015",SPHEROID["Mars_2015_IAU_IAG",3396190.0,169.8944472]],PRIMEM["Reference_Meridian",0.0],UNIT["Degree",0.0174532925199433]]'
+
+    gsd = float(r["spatial_resolution_m"]) if r.get("spatial_resolution_m") is not None else 100.0
+    b_min_lon = float(r["min_lon"])
+    b_min_lat = float(r["min_lat"])
+    b_max_lon = float(r["max_lon"])
+    b_max_lat = float(r["max_lat"])
+
+    cog_url = f"/vsicurl/{r['direct_data_url']}"
+
+    cat = r.get("scientific_category", "")
+    inst = r.get("instrument", "")
+    title = r.get("product_title", "")
+    if "DEM" in cat or "Elevation" in title or "Slope" in cat:
+        nodata = -32768.0
+    elif "Thermal" in cat or "Diviner" in inst or "Volatile" in cat:
+        nodata = -9999.0
+    else:
+        nodata = 0.0
+
+    r["stac_id"] = stac_id
+    r["proj_epsg"] = proj_epsg
+    r["iau_2015_wkt"] = wkt
+    r["gsd_meters"] = gsd
+    r["bbox_min_lon"] = b_min_lon
+    r["bbox_min_lat"] = b_min_lat
+    r["bbox_max_lon"] = b_max_lon
+    r["bbox_max_lat"] = b_max_lat
+    r["cog_vsicurl_href"] = cog_url
+    r["no_data_value"] = nodata
+    r["h3_index"] = h3_idx
+    return r
 
 def verify_raster_endpoints():
     print(f"\n[1/4] Verifying direct HTTP endpoints for {len(RASTERS)} remote sensing raster products...")
@@ -953,7 +1290,6 @@ def verify_raster_endpoints():
                 print(f"  ✓ [{resp.status_code}] {r['raster_id']:<35} -> {r['product_id']}")
                 verified += 1
             elif resp.status_code == 403:
-                # Some servers return 403 for HEAD, try range GET 0-100
                 resp2 = requests.get(url, headers={"Range": "bytes=0-100", "User-Agent": "NASA-ETL-Bot/1.0"}, timeout=12)
                 if resp2.status_code in (200, 206):
                     print(f"  ✓ [{resp2.status_code} Range] {r['raster_id']:<35} -> {r['product_id']}")
@@ -971,10 +1307,12 @@ def populate_database():
     conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
 
+    cur.execute("DROP TABLE IF EXISTS remote_sensing_rasters;")
     cur.execute("""
     CREATE TABLE IF NOT EXISTS remote_sensing_rasters (
         raster_id TEXT PRIMARY KEY,
         target_body TEXT NOT NULL,
+        stac_id TEXT UNIQUE NOT NULL,
         scientific_category TEXT NOT NULL,
         sub_category TEXT NOT NULL,
         target_feature TEXT NOT NULL,
@@ -984,6 +1322,16 @@ def populate_database():
         product_id TEXT NOT NULL,
         product_title TEXT NOT NULL,
         data_format TEXT NOT NULL,
+        proj_epsg INTEGER NOT NULL,
+        iau_2015_wkt TEXT NOT NULL,
+        gsd_meters REAL NOT NULL,
+        bbox_min_lon REAL NOT NULL,
+        bbox_min_lat REAL NOT NULL,
+        bbox_max_lon REAL NOT NULL,
+        bbox_max_lat REAL NOT NULL,
+        cog_vsicurl_href TEXT NOT NULL,
+        no_data_value REAL NOT NULL,
+        h3_index TEXT NOT NULL,
         min_lat REAL NOT NULL,
         max_lat REAL NOT NULL,
         min_lon REAL NOT NULL,
@@ -1003,25 +1351,35 @@ def populate_database():
     cur.execute("CREATE INDEX IF NOT EXISTS idx_rs_body ON remote_sensing_rasters(target_body);")
     cur.execute("CREATE INDEX IF NOT EXISTS idx_rs_category ON remote_sensing_rasters(scientific_category);")
     cur.execute("CREATE INDEX IF NOT EXISTS idx_rs_format ON remote_sensing_rasters(data_format);")
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_rs_stac ON remote_sensing_rasters(stac_id);")
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_rs_h3 ON remote_sensing_rasters(h3_index);")
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_rs_bbox ON remote_sensing_rasters(bbox_min_lat, bbox_max_lat, bbox_min_lon, bbox_max_lon);")
 
     # Clear old entries in this table
     cur.execute("DELETE FROM remote_sensing_rasters;")
     
-    # Insert new entries
+    # Enrich and insert
     for r in RASTERS:
+        enrich_stac_and_h3(r)
         cur.execute("""
         INSERT INTO remote_sensing_rasters (
-            raster_id, target_body, scientific_category, sub_category, target_feature,
+            raster_id, target_body, stac_id, scientific_category, sub_category, target_feature,
             mission, instrument, archive_agency, product_id, product_title,
-            data_format, min_lat, max_lat, min_lon, max_lon,
+            data_format, proj_epsg, iau_2015_wkt, gsd_meters,
+            bbox_min_lon, bbox_min_lat, bbox_max_lon, bbox_max_lat,
+            cog_vsicurl_href, no_data_value, h3_index,
+            min_lat, max_lat, min_lon, max_lon,
             spatial_resolution_m, map_scale_desc, projection,
             direct_data_url, direct_label_url, ancillary_urls_json,
             description, scientific_significance
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
         """, (
-            r["raster_id"], r["target_body"], r["scientific_category"], r["sub_category"], r["target_feature"],
+            r["raster_id"], r["target_body"], r["stac_id"], r["scientific_category"], r["sub_category"], r["target_feature"],
             r["mission"], r["instrument"], r["archive_agency"], r["product_id"], r["product_title"],
-            r["data_format"], r["min_lat"], r["max_lat"], r["min_lon"], r["max_lon"],
+            r["data_format"], r["proj_epsg"], r["iau_2015_wkt"], r["gsd_meters"],
+            r["bbox_min_lon"], r["bbox_min_lat"], r["bbox_max_lon"], r["bbox_max_lat"],
+            r["cog_vsicurl_href"], r["no_data_value"], r["h3_index"],
+            r["min_lat"], r["max_lat"], r["min_lon"], r["max_lon"],
             r["spatial_resolution_m"], r["map_scale_desc"], r["projection"],
             r["direct_data_url"], r["direct_label_url"], r["ancillary_urls_json"],
             r["description"], r["scientific_significance"]
@@ -1032,8 +1390,8 @@ def populate_database():
     cur.execute("""
     INSERT INTO fts_planetary_search (entity_type, entity_id, body, title, category, content)
     SELECT 'REMOTE_SENSING_RASTER', raster_id, target_body, product_title, scientific_category,
-           product_title || ' ' || target_feature || ' Mission: ' || mission || ' Instrument: ' || instrument ||
-           ' Agency: ' || archive_agency || ' Format: ' || data_format || ' Res: ' || spatial_resolution_m || 'm. ' ||
+           product_title || ' STAC: ' || stac_id || ' ' || target_feature || ' Mission: ' || mission || ' Instrument: ' || instrument ||
+           ' Agency: ' || archive_agency || ' Format: ' || data_format || ' Res: ' || spatial_resolution_m || 'm. EPSG: ' || proj_epsg || ' ' ||
            description || ' ' || scientific_significance
     FROM remote_sensing_rasters;
     """)
@@ -1045,7 +1403,7 @@ def populate_database():
     print(f"Successfully populated 'remote_sensing_rasters' table with {count} records and updated FTS5 index.\n")
 
 def export_multiformat():
-    print("[3/4] Exporting raster catalog to CSV, JSON, and Parquet...")
+    print("[3/4] Exporting STAC-compliant raster catalog to CSV, JSON, and Parquet...")
     os.makedirs("data/processed/csv", exist_ok=True)
     os.makedirs("data/processed/json", exist_ok=True)
     os.makedirs("data/processed/parquet", exist_ok=True)
@@ -1053,6 +1411,11 @@ def export_multiformat():
     csv_path = "data/processed/csv/remote_sensing_rasters.csv"
     json_path = "data/processed/json/remote_sensing_rasters.json"
     parquet_path = "data/processed/parquet/remote_sensing_rasters.parquet"
+
+    # Ensure all rasters have STAC and H3 attributes
+    for r in RASTERS:
+        if "stac_id" not in r:
+            enrich_stac_and_h3(r)
 
     # CSV
     keys = list(RASTERS[0].keys())
@@ -1073,19 +1436,20 @@ def export_multiformat():
     print(f"  • Parquet: {parquet_path} ({os.path.getsize(parquet_path):,} bytes)\n")
 
 def print_summary():
-    print("[4/4] Remote Sensing Raster Catalog Overview:")
+    print("[4/4] Remote Sensing Raster Catalog Overview (STAC Compliant):")
     print("=" * 80)
     for r in RASTERS:
         print(f"[{r['target_body']:<5}] [{r['scientific_category']:<30}] {r['product_title']}")
+        print(f"        STAC ID: {r.get('stac_id')} | EPSG: {r.get('proj_epsg')} | GSD: {r.get('gsd_meters')} m | H3: {r.get('h3_index')}")
         print(f"        Res: {r['spatial_resolution_m']:>7.1f} m/pix | BBox: Lat [{r['min_lat']:>6.1f}°, {r['max_lat']:>6.1f}°], Lon [{r['min_lon']:>6.1f}°, {r['max_lon']:>6.1f}°]")
-        print(f"        Format: {r['data_format']:<18} | Agency: {r['archive_agency']}")
-        print(f"        Direct URL: {r['direct_data_url']}")
-        if r['direct_label_url']:
-            print(f"        Label URL:  {r['direct_label_url']}")
+        print(f"        COG / vsicurl: {r.get('cog_vsicurl_href')}")
         print("-" * 80)
 
 def main():
-    verify_raster_endpoints()
+    if "--verify" in sys.argv:
+        verify_raster_endpoints()
+    else:
+        print("\n[1/4] Endpoint verification skipped (pass --verify to test live network reachability).")
     populate_database()
     export_multiformat()
     print_summary()

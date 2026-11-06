@@ -87,7 +87,7 @@ CREATE INDEX idx_eph_body_date ON ephemerides_2026(body_id, datetime_utc);
 CREATE TABLE iau_planetary_features (
     feature_pk INTEGER PRIMARY KEY AUTOINCREMENT,
     body_id TEXT NOT NULL,
-    feature_id TEXT,
+    feature_id TEXT UNIQUE,
     name TEXT NOT NULL,
     clean_name TEXT NOT NULL,
     feature_type TEXT NOT NULL,
@@ -108,13 +108,16 @@ CREATE TABLE iau_planetary_features (
     quad_name TEXT,
     quad_code TEXT,
     usgs_link TEXT,
+    h3_index TEXT,
     FOREIGN KEY (body_id) REFERENCES celestial_bodies(body_id)
 );
 CREATE INDEX idx_feat_body ON iau_planetary_features(body_id);
+CREATE UNIQUE INDEX idx_feat_id_unique ON iau_planetary_features(feature_id);
 CREATE INDEX idx_feat_name ON iau_planetary_features(name);
 CREATE INDEX idx_feat_type ON iau_planetary_features(feature_type);
 CREATE INDEX idx_feat_diam ON iau_planetary_features(diameter_km DESC);
 CREATE INDEX idx_feat_coords ON iau_planetary_features(center_lat, center_lon);
+CREATE INDEX idx_feat_h3 ON iau_planetary_features(h3_index);
 
 -- 6. Space Missions Catalog
 CREATE TABLE missions_catalog (
@@ -418,12 +421,12 @@ print("Ingesting 11,139 IAU Planetary Features...")
 with open("data/processed/json/iau_features.json", "r", encoding="utf-8") as f:
     feat_data = json.load(f)
 feat_rows = [
-    (item["body"], item.get("feature_id"), item["name"], item["clean_name"], item["feature_type"], item.get("type_code"), item["diameter_km"], item["center_lat"], item["center_lon"], item["center_lon_180"], item.get("min_lat"), item.get("max_lat"), item.get("min_lon"), item.get("max_lon"), item.get("origin"), item.get("approval_date"), item.get("approval_status"), item.get("ethnicity"), item.get("continent"), item.get("quad_name"), item.get("quad_code"), item.get("usgs_link"))
+    (item["body"], item.get("feature_id"), item["name"], item["clean_name"], item["feature_type"], item.get("type_code"), item["diameter_km"], item["center_lat"], item["center_lon"], item["center_lon_180"], item.get("min_lat"), item.get("max_lat"), item.get("min_lon"), item.get("max_lon"), item.get("origin"), item.get("approval_date"), item.get("approval_status"), item.get("ethnicity"), item.get("continent"), item.get("quad_name"), item.get("quad_code"), item.get("usgs_link"), item.get("h3_index"))
     for item in feat_data
 ]
 cursor.executemany("""
-INSERT INTO iau_planetary_features (body_id, feature_id, name, clean_name, feature_type, type_code, diameter_km, center_lat, center_lon, center_lon_180, min_lat, max_lat, min_lon, max_lon, origin, approval_date, approval_status, ethnicity, continent, quad_name, quad_code, usgs_link)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+INSERT INTO iau_planetary_features (body_id, feature_id, name, clean_name, feature_type, type_code, diameter_km, center_lat, center_lon, center_lon_180, min_lat, max_lat, min_lon, max_lon, origin, approval_date, approval_status, ethnicity, continent, quad_name, quad_code, usgs_link, h3_index)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 """, feat_rows)
 
 # Ingest Missions
@@ -679,9 +682,16 @@ for t in tables:
 
 db_size = os.path.getsize(DB_PATH)
 print("="*60)
-print(f"TOTAL ROWS ACROSS ALL TABLES: {total_rows:,}")
-print(f"DATABASE FILE SIZE:           {db_size:,} bytes ({db_size / (1024*1024):.2f} MB)")
+print(f"TOTAL ROWS ACROSS ALL CORE TABLES: {total_rows:,}")
+print(f"DATABASE FILE SIZE:                {db_size:,} bytes ({db_size / (1024*1024):.2f} MB)")
 print("="*60 + "\n")
 
 conn.close()
+
+# Ingest rasters, engineering safety, EDL envelopes, and geotechnics
+print("Triggering supplementary pipelines (rasters, site safety, lander envelopes, geotechnics)...")
+import subprocess
+subprocess.run(["python3", "scripts/11_fetch_pds_usgs_remote_sensing_rasters.py"], check=True)
+subprocess.run(["python3", "scripts/12_build_engineering_safety_and_edl.py"], check=True)
+print("Full database build and supplementary pipeline successfully completed.")
 
