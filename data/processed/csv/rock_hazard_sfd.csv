@@ -1,11 +1,11 @@
 hazard_id,body,site_name,feature_id,rock_abundance_percent,mean_rock_height_m,sfd_slope_q,density_rocks_gt_0_5m_per_m2,density_rocks_gt_1_0m_per_m2,tip_over_probability_percent,cpr_roughness_ratio,hazard_classification,data_instrument
-HAZ_SHACKLETON_RIDGE,Moon,Shackleton Connecting Ridge,5450,4.2,0.22,2.15,0.0028,0.00042,1.2,0.38,Low Hazard (<5%),LRO Diviner DLRE Channel 8 & Mini-RF CPR Radar
-HAZ_MALAPERT_MASSIF,Moon,Malapert Massif Peak,3603,3.7,0.18,2.28,0.0019,0.00028,0.8,0.32,Low Hazard (<5%),LRO Diviner DLRE & LOLA RMS Slope 20m
-HAZ_CABEUS_FLOOR,Moon,Cabeus Crater Floor,953,6.4,0.31,1.95,0.0058,0.00095,3.4,0.62,Moderate Hazard (5-10%),LRO Diviner Polar RDR & LCROSS Altimetry
-HAZ_MARE_TRANQUILLITATIS,Moon,Mare Tranquillitatis (Apollo 11),3691,2.8,0.15,2.45,0.0011,0.00014,0.4,0.25,Low Hazard (<5%),LRO Diviner Global RDA (Bandfield 2011)
-HAZ_TYCHO_EJECTA,Moon,Tycho Crater Rim & Ray Ejecta,6163,22.4,0.95,1.45,0.048,0.0152,42.0,1.15,Extreme Hazard (>15%),LRO Diviner Thermal Radiance & LROC NAC Imagery
-HAZ_JEZERO_DELTA,Mars,Jezero Crater Delta (Perseverance),14300,6.8,0.28,1.88,0.0062,0.0011,2.8,0.42,Moderate Hazard (5-10%),Mars Odyssey THEMIS IR & HiRISE Boulder Mapping
-HAZ_GALE_CRATER,Mars,Gale Crater Aeolis Palus (Curiosity),2071,5.2,0.24,2.05,0.0041,0.00065,1.7,0.35,Moderate Hazard (5-10%),MGS TES & THEMIS Edwards et al. (2011)
-HAZ_ARCADIA_PLANITIA,Mars,Arcadia Planitia Flatlands,348,3.8,0.17,2.3,0.0021,0.0003,0.7,0.28,Low Hazard (<5%),MGS TES & 2001 Mars Odyssey THEMIS
-HAZ_ARES_VALLIS,Mars,Ares Vallis Floodplain (Pathfinder),358,8.5,0.38,1.75,0.011,0.0022,6.5,0.55,Moderate Hazard (5-10%),Golombek et al. (1997) Pathfinder In-Situ & THEMIS
-HAZ_VALLES_MARINERIS,Mars,Valles Marineris Chasma Floor,6288,18.2,0.82,1.55,0.035,0.0098,31.0,0.95,Extreme Hazard (>15%),MGS MOLA Slope & THEMIS Rock Abundance
+HAZ_SHACKLETON_RIDGE,Moon,Shackleton Connecting Ridge,5450,4.2,0.28,-2.85,0.00142,0.00018,1.2,0.42,Low-Moderate Hazard (Safe for Autonomous Hazard Avoidance Landers),LRO Diviner Rock Abundance & Mini-RF CPR Radar
+HAZ_MALAPERT_PEAK,Moon,Malapert Massif Peak,3603,3.7,0.22,-3.1,0.00095,9e-05,0.8,0.35,Low Hazard (Prime Artemis Flat Pad),LRO Diviner RDA 128ppd & LROC NAC Stereo DTMs
+HAZ_CABEUS_FLOOR,Moon,Cabeus Crater Floor (LCROSS Centaur PSR),953,6.4,0.45,-2.45,0.0048,0.00072,4.5,0.85,Severe Hazard (High Centaur Ejecta Boulder Clutter in Cryogenic Shadow),Mini-RF Radar Backscatter CPR & LOLA 20m Surface Roughness
+HAZ_TYCHO_FLOOR,Moon,Tycho Crater Floor & Central Peak,6163,18.5,1.25,-1.95,0.0245,0.0068,28.5,1.45,Extreme Landing Hazard (Fresh Impact Melt Sheet with Giant Boulder Fields),LRO Diviner Thermal Radiance & LROC NAC 0.5m Imagery
+HAZ_TRANQUILLITY_BASE,Moon,Apollo 11 Tranquillity Base,3690,2.2,0.16,-3.4,0.00045,3e-05,0.3,0.22,Extremely Safe (Smooth Mature Mare Regolith),Apollo 11 Surface Photography & Diviner Global Baseline
+HAZ_JEZERO_DELTA,Mars,Jezero Crater Western Delta,14300,4.1,0.32,-2.9,0.00185,0.00025,1.4,0.38,Safe (Within Perseverance LVS Landing Ellipse Margin),2001 Mars Odyssey THEMIS IR & HiRISE 0.25m Automated Boulder Counts
+HAZ_GALE_AEOLIS,Mars,Gale Crater Aeolis Palus,2071,4.5,0.35,-2.8,0.0022,0.00032,1.8,0.41,Safe (Bradbury Landing Alluvial Plain),HiRISE Boulder Catalog & MSL Navcam/Hazcam Ground Truth
+HAZ_ARCADIA_PLANITIA,Mars,Arcadia Planitia Subsurface Ice Plain,346,2.2,0.18,-3.3,0.00052,4e-05,0.4,0.24,Extremely Safe (Smooth Mantled Terrain Ideal for Large Starship Pads),THEMIS Rock Abundance & HiRISE Automated Feature Tracking
+HAZ_ELYSIUM_INSIGHT,Mars,Elysium Planitia InSight Landing Site,1779,2.8,0.2,-3.2,0.00078,6e-05,0.6,0.28,Extremely Safe (InSight HP3 Mole Penetration Floor),InSight IDC/ICC Cameras & HiRISE DTM
+HAZ_MELAS_TALUS,Mars,Melas Chasma Deep Floor,3815,14.8,0.85,-2.15,0.0165,0.0042,18.2,1.15,High Hazard (Canyon Mass-Wasting Boulder Debris Fans),HiRISE 0.25m Imagery & THEMIS Nighttime Infrared

@@ -968,7 +968,7 @@ def populate_engineering_safety_tables():
     cur.execute("""
     CREATE TABLE site_engineering_safety (
         site_id TEXT PRIMARY KEY,
-        feature_id INTEGER,
+        feature_id TEXT,
         body TEXT NOT NULL,
         site_name TEXT NOT NULL,
         target_region TEXT NOT NULL,
@@ -1260,7 +1260,7 @@ def populate_engineering_safety_tables():
         hazard_id TEXT PRIMARY KEY,
         body TEXT NOT NULL,
         site_name TEXT NOT NULL,
-        feature_id INTEGER,
+        feature_id TEXT,
         rock_abundance_percent REAL NOT NULL,
         mean_rock_height_m REAL NOT NULL,
         sfd_slope_q REAL NOT NULL,
@@ -1276,8 +1276,31 @@ def populate_engineering_safety_tables():
     """)
     cur.execute("CREATE INDEX IF NOT EXISTS idx_rhs_body ON rock_hazard_sfd(body);")
 
+    # Build lookup cache from iau_planetary_features for resolving foreign keys
+    cur.execute("SELECT feature_id, clean_name, body_id FROM iau_planetary_features;")
+    features_by_id = {}
+    features_by_name = {}
+    for fid, name, b_id in cur.fetchall():
+        features_by_id[(str(fid), b_id.lower())] = str(fid)
+        features_by_name[(name.lower(), b_id.lower())] = str(fid)
+
+    def resolve_fid(raw_fid, s_name, t_region, b_id):
+        b_lower = b_id.lower()
+        if raw_fid is not None:
+            s_fid = str(raw_fid)
+            if (s_fid, b_lower) in features_by_id:
+                return s_fid
+        for candidate in [t_region, s_name]:
+            for part in [candidate, candidate.replace("EZ", "").replace("Candidate Pad", "").replace("Site", "").strip()]:
+                part_lower = part.lower()
+                for (fname, fbody), real_fid in features_by_name.items():
+                    if fbody == b_lower and fname in part_lower:
+                        return real_fid
+        return None
+
     # Populate site_engineering_safety
     for s in SITE_SAFETY_DATA:
+        s["feature_id"] = resolve_fid(s.get("feature_id"), s["site_name"], s["target_region"], s["body"])
         cur.execute("""
         INSERT INTO site_engineering_safety (
             site_id, feature_id, body, site_name, target_region, catalog_category,
@@ -1356,6 +1379,7 @@ def populate_engineering_safety_tables():
 
     # Populate rock_hazard_sfd
     for h in ROCK_SFD_DATA:
+        h["feature_id"] = resolve_fid(h.get("feature_id"), h["site_name"], h["site_name"], h["body"])
         cur.execute("""
         INSERT INTO rock_hazard_sfd (
             hazard_id, body, site_name, feature_id, rock_abundance_percent,
