@@ -135,10 +135,10 @@ Historically, planetary data for Earth, the Moon, and Mars lived in disjoint rep
 | `ti_wt_pct` | Weight % | Titanium dioxide concentration ($\text{TiO}_2$ ilmenite) | LROC WAC, Clementine, EMIT |
 | `h2o_equiv_pct` | Weight % | Water-Equivalent Hydrogen ($\text{WEH}$) | LRO LEND, Odyssey GRS, Copernicus |
 | `diurnal_temp_swing_k` | Kelvin ($\text{K}$) | Diurnal surface temperature amplitude ($\Delta T$) | Diviner, MEDA, REMS, ERA5 |
-| `has_subsurface_void`| `INTEGER` (0 or 1) | Presence of intact lava tubes or karst caves | LROC NAC Pits, USGS MGC3, Speleology |
-| `spatial_resolution_m`| Meters ($\text{m}$) | Sensor ground sampling distance | HiRISE, NAC, HRSC, Sentinel |
+| `has_subsurface_void` | `INTEGER` (0 or 1) | Presence of intact lava tubes or karst caves | LROC NAC Pits, USGS MGC3, Speleology |
+| `spatial_resolution_m` | Meters ($\text{m}$) | Sensor ground sampling distance | HiRISE, NAC, HRSC, Sentinel |
 | `vertical_accuracy_m` | Meters ($\text{m}$) | Vertical topographic error margin | LOLA, MOLA, SRTM |
-| `measurement_confidence`| $[0.0, 1.0]$ | Quantitative dataset confidence bound | Peer-reviewed calibration margins |
+| `measurement_confidence` | $[0.0, 1.0]$ | Quantitative dataset confidence bound | Peer-reviewed calibration margins |
 
 ---
 
@@ -167,21 +167,21 @@ Following official competition directives to look beyond over-studied sites (Ant
 | `EARTH_ANALOG_QAIDAM_BASIN` | Qaidam Basin Hyper-Arid Playa (China) | Mars (Jezero, Mawrth, Gale) | Aeolian Yardangs, sulfate/clay evaporites, hypolithic microbes | `Remote-Sensing Benchmark (Bilateral Restrictions)` | `10.1016/j.epsl.2018.06.028` |
 | `EARTH_ANALOG_HAUGHTON_CRATER` | Haughton Impact Crater (Devon Island, Canada) | Moon & Mars (Artemis, HLS2) | Shocked impact breccia, hydrothermal paleolakes, permafrost gullies | `Open Field Deployment (CSA / NASA Arctic Base)` | `10.1111/j.1945-5100.2005.tb00179.x` |
 | `EARTH_ANALOG_SAMAIL_OPHIOLITE` | Samail Ophiolite Mantle Peridotite (Oman) | Mars (Nili Fossae, Syrtis Major) | Ultramafic mantle serpentinization, olivine weathering, abiotic $\text{CH}_4$ | `Open Field Deployment (Oman MoEM / International Access)` | `10.1002/2016JB013604` |
-| `EARTH_ANALOG_DANAKIL_DEPRESSION`| Danakil Depression / Dallol (Ethiopia) | Mars (Early Mars Acidic Brines) | Ultra-acidic ($pH < 0$), hyper-saline hydrothermal sulfate chemistry | `Open Field Deployment (Extreme Field Expedition)` | `10.1038/s41559-019-1005-0` |
-| `EARTH_ANALOG_SVALBARD_BOCKFJORDEN`| Bockfjorden Volcanic Complex (Svalbard) | Mars (Gusev Crater, Elysium) | Basaltic volcanism through glacial cryosphere, carbonate globules | `Open Field Deployment (Svalbard Treaty / AMASE Station)` | `10.1111/maps.12210` |
+| `EARTH_ANALOG_DANAKIL_DEPRESSION` | Danakil Depression / Dallol (Ethiopia) | Mars (Early Mars Acidic Brines) | Ultra-acidic ($pH < 0$), hyper-saline hydrothermal sulfate chemistry | `Open Field Deployment (Extreme Field Expedition)` | `10.1038/s41559-019-1005-0` |
+| `EARTH_ANALOG_SVALBARD_BOCKFJORDEN` | Bockfjorden Volcanic Complex (Svalbard) | Mars (Gusev Crater, Elysium) | Basaltic volcanism through glacial cryosphere, carbonate globules | `Open Field Deployment (Svalbard Treaty / AMASE Station)` | `10.1111/maps.12210` |
 | `EARTH_ANALOG_PILBARA_CRATON` | Pilbara Craton (North Pole Dome, Australia) | Mars (Jezero Crater, Noachian) | Archean chert stromatolites, oldest terrestrial biosignatures ($3.48\text{ Ga}$) | `Open Field Deployment (Geoheritage Permitted)` | `10.1038/s41467-019-11883-0` |
 | `EARTH_ANALOG_RIO_TINTO` | Rio Tinto (Iberian Pyrite Belt, Spain) | Mars (Meridiani Planum) | Acid mine drainage, ferric iron precipitation, jarosite evaporites | `Open Field Deployment (ESA Field Test Site)` | `10.1016/j.pss.2007.05.008` |
 | `EARTH_ANALOG_MAKGADIKGADI_PANS` | Makgadikgadi Salt Flats (Botswana) | Mars (Terra Sirenum paleolakes) | Giant lacustrine evaporite crusts, deflation hollows, brine groundwater | `Open Field Deployment (Open Field Logistics)` | `10.1016/j.geomorph.2014.03.018` |
 | `EARTH_ANALOG_NULLARBOR_KARST` | Nullarbor Plain Karst & Caves (Australia) | Moon & Mars (Subsurface Skylights) | Arid karst collapse dolines, deep caves, subterranean microclimates | `Open Field Deployment (Cave Exploration Permits)` | `10.1016/j.epsl.2017.04.015` |
 | `EARTH_ANALOG_LONAR_CRATER` | Lonar Impact Crater (Deccan Traps, India) | Moon & Mars (Basaltic Craters) | Hyper-velocity impact cratering in basalt target rocks, shock plagioclase | `Open Field Deployment (GSI Geoheritage Site)` | `10.1111/j.1945-5100.2008.tb00676.x` |
-| `EARTH_ANALOG_EL_MALPAIS` | El Malpais Lava Tube System (New Mexico, USA)| Moon (Marius Hills) / Mars (Arsia Mons)| Quaternary basaltic lava tubes, perennial micro-ice reserves, biothems | `Open Field Deployment (NPS Scientific Research Permit)` | `10.1016/j.icarus.2017.06.002` |
-| `EARTH_ANALOG_KAZUMURA_LAVA_TUBE`| Kazumura Lava Tube (Hawaii, USA) | Moon (Mare Tranquillitatis) | World's longest and deepest intact basaltic master lava tube | `Open Field Deployment (Private / Conservation Access)` | `10.1016/j.jvolgeores.2019.07.014` |
+| `EARTH_ANALOG_EL_MALPAIS` | El Malpais Lava Tube System (New Mexico, USA) | Moon (Marius Hills) / Mars (Arsia Mons) | Quaternary basaltic lava tubes, perennial micro-ice reserves, biothems | `Open Field Deployment (NPS Scientific Research Permit)` | `10.1016/j.icarus.2017.06.002` |
+| `EARTH_ANALOG_KAZUMURA_LAVA_TUBE` | Kazumura Lava Tube (Hawaii, USA) | Moon (Mare Tranquillitatis) | World's longest and deepest intact basaltic master lava tube | `Open Field Deployment (Private / Conservation Access)` | `10.1016/j.jvolgeores.2019.07.014` |
 
 > [!NOTE]
 > **Field Access & Bilateral Feasibility Classification:**
 > Following NASA policy directives (including the Wolf Amendment / P.L. 112-55 and US State Dept ITAR controls), terrestrial analog sites are proactively classified by operational deployment feasibility:
-> • **Open Field Deployment:** Sovereign partner nations (USA, Canada, Australia, Norway/Svalbard, India, Ethiopia, Oman, Spain, Botswana) where physical rover test campaigns, drill validation, and crewed habitat simulations can be permitted and funded under NASA, ESA, CSA, or bilateral science agreements.
-> • **Remote-Sensing Benchmark (Bilateral Restrictions):** Highly valuable physical yardang/playa geomorphological analogs (such as the Qaidam Basin) utilized exclusively via open satellite telemetry (Copernicus 30m, ASTER GED v3, ERA5) as algorithmic validation benchmarks without requiring bilateral hardware transfers.
+> - **Open Field Deployment:** Sovereign partner nations (USA, Canada, Australia, Norway/Svalbard, India, Ethiopia, Oman, Spain, Botswana) where physical rover test campaigns, drill validation, and crewed habitat simulations can be permitted and funded under NASA, ESA, CSA, or bilateral science agreements.
+> - **Remote-Sensing Benchmark (Bilateral Restrictions):** Highly valuable physical yardang/playa geomorphological analogs (such as the Qaidam Basin) utilized exclusively via open satellite telemetry (Copernicus 30m, ASTER GED v3, ERA5) as algorithmic validation benchmarks without requiring bilateral hardware transfers.
 
 ---
 
