@@ -3,6 +3,8 @@
 
 [![NASA TRL 4](https://img.shields.io/badge/NASA%20TRL-4%20(Component%20Validated)-0052cc.svg)](https://www.nasa.gov/directorates/somd/)
 [![Unit Tests](https://img.shields.io/badge/Unit%20Tests-213%20Passing-brightgreen.svg)](tests/)
+[![Python Version](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13%20%7C%203.14-blue.svg)](pyproject.toml)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![NASA SPD-41a](https://img.shields.io/badge/NASA%20SPD--41a-Open--Science%20Compliant-blueviolet.svg)](https://science.nasa.gov/researchers/open-science/)
 
 ---
@@ -19,6 +21,28 @@ This database constitutes an authoritative, multidisciplinary planetary database
 * **Johnson Space Center (JSC) Astromaterials**: Apollo Lunar Sample Database, Mars Meteorite Compendium (MMC), and terrestrial analog mineral catalogs.
 
 The master database is housed in **SQLite 3 (`planetary_moon_mars.db`)** with **Full-Text Search (FTS5)**, **Uber H3 hexagonal spatial indexing (Resolutions 6 & 7)**, and pre-computed analytical views. Every dataset is synchronized and exported in **CSV**, **JSON**, and Snappy-compressed **Apache Parquet (`.parquet`)** formats.
+
+---
+
+## ⚙️ Python Environment & Installation
+
+ATLAS-X is built for modern scientific computing and supports **Python 3.10, 3.11, 3.12, 3.13, and 3.14** (verified on Python 3.14.6 runtime).
+
+### Quickstart Installation
+```bash
+# Clone the repository
+git clone https://github.com/FameDied/mars-moon.git
+cd mars-moon
+
+# Install dependencies in your active Python environment
+pip install -r requirements.txt
+```
+
+### Dependency Stack
+* **Topographic & Matrix Calculus:** `numpy (>=1.24.0)`, `scipy (>=1.10.0)`
+* **Tabular & Columnar Data:** `pandas (>=2.0.0)`, `pyarrow (>=14.0.0)`, `openpyxl (>=3.1.0)`
+* **Discrete Global Grid System:** `h3 (>=3.7.0)`
+* **Verification & Property Testing:** `pytest (>=7.0.0)`, `hypothesis (>=6.0.0)`
 
 ---
 
@@ -255,6 +279,9 @@ The core innovation of ATLAS-X is its 4-step modular architecture that mathemati
 ```
 ATLAS-X/
 ├── README.md                              <- Full documentation & system manual
+├── LICENSE                                <- Apache License 2.0 (NASA SPD-41a compliant)
+├── requirements.txt                       <- Python environment dependencies (Python >= 3.10)
+├── pyproject.toml                         <- Package configuration and build metadata
 ├── FINAL_BASE_SELECTION_RESULTS.txt       <- Mission Control base panel telemetry & final results
 ├── STEP4_CONVERGENCE_REPORT.md            <- Detailed Step 4 convergence & verification report
 ├── VERIFICATION_MATRIX.md                 <- NASA NPR 7150.2D requirements traceability matrix
@@ -565,3 +592,13 @@ tests/test_terrestrial_pipeline.py ...............                       [100%]
 11. **ECMWF / NASA GMAO**: ERA5 Global Atmospheric Reanalysis, boundary layer wind dynamics and aerosol flux grids.
 12. **InSight SEIS Team & CAB**: Mars Interior Structure and InSight / Curiosity / Perseverance in-situ meteorological records.
 13. **Uber H3**: H3: A Hexagonal Hierarchical Spatial Index, open-source discrete global grid system.
+
+---
+
+## 📄 License & Open-Science Compliance
+
+This software is released under the **Apache License, Version 2.0**.
+See the [LICENSE](./LICENSE) file for complete terms and copyright notices.
+
+* **NASA Open-Science Alignment:** Fully compliant with [NASA SPD-41a: Scientific Information Policy for the Science Mission Directorate](https://science.nasa.gov/researchers/open-science/).
+* **Citation:** Academic and mission users should cite this repository using the metadata provided in [CITATION.cff](./CITATION.cff).
