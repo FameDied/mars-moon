@@ -306,7 +306,7 @@ Layer A - COSPAR Planetary Protection Classification:
 Layer B - Multi-Zone 3-Hexagon Base Topology (Uber H3 Resolution 7):
   1. Landing Pad Hexagon (H_pad):   87608680dffffff | Plume Standoff: 2.32 km to Hab Core (>1.5 km Blast Limit: MET - SAFE)
   2. Shielded Habitat Core (H_hab): 876086872ffffff | 3-5m Regolith Overburden attenuates cosmic radiation to < 35 mSv/yr
-  3. ISRU Extraction Zone (H_isru): 876086876ffffff | Hauling Traverse: 3.20 km | E_haul: 918.0 J/kg (0.25 kWh/ton)
+  3. ISRU Extraction Zone (H_isru): 876086876ffffff | Hauling Traverse: 3.20 km | E_haul: 918.0 J/kg (0.26 kWh/ton)
   ★ ASCII 3-Hexagon Topology Diagram:
        [ H_pad: LANDING & ASCENT PAD ]
        • H3 Index: 87608680dffffff (Res 7)
@@ -318,10 +318,10 @@ Layer B - Multi-Zone 3-Hexagon Base Topology (Uber H3 Resolution 7):
        [ H_hab: SHIELDED HABITAT CORE ] ------------------------ [ H_isru: VOLATILE MINING ]
        • H3 Index: 876086872ffffff (Res 7)         3.20 km        • H3 Index: 876086876ffffff (Res 7)
        • Overburden: 3-5m Regolith (<35 mSv/yr)   Rover Haul      • Resource: Lacustrine Hydrated Clays / Permafrost
-                                                  Corridor        • Hauling Work: 918.0 J/kg (0.25 kWh/ton)
+                                                  Corridor        • Hauling Work: 918.0 J/kg (0.26 kWh/ton)
 
 Layer C - Executive Mission Storytelling (Plain-English Takeaways):
-  • Hauling Work: Transporting 1 metric ton of clay/volatile material along 3.2 km takes only 0.25 kWh (0.92 MJ).
+  • Hauling Work: Transporting 1 metric ton of clay/volatile material along 3.2 km takes only 0.26 kWh (0.92 MJ).
   • Atmospheric Entry: Hypersonic atmospheric entry reduces descent propellant mass before touchdown on 2.32 km offset pad.
   • Dust Storm Keep-Alive: Kilopower nuclear Stirling baseload guarantees uninterrupted ECLSS life support during global storms.
   • Planetary Protection: Category IVa Non-Special Region permits direct human exploration of Western fan delta sediments.

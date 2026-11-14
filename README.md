@@ -160,22 +160,28 @@ Earth analogs can replicate mineralogy, geomorphology, and hyper-arid weathering
 ---
 
 ### 5. 12 Factual, Under-Studied Terrestrial Analog Regions
-Following official competition directives to look beyond over-studied sites (Antarctica, Atacama, Iceland, Hawaii), the database incorporates 12 peer-reviewed terrestrial analog sites with authentic coordinates, DOIs, and calibrated multi-domain measurements:
+Following official competition directives to look beyond over-studied sites (Antarctica, Atacama, Iceland, Hawaii), the database incorporates 12 peer-reviewed terrestrial analog sites with authentic coordinates, DOIs, calibrated multi-domain measurements, and proactive diplomatic field-access classifications:
 
-| Site ID | Terrestrial Location | Primary Planetary Target | Analog Domain | Authentic Literature DOI |
-| :--- | :--- | :--- | :--- | :--- |
-| `EARTH_ANALOG_QAIDAM_BASIN` | Qaidam Basin Hyper-Arid Playa (China) | Mars (Jezero, Mawrth, Gale) | Aeolian Yardangs, sulfate/clay evaporites, hypolithic microbes | `10.1016/j.epsl.2018.06.028` |
-| `EARTH_ANALOG_HAUGHTON_CRATER` | Haughton Impact Crater (Devon Island, Canada) | Moon & Mars (Artemis, HLS2) | Shocked impact breccia, hydrothermal paleolakes, permafrost gullies | `10.1111/j.1945-5100.2005.tb00179.x` |
-| `EARTH_ANALOG_SAMAIL_OPHIOLITE` | Samail Ophiolite Mantle Peridotite (Oman) | Mars (Nili Fossae, Syrtis Major) | Ultramafic mantle serpentinization, olivine weathering, abiotic $\text{CH}_4$ | `10.1002/2016JB013604` |
-| `EARTH_ANALOG_DANAKIL_DEPRESSION`| Danakil Depression / Dallol (Ethiopia) | Mars (Early Mars Acidic Brines) | Ultra-acidic ($pH < 0$), hyper-saline hydrothermal sulfate chemistry | `10.1038/s41559-019-1005-0` |
-| `EARTH_ANALOG_SVALBARD_BOCKFJORDEN`| Bockfjorden Volcanic Complex (Svalbard) | Mars (Gusev Crater, Elysium) | Basaltic volcanism through glacial cryosphere, carbonate globules | `10.1111/maps.12210` |
-| `EARTH_ANALOG_PILBARA_CRATON` | Pilbara Craton (North Pole Dome, Australia) | Mars (Jezero Crater, Noachian) | Archean chert stromatolites, oldest terrestrial biosignatures ($3.48\text{ Ga}$) | `10.1038/s41467-019-11883-0` |
-| `EARTH_ANALOG_RIO_TINTO` | Rio Tinto (Iberian Pyrite Belt, Spain) | Mars (Meridiani Planum) | Acid mine drainage, ferric iron precipitation, jarosite evaporites | `10.1016/j.pss.2007.05.008` |
-| `EARTH_ANALOG_MAKGADIKGADI_PANS` | Makgadikgadi Salt Flats (Botswana) | Mars (Terra Sirenum paleolakes) | Giant lacustrine evaporite crusts, deflation hollows, brine groundwater | `10.1016/j.geomorph.2014.03.018` |
-| `EARTH_ANALOG_NULLARBOR_KARST` | Nullarbor Plain Karst & Caves (Australia) | Moon & Mars (Subsurface Skylights) | Arid karst collapse dolines, deep caves, subterranean microclimates | `10.1016/j.epsl.2017.04.015` |
-| `EARTH_ANALOG_LONAR_CRATER` | Lonar Impact Crater (Deccan Traps, India) | Moon & Mars (Basaltic Craters) | Hyper-velocity impact cratering in basalt target rocks, shock plagioclase | `10.1111/j.1945-5100.2008.tb00676.x` |
-| `EARTH_ANALOG_EL_MALPAIS` | El Malpais Lava Tube System (New Mexico, USA)| Moon (Marius Hills) / Mars (Arsia Mons)| Quaternary basaltic lava tubes, perennial micro-ice reserves, biothems | `10.1016/j.icarus.2017.06.002` |
-| `EARTH_ANALOG_KAZUMURA_LAVA_TUBE`| Kazumura Lava Tube (Hawaii, USA) | Moon (Mare Tranquillitatis) | World's longest and deepest intact basaltic master lava tube | `10.1016/j.jvolgeores.2019.07.014` |
+| Site ID | Terrestrial Location | Primary Planetary Target | Analog Domain | Field Access Status | Authentic Literature DOI |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `EARTH_ANALOG_QAIDAM_BASIN` | Qaidam Basin Hyper-Arid Playa (China) | Mars (Jezero, Mawrth, Gale) | Aeolian Yardangs, sulfate/clay evaporites, hypolithic microbes | `Remote-Sensing Benchmark (Bilateral Restrictions)` | `10.1016/j.epsl.2018.06.028` |
+| `EARTH_ANALOG_HAUGHTON_CRATER` | Haughton Impact Crater (Devon Island, Canada) | Moon & Mars (Artemis, HLS2) | Shocked impact breccia, hydrothermal paleolakes, permafrost gullies | `Open Field Deployment (CSA / NASA Arctic Base)` | `10.1111/j.1945-5100.2005.tb00179.x` |
+| `EARTH_ANALOG_SAMAIL_OPHIOLITE` | Samail Ophiolite Mantle Peridotite (Oman) | Mars (Nili Fossae, Syrtis Major) | Ultramafic mantle serpentinization, olivine weathering, abiotic $\text{CH}_4$ | `Open Field Deployment (Oman MoEM / International Access)` | `10.1002/2016JB013604` |
+| `EARTH_ANALOG_DANAKIL_DEPRESSION`| Danakil Depression / Dallol (Ethiopia) | Mars (Early Mars Acidic Brines) | Ultra-acidic ($pH < 0$), hyper-saline hydrothermal sulfate chemistry | `Open Field Deployment (Extreme Field Expedition)` | `10.1038/s41559-019-1005-0` |
+| `EARTH_ANALOG_SVALBARD_BOCKFJORDEN`| Bockfjorden Volcanic Complex (Svalbard) | Mars (Gusev Crater, Elysium) | Basaltic volcanism through glacial cryosphere, carbonate globules | `Open Field Deployment (Svalbard Treaty / AMASE Station)` | `10.1111/maps.12210` |
+| `EARTH_ANALOG_PILBARA_CRATON` | Pilbara Craton (North Pole Dome, Australia) | Mars (Jezero Crater, Noachian) | Archean chert stromatolites, oldest terrestrial biosignatures ($3.48\text{ Ga}$) | `Open Field Deployment (Geoheritage Permitted)` | `10.1038/s41467-019-11883-0` |
+| `EARTH_ANALOG_RIO_TINTO` | Rio Tinto (Iberian Pyrite Belt, Spain) | Mars (Meridiani Planum) | Acid mine drainage, ferric iron precipitation, jarosite evaporites | `Open Field Deployment (ESA Field Test Site)` | `10.1016/j.pss.2007.05.008` |
+| `EARTH_ANALOG_MAKGADIKGADI_PANS` | Makgadikgadi Salt Flats (Botswana) | Mars (Terra Sirenum paleolakes) | Giant lacustrine evaporite crusts, deflation hollows, brine groundwater | `Open Field Deployment (Open Field Logistics)` | `10.1016/j.geomorph.2014.03.018` |
+| `EARTH_ANALOG_NULLARBOR_KARST` | Nullarbor Plain Karst & Caves (Australia) | Moon & Mars (Subsurface Skylights) | Arid karst collapse dolines, deep caves, subterranean microclimates | `Open Field Deployment (Cave Exploration Permits)` | `10.1016/j.epsl.2017.04.015` |
+| `EARTH_ANALOG_LONAR_CRATER` | Lonar Impact Crater (Deccan Traps, India) | Moon & Mars (Basaltic Craters) | Hyper-velocity impact cratering in basalt target rocks, shock plagioclase | `Open Field Deployment (GSI Geoheritage Site)` | `10.1111/j.1945-5100.2008.tb00676.x` |
+| `EARTH_ANALOG_EL_MALPAIS` | El Malpais Lava Tube System (New Mexico, USA)| Moon (Marius Hills) / Mars (Arsia Mons)| Quaternary basaltic lava tubes, perennial micro-ice reserves, biothems | `Open Field Deployment (NPS Scientific Research Permit)` | `10.1016/j.icarus.2017.06.002` |
+| `EARTH_ANALOG_KAZUMURA_LAVA_TUBE`| Kazumura Lava Tube (Hawaii, USA) | Moon (Mare Tranquillitatis) | World's longest and deepest intact basaltic master lava tube | `Open Field Deployment (Private / Conservation Access)` | `10.1016/j.jvolgeores.2019.07.014` |
+
+> [!NOTE]
+> **Field Access & Bilateral Feasibility Classification:**
+> Following NASA policy directives (including the Wolf Amendment / P.L. 112-55 and US State Dept ITAR controls), terrestrial analog sites are proactively classified by operational deployment feasibility:
+> • **Open Field Deployment:** Sovereign partner nations (USA, Canada, Australia, Norway/Svalbard, India, Ethiopia, Oman, Spain, Botswana) where physical rover test campaigns, drill validation, and crewed habitat simulations can be permitted and funded under NASA, ESA, CSA, or bilateral science agreements.
+> • **Remote-Sensing Benchmark (Bilateral Restrictions):** Highly valuable physical yardang/playa geomorphological analogs (such as the Qaidam Basin) utilized exclusively via open satellite telemetry (Copernicus 30m, ASTER GED v3, ERA5) as algorithmic validation benchmarks without requiring bilateral hardware transfers.
 
 ---
 
@@ -498,7 +504,7 @@ python3 cli.py match --target "Jezero Crater"
      - Verification Status:             PASSED (Contiguous >25 km^2 operational field-testing zone)
 
 7. TEMPORAL POWER & ECLIPSE SURVIVAL SIZING (Layer A - Life Support Keep-Alive)
-   • Continuous Shadow Duration (Delta_t_dark_max): 12.3 hours (0.5 Earth days)
+   • Continuous Shadow Duration (Delta_t_dark_max): 12.3 hours (0.5 Martian sols)
    • Habitat Life-Support Baseload:                25.0 kWe continuous
    • Energy Storage Buffer Required:               307.5 kWh
    • Technology Comparison (RFC vs Li-ion):
@@ -542,7 +548,7 @@ python3 cli.py match --target "Jezero Crater"
        [ H_hab: SHIELDED HABITAT CORE ] ------------------------ [ H_isru: VOLATILE MINING ]
        • H3 Index: 876086872ffffff (Resolution 7)            3.20 km        • H3 Index: 876086876ffffff (Resolution 7)
        • Shielding: 3-5m Regolith Overburden / Void      Rover Haul      • Resource: Lobate Debris Apron / Glacial Su
-       • Radiation: Attenuated to < 35 mSv/yr            Corridor        • Hauling Work: 918.0 J/kg (0.25 kWh/ton)
+       • Radiation: Attenuated to < 35 mSv/yr            Corridor        • Hauling Work: 918.0 J/kg (0.26 kWh/ton)
 
 10. EXECUTIVE MISSION STORYTELLING (Layer C - Plain-English Mission Takeaways)
    • ISRU Hauling Cost:       Transporting 1 metric ton of raw water ice along the 3.2 km haul route consumes only 0.26 kWh (or 0.92 MJ) of mechanical traction energy—equivalent to powering a standard electric kettle for ~8 minutes.
@@ -585,13 +591,13 @@ Query standardized physical features across Earth, Moon, and Mars indexed by Ube
 python3 cli.py harmonize --body Moon --limit 3
 ```
 
-### 6. Multi-Criteria Decision Analysis (MCDA) Scoring (`cli.py mcda`)
+### 7. Multi-Criteria Decision Analysis (MCDA) Scoring (`cli.py mcda`)
 Live weighting engine across EDL Safety, Survivability/Comms, ISRU, and Science Return:
 ```bash
 python3 cli.py mcda --body Moon --weight-safety 40 --weight-comms 25 --weight-isru 20 --weight-science 15 --limit 5
 ```
 
-### 7. Full-Text Search Across the Master Archive (`cli.py search`)
+### 8. Full-Text Search Across the Master Archive (`cli.py search`)
 ```bash
 python3 cli.py search "lava tube"
 ```

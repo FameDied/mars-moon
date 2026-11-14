@@ -1871,8 +1871,8 @@ def compute_three_hexagon_base_topology(
     if d_haul_km <= 0.1:
         d_haul_km = 3.2
 
-    e_haul_j_kg = float(target_site.get("e_haul_j_kg", 596.5) or 596.5)
-    kwh_per_ton = e_haul_j_kg / 3600.0
+    e_haul_j_kg = round(float(target_site.get("e_haul_j_kg", 596.5) or 596.5), 1)
+    kwh_per_ton = round(e_haul_j_kg / 3600.0, 3)
 
     # Res 7 nominal edge ~1.22 km, spacing ~2.10 km; Res 6 nominal edge ~3.23 km, spacing ~5.56 km
     spacing_km = 2.10 if h3_resolution == 7 else 5.56
@@ -2201,7 +2201,7 @@ def format_planetary_decision_scorecard(
         f"     - Verification Status:             {sp_verified} (Contiguous >25 km^2 operational field-testing zone)",
         "",
         "7. TEMPORAL POWER & ECLIPSE SURVIVAL SIZING (Layer A - Life Support Keep-Alive)",
-        f"   • Continuous Shadow Duration (Delta_t_dark_max): {power_sizing['max_eclipse_hours']:.1f} hours ({power_sizing['max_eclipse_hours']/24.0:.1f} Earth days)",
+        f"   • Continuous Shadow Duration (Delta_t_dark_max): {power_sizing['max_eclipse_hours']:.1f} hours ({power_sizing['max_eclipse_hours'] / (24.66 if str(t_body).strip().lower() != 'moon' else 24.0):.1f} {'Martian sols' if str(t_body).strip().lower() != 'moon' else 'Earth days'})",
         f"   • Habitat Life-Support Baseload:                {power_sizing['base_power_kw']:.1f} kWe continuous",
         f"   • Energy Storage Buffer Required:               {power_sizing['energy_storage_kwh']:,.1f} kWh",
         "   • Technology Comparison (RFC vs Li-ion):",

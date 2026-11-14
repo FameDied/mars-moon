@@ -727,7 +727,7 @@ This report brings together all three teammates:
      - Verification Status:             PASSED (Contiguous >25 km^2 operational field-testing zone)
 
 7. TEMPORAL POWER & ECLIPSE SURVIVAL SIZING (Layer A - Life Support Keep-Alive)
-   • Continuous Shadow Duration (Delta_t_dark_max): 12.3 hours (0.5 Earth days)
+   • Continuous Shadow Duration (Delta_t_dark_max): 12.3 hours (0.5 Martian sols)
    • Habitat Life-Support Baseload:                25.0 kWe continuous
    • Energy Storage Buffer Required:               307.5 kWh
    • Technology Comparison (RFC vs Li-ion):
@@ -855,7 +855,7 @@ This report brings together all three teammates:
      - Verification Status:             PASSED (Contiguous >25 km^2 operational field-testing zone)
 
 7. TEMPORAL POWER & ECLIPSE SURVIVAL SIZING (Layer A - Life Support Keep-Alive)
-   • Continuous Shadow Duration (Delta_t_dark_max): 12.3 hours (0.5 Earth days)
+   • Continuous Shadow Duration (Delta_t_dark_max): 12.3 hours (0.5 Martian sols)
    • Habitat Life-Support Baseload:                25.0 kWe continuous
    • Energy Storage Buffer Required:               307.5 kWh
    • Technology Comparison (RFC vs Li-ion):
@@ -983,7 +983,7 @@ This report brings together all three teammates:
      - Verification Status:             PASSED (Contiguous >25 km^2 operational field-testing zone)
 
 7. TEMPORAL POWER & ECLIPSE SURVIVAL SIZING (Layer A - Life Support Keep-Alive)
-   • Continuous Shadow Duration (Delta_t_dark_max): 12.3 hours (0.5 Earth days)
+   • Continuous Shadow Duration (Delta_t_dark_max): 12.3 hours (0.5 Martian sols)
    • Habitat Life-Support Baseload:                25.0 kWe continuous
    • Energy Storage Buffer Required:               307.5 kWh
    • Technology Comparison (RFC vs Li-ion):
@@ -1111,7 +1111,7 @@ This report brings together all three teammates:
      - Verification Status:             PASSED (Contiguous >25 km^2 operational field-testing zone)
 
 7. TEMPORAL POWER & ECLIPSE SURVIVAL SIZING (Layer A - Life Support Keep-Alive)
-   • Continuous Shadow Duration (Delta_t_dark_max): 12.3 hours (0.5 Earth days)
+   • Continuous Shadow Duration (Delta_t_dark_max): 12.3 hours (0.5 Martian sols)
    • Habitat Life-Support Baseload:                25.0 kWe continuous
    • Energy Storage Buffer Required:               307.5 kWh
    • Technology Comparison (RFC vs Li-ion):
@@ -1239,7 +1239,7 @@ This report brings together all three teammates:
      - Verification Status:             PASSED (Contiguous >25 km^2 operational field-testing zone)
 
 7. TEMPORAL POWER & ECLIPSE SURVIVAL SIZING (Layer A - Life Support Keep-Alive)
-   • Continuous Shadow Duration (Delta_t_dark_max): 12.3 hours (0.5 Earth days)
+   • Continuous Shadow Duration (Delta_t_dark_max): 12.3 hours (0.5 Martian sols)
    • Habitat Life-Support Baseload:                25.0 kWe continuous
    • Energy Storage Buffer Required:               307.5 kWh
    • Technology Comparison (RFC vs Li-ion):
