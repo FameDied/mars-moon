@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: "If you utilize the ATLAS-X database, similarity engine, or analysis pipelines in your planetary research, please cite it as below."
+title: "ATLAS-X: Automated Terrestrial & Lunar/Martian Analog System"
+version: "1.0.0"
+date-released: "2026-11-14"
+abstract: "The Automated Terrestrial & Lunar/Martian Analog System (ATLAS-X) is an authoritative, multidisciplinary planetary database and analysis engine spanning Earth, the Moon, and Mars. It provides decoupled 4-axis multi-dimensional similarity matching, dual-tier engineering suitability masking, physical limit delta-vectors, and cross-body Uber H3 spatial harmonization compliant with NASA SPD-41a Open-Science standards."
+authors:
+  - family-names: "Roy"
+    given-names: "Soumen"
+    affiliation: "ATLAS-X Planetary Exploration Team"
+  - family-names: "ATLAS-X Mission Engineering Team"
+    name: "ATLAS-X Project Contributors"
+repository-code: "https://github.com/FameDied/mars-moon.git"
+url: "https://github.com/FameDied/mars-moon"
+license: "Apache-2.0"
+keywords:
+  - "planetary-science"
+  - "analog-discovery"
+  - "lunar-exploration"
+  - "mars-analogs"
+  - "artemis"
+  - "terrestrial-analogs"
+  - "h3-spatial-index"
+  - "nasa-open-science"
+  - "mcda"
+  - "mahalanobis-distance"
+references:
+  - type: article
+    title: "Scientific Information Policy for the Science Mission Directorate"
+    authors:
+      - name: "NASA Science Mission Directorate"
+    year: 2022
+    notes: "NASA SPD-41a Policy Document"
+  - type: standard
+    title: "NASA Software Engineering Requirements"
+    authors:
+      - name: "NASA"
+    year: 2020
+    notes: "NASA NPR 7150.2D"

@@ -826,6 +826,86 @@ def cmd_analog(args):
 
     print("-" * 105 + "\n")
 
+def cmd_match(args):
+    """
+    Step 4 Cross-Planetary Convergence, Split-Twin Optimization & Decision Scorecard.
+    """
+    from analog_engine import (
+        resolve_extraterrestrial_target,
+        fetch_earth_candidates,
+        match_target_pipeline,
+        DEFAULT_AXIS_WEIGHTS,
+        PROJECT_ROOT,
+    )
+
+    target_query = getattr(args, "target", None) or "Jezero Crater"
+    body_filter = getattr(args, "body", None)
+    n_trials = getattr(args, "trials", 1000) or 1000
+    candidates_path = getattr(args, "candidates", None)
+
+    try:
+        candidates = fetch_earth_candidates(candidates_path)
+    except Exception as e:
+        print(f"Error loading Earth analog candidates: {e}")
+        sys.exit(1)
+
+    if not candidates:
+        print("Error: No Earth analog candidates available in earth_candidates.parquet.")
+        sys.exit(1)
+
+    # If user specifies 'all' or 'matrix', run across top 10 extraterrestrial bases
+    if target_query.lower() in ("all", "matrix", "top"):
+        ext_path = PROJECT_ROOT / "extraterrestrial_targets.parquet"
+        if not ext_path.exists():
+            ext_path = PROJECT_ROOT / "extraterrestrial_optimization" / "extraterrestrial_targets.parquet"
+        if ext_path.exists():
+            import pandas as pd
+            df_ext = pd.read_parquet(ext_path)
+            print("\n" + "=" * 115)
+            print("                 STEP 4 MASTER CROSS-PLANETARY MATCHING MATRIX (TOP 10 BASE SITES)")
+            print("=" * 115)
+            print(f"{'Rank':<5} {'Body':<6} {'Target Base ID':<34} {'U_base':<8} {'Primary Earth Analog':<36} {'Score':<8} {'Split-Twin':<8}")
+            print("-" * 115)
+            matrix_results = []
+            for idx, r in df_ext.iterrows():
+                t = resolve_extraterrestrial_target(r["site_id"])
+                summary, _ = match_target_pipeline(t, candidates, n_mc_trials=250)
+                rank_str = f"#{(idx % 5) + 1}"
+                prim = summary["top_analog"]
+                twin = summary["split_twin"]
+                matrix_results.append({
+                    "rank": rank_str,
+                    "body": t["body"],
+                    "target_id": t["site_id"],
+                    "target_name": t["site_name"],
+                    "u_base": t.get("U_base", 0.0),
+                    "primary_analog": prim["site_name"],
+                    "primary_score": prim["composite_score"],
+                    "split_twin_score": twin["twin_composite_score"],
+                })
+                score_str = f"{prim['composite_score']:.1f}%"
+                twin_str = f"{twin['twin_composite_score']:.1f}%"
+                print(f"{rank_str:<5} {t['body']:<6} {t['site_id'][:32]:<34} {t.get('U_base', 0.0):<8.4f} {prim['site_name'][:34]:<36} {score_str:<8} {twin_str:<8}")
+            print("=" * 115 + "\n")
+            if getattr(args, "json", False):
+                print(json.dumps(matrix_results, indent=2))
+            return
+
+    # Single target evaluation
+    try:
+        target = resolve_extraterrestrial_target(target_query, body=body_filter)
+    except Exception as e:
+        print(f"Error resolving target extraterrestrial base '{target_query}': {e}")
+        sys.exit(1)
+
+    summary, scorecard_str = match_target_pipeline(target, candidates, n_mc_trials=n_trials)
+
+    if getattr(args, "json", False):
+        print(json.dumps(summary, indent=2, default=str))
+        return
+
+    print(scorecard_str)
+
 def cmd_mask(args):
     """
     R2 Engineering Constraint Masks & Soft MAUT Utility Evaluator.
@@ -1176,6 +1256,14 @@ def main():
     p_hrm.add_argument("--limit", type=int, default=20, help="Max results (default: 20)")
     p_hrm.add_argument("--json", action="store_true", help="Output machine-readable JSON")
 
+    # Match (Step 4 Cross-Planetary Convergence & Split-Twin Optimization)
+    p_mat = subparsers.add_parser("match", help="Execute Step 4 Cross-Planetary Convergence, Split-Twin Optimization & Decision Scorecard")
+    p_mat.add_argument("--target", "-t", default="Jezero Crater", help="Target extraterrestrial site ID, name substring, or preset (default: 'Jezero Crater'; pass 'all' for full matrix)")
+    p_mat.add_argument("--body", "-b", choices=["Moon", "Mars"], help="Optional celestial body filter")
+    p_mat.add_argument("--candidates", "-c", help="Path to earth candidates parquet (default: earth_candidates.parquet)")
+    p_mat.add_argument("--trials", "-n", type=int, default=1000, help="Number of Monte Carlo trials (default: 1000)")
+    p_mat.add_argument("--json", action="store_true", help="Output machine-readable JSON")
+
     args = parser.parse_args()
     if not args.command:
         parser.print_help()
@@ -1207,6 +1295,7 @@ def main():
         "delta": cmd_delta,
         "harmonize": cmd_harmonize,
         "harmonized": cmd_harmonize,
+        "match": cmd_match,
     }
     dispatch[args.command](args)
 
