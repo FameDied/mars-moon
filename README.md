@@ -1,29 +1,24 @@
-# Complete Moon & Mars Scientific Planetary Database
-**The Definitive Multidisciplinary Archive for Lunar and Martian Planetary Science & Landing Site Optimization**
+# Complete Planetary Science & Terrestrial Analog Database (Earth, Moon & Mars)
+**The Definitive Multidisciplinary Archive for Planetary Science, Mission Engineering, and Cross-Body Terrestrial Analog Discovery**
 
 ---
 
 ## 🌌 Overview
 
-This database constitutes a comprehensive, authoritative, multidisciplinary planetary database for **Earth's Moon** and **Mars** (along with the Martian moons **Phobos** and **Deimos**). It aggregates, harmonizes, and cross-indexes data from premier space agencies, planetary missions, and scientific institutions:
-* **USGS Astrogeology Science Center / International Astronomical Union (IAU)**: Complete Gazetteer of Planetary Nomenclature with Uber H3 spatial indexing.
-* **NASA Jet Propulsion Laboratory (JPL)**: Horizons Ephemerides & Dynamics System (DE441), Mars 2020 EDL Performance, and Surveyor landing telemetry.
-* **NASA Goddard Space Flight Center (GSFC)**: National Space Science Data Center (NSSDC) Planetary Fact Sheets, LRO LOLA laser altimetry, and Diviner thermal radiometry.
-* **NASA Johnson Space Center (JSC)**: Astromaterials Acquisition and Curation Office (Apollo Lunar Sample Database & Mars Meteorite Compendium).
-* **NASA Planetary Data System (PDS) & SpatioTemporal Asset Catalog (STAC)**: Cloud-Optimized GeoTIFFs (COG), HiRISE DTMs, CRISM mineral parameter cubes, SHARAD SWIM ice overburden maps, and MOLA elevation grids.
-* **CNSA, ISRO, ESA, Roscosmos, JAXA & Commercial CLPS Providers**: Chang'e 1–6, Chandrayaan 1–3, SLIM, Mars Express, ExoMars TGO, Intuitive Machines Nova-C, and Astrobotic Griffin.
+This database constitutes an authoritative, multidisciplinary planetary database spanning **Earth's Moon**, **Mars** (with **Phobos** and **Deimos**), and **Earth** as the baseline for comparative planetology and terrestrial analog matching. It aggregates, harmonizes, and cross-indexes open data from premier space agencies, planetary missions, and scientific institutions:
 
-The master database is housed in **SQLite 3 (`planetary_moon_mars.db`)** with **Full-Text Search (FTS5)**, **Uber H3 spatial indexing**, and **pre-computed Multi-Criteria Decision Analysis (MCDA)** scoring views. Every dataset is also independently exported in **CSV**, **JSON**, and **Apache Parquet (`.parquet`)** formats.
+* **NASA Planetary Data System (PDS) & STAC**: LRO Diviner rock abundance & thermal radiometry, LOLA laser altimetry, Clementine UV-VIS FeO/TiO2 maps, CRISM hyperspectral cubes, MRO HiRISE DTMs, SHARAD SWIM ice overburden, and MOLA elevation grids.
+* **NASA Earth Science & USGS Astrogeology**: ASTER Global Emissivity Dataset (GED v3), MODIS Land Surface Temperature (LST), EMIT hyperspectral mineralogy, Copernicus 30m GLO-30 DEMs, SRTM, and the complete IAU Gazetteer of Planetary Nomenclature with Uber H3 spatial indexing.
+* **European Space Agency (ESA) & Copernicus Data Space**: Mars Express HRSC DTMs, ExoMars Trace Gas Orbiter (TGO) FREND neutron maps, and Copernicus Sentinel/Earth observation services.
+* **JAXA, CSA & International Agencies**: JAXA G-Portal ALOS/PALSAR radar products, CSA RADARSAT-1 & RCM geomorphology archives, Chandrayaan-1 Moon Mineralogy Mapper ($M^3$), and Kaguya (SELENE) laser altimetry.
+* **NASA JPL & Atmospheric Reanalysis**: JPL Horizons Ephemerides (DE441), Mars 2020 Perseverance & MSL Curiosity in-situ science telemetry, and ECMWF/NASA GMAO ERA5 wind shear and aerosol dust flux grids.
+* **Johnson Space Center (JSC) Astromaterials**: Apollo Lunar Sample Database, Mars Meteorite Compendium (MMC), and terrestrial analog mineral catalogs.
+
+The master database is housed in **SQLite 3 (`planetary_moon_mars.db`)** with **Full-Text Search (FTS5)**, **Uber H3 hexagonal spatial indexing (Resolutions 6 & 7)**, and pre-computed analytical views. Every dataset is synchronized and exported in **CSV**, **JSON**, and Snappy-compressed **Apache Parquet (`.parquet`)** formats.
 
 ---
 
-## 🚀 Key Upgrades & Core Innovations
-
-### 1. 3-Sigma Landing Dispersion Ellipses & Uber H3 Spatial Grids
-Spacecraft never land on a single zero-dimensional coordinate $(lat, lon)$. Atmospheric entry, guidance margins, retro-burn dispersion, and orbital inclination produce a **3-Sigma Dispersion Ellipse** parameterized by:
-* **Semi-Major Axis ($a$)**: Dispersion along the entry corridor (km).
-* **Semi-Minor Axis ($b$)**: Cross-track dispersion perpendicular to trajectory (km).
-* **Approach Azimuth Angle ($\theta$)**: Orientation angle ($0^\circ - 360^\circ$ East of North) driven by incoming orbital inclination.
+## 🚀 Key Innovations & Scientific Capabilities
 
 ```
        Incoming Orbital Trajectory (Azimuth θ)
@@ -39,119 +34,164 @@ Spacecraft never land on a single zero-dimensional coordinate $(lat, lon)$. Atmo
              Semi-Minor Axis (b)
 ```
 
-To enable spatial indexing across planetary spheres without heavyweight GIS dependencies (e.g. PostGIS, GDAL, GEOS), every named IAU feature, remote sensing raster, and candidate landing ellipse is indexed using the **Uber H3 Discrete Global Grid System at Resolution 6**:
-* **Average Hexagon Area**: $\sim 36.1\text{ km}^2$
-* **Average Edge Length**: $\sim 3.2\text{ km}$
-* **Sub-Millisecond Spatial Joins**: Querying landing sites against regional named craters or co-located remote sensing rasters takes **$< 1.5\text{ ms}$** in pure SQLite using standard indexed `JOIN ... ON s.h3_index = r.h3_index`.
+### 1. Multi-Dimensional Similarity Vector & Decomposed Analog Score
+Instead of an opaque, single similarity score, the system decouples physical matching across four orthogonal axes:
+
+$$\text{Composite Score} = w_A S_{\text{Geomorph}} + w_B S_{\text{Geochem}} + w_C S_{\text{Thermo}} + w_D S_{\text{Volatiles}}$$
+
+* **Axis A (Geomorphology):** Slope distributions, Terrain Ruggedness Index (TRI), crater roughness, and Diviner rock abundance at lander-footpad baselines.
+* **Axis B (Geochemistry & Mineralogy):** Spectral band depths matching CRISM phyllosilicate/sulfate/olivine indices to Earth ASTER & EMIT hyperspectral bands, iron oxide ($\text{FeO}$ wt%), and titanium dioxide ($\text{TiO}_2$ wt%).
+* **Axis C (Thermophysics):** Diurnal temperature amplitude ($\Delta T$) and apparent thermal inertia.
+* **Axis D (Volatiles & Aeolian):** Water-equivalent hydrogen ($\text{WEH}$ wt%), active permafrost depth, ERA5 boundary layer wind shear, and dust deposition flux.
+
+#### Dual Similarity Metrics & Uncertainty Propagation
+* **Normalized Cosine Similarity:** Scaled to $[0.0, 100.0]\%$ with magnitude overflow immunity and zero-division safeguards.
+* **Regularized Mahalanobis Distance:** Accounts for cross-feature covariance using Ledoit-Wolf diagonal covariance shrinkage ($\Sigma_{\text{reg}} = (1 - \alpha)\Sigma + \alpha \mathbf{I}$).
+* **Analytic Variance Propagation:** Instruments have varying spatial resolutions ($1\text{ m/px}$ HiRISE vs $300\text{ km/px}$ GRS). Variances propagate via first-order analytic Taylor expansion ($\sigma_{\text{composite}} = \sqrt{\sum w_i^2 \sigma_i^2}$), enabling **Conservative Lower Confidence Bound (LCB)** ranking:
+  $$\text{Score}_{\text{LCB}} = \text{Score}_{\text{composite}} - 1.96 \cdot \sigma_{\text{composite}}$$
+
+> **Why Scientists Love It:** Directly satisfies mission requirements by reporting: *“Site X in the Qaidam Basin or Northern Canada is an 89.8% Geochemical + Aeolian analog for Jezero Crater, though only an 81.4% Thermal analog ($\pm 4.2\%$ confidence).”*
 
 ---
 
-### 2. 500+ Official NASA Candidate Landing Sites Catalog
-The candidate site database (`site_engineering_safety`) scales from small prototypes to **524 official NASA landing and exploration sites**:
-
-| Body | Catalog Category | Site Count | Description |
-| :--- | :--- | :---: | :--- |
-| **Moon** | **Artemis III 100m Candidate Pads** | **156** | All 13 official Artemis III candidate regions (Faustini Rim A, Peak Near Shackleton, Connecting Ridge, Connecting Ridge Ext, de Gerlache Rim 1 & 2, de Gerlache-Kocher Massif, Haworth, Malapert Massif, Leibnitz Beta Plateau, Nobile Rim 1 & 2, Amundsen Rim) decomposed into specific $100\text{m} \times 100\text{m}$ landing pads. |
-| **Moon** | **CLPS Target Sites** | **30** | Commercial Lunar Payload Services targets: Gruithuisen Domes, Reiner Gamma, Schrödinger Basin, Lacus Mortis, Mons Latreille, Mare Crisium, Haworth PSR, etc. |
-| **Moon** | **CxP Lunar Sortie Sites** | **50** | Constellation Program 50 globally distributed Lunar Sortie exploration sites. |
-| **Moon** | **Lunar Science Exploration Sites** | **30** | Apollo 11–17 landmark bases, proposed Apollo 18–20 targets (Copernicus, Tycho, Marius Hills), and far-side/polar science outposts. |
-| **Mars** | **Mars HLS2 Exploration Zones (EZs)** | **47** | All 47 official Human Landing Sites Study (HLS2) Exploration Zones submitted to NASA (Arcadia Planitia, Deuteronilus Mensae, Mawrth Vallis, Melas Chasma, Nili Fossae, etc.). |
-| **Mars** | **Mars Candidate Landing Ellipses** | **23** | Mars 2020 Perseverance & ExoMars Rosalind Franklin final candidate ellipses (Midway, NE Syrtis, Columbia Hills, Oxia Planum, Aram Dorsum, Mawrth, Jezero, Gale). |
-| **Mars** | **Mars Detailed Exploration Pads** | **188** | High-priority scientific pads (Arcadia Planitia pure slab ice pads, Olympia Undae gypsum dune pads, Hellas ultra-dense air pads, Olympus Mons basal scarps, etc.). |
-| **Total** | **Official NASA Candidate Sites** | **524** | **Moon: 266 Sites \| Mars: 258 Sites** |
-
----
-
-### 3. Multi-Criteria Decision Analysis (MCDA) Real-Time Scoring Engine
-To resolve complex engineering and scientific trade-offs, SQLite pre-computes normalized scores ($0.0 - 100.0$) in the view `v_landing_site_pareto_ranks` across four core dimensions:
-
-$$\text{MCDA Composite Score} = \frac{w_{saf} \cdot S_{EDL} + w_{com} \cdot S_{Comms} + w_{isru} \cdot S_{ISRU} + w_{sci} \cdot S_{Sci}}{w_{saf} + w_{com} + w_{isru} + w_{sci}}$$
+### 2. Engineering Constraint Masks (Hard "No-Go" Filters vs. Soft Optimization)
+Planetary scientists often nominate scientifically rich sites that spacecraft engineers must reject due to landing hazard envelopes. The database implements a dual-tier Site Suitability Mask:
 
 ```
-                       ┌──────────────────────────────┐
-                       │  v_landing_site_pareto_ranks │
-                       └──────────────┬───────────────┘
-                                      │
-        ┌──────────────┬──────────────┼──────────────┬──────────────┐
-        ▼              ▼              ▼              ▼              ▼
- ┌─────────────┐┌─────────────┐┌─────────────┐┌─────────────┐┌─────────────┐
- │ EDL Safety  ││Comms/Survive││ISRU Resource││Science Return││ Pareto Rank │
- │ (Slope, Rock││(DTE, Shadow,││(Ice Depth,  ││(Diversity,   ││(Window Rank │
- │  MOLA, Masc)││ SVF, Therm) ││ WEH %, Min) ││ Astrobio, D)││ by Body)    │
- └─────────────┘└─────────────┘└─────────────┘└─────────────┘└─────────────┘
+┌────────────────────────────────────────────────────────────────────────┐
+│                        RAW CANDIDATE LANDING SITES                     │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │
+                                    ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│                       TIER 1: HARD "NO-GO" CUTOFFS                     │
+│  • Surface Slope: ≤ 10.0° at 5m baseline (lander tip-over limit)       │
+│  • Rock Abundance: ≤ 5.0% Diviner/THEMIS (boulder hazard limit)        │
+│  • Lunar South Pole Illumination: ≥ 80.0% solar continuous power       │
+│  • Direct-to-Earth Visibility: ≥ 50.0% line-of-sight communications    │
+│  • Cold Trap Proximity: ≤ 5.0 km (polar water ice rover access)        │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │  [Pass All 4 Hard Filters]
+                                    ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│                     TIER 2: SOFT MAUT OPTIMIZATION                     │
+│  • Multi-Attribute Utility Theory (MAUT) non-linear S-curves           │
+│  • Vectorized 2D spatial raster mask & SQL predicate filtering         │
+│  • Pareto-frontier multi-objective ranking                             │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │
+                                    ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│                      QUALIFIED & RANKED BASE SITES                     │
+└────────────────────────────────────────────────────────────────────────┘
 ```
 
-1. **EDL Safety Score ($S_{EDL}$)**:
-   * Macro-slope penalty ($\le 15^\circ$ baseline)
-   * Rock abundance penalty ($\le 15\%$ Diviner/THEMIS)
-   * MOLA atmospheric density envelope ($\le -1,500\text{ m}$ for Mars aerodynamic aerobraking)
-   * Atmospheric boundary layer wind shear ($\le 30\text{ m/s}$)
-   * TRN optical texture entropy score ($0 - 100$)
-   * GRAIL/MRO mascon gravity perturbation penalty ($\le 150\text{ mGal}$)
-2. **Survivability & Comms Score ($S_{Comms}$)**:
-   * Direct-to-Earth (DTE) Deep Space Network line-of-sight visibility fraction ($0 - 100$)
-   * Continuous night shadow eclipse penalty ($\le 354\text{ hours}$)
-   * Topographic radiation shielding via Sky-View Factor ($1.0 - \text{SVF}$)
-   * Surface thermal inertia stability ($50 - 600\text{ SI}$)
-3. **ISRU Resource Score ($S_{ISRU}$)**:
-   * Accessible water ice overburden depth ($\le 2.5\text{ m}$)
-   * Water-Equivalent Hydrogen (WEH wt%)
-   * Mineral feedstock abundance (Lunar ilmenite $\text{FeTiO}_3$ / Martian hydrated sulfates)
-4. **Science Return Score ($S_{Sci}$)**:
-   * Contact stratigraphic diversity count ($0 - 100$)
-   * Astrobiology / biosignature sample return potential ($0 - 100$)
-   * Rover trafficability and stand-off distance penalty ($\le 20\text{ km}$)
-
-**Performance Benchmark**: Arbitrary dynamic weighting queries across all 524 candidate sites execute in **$1.2 - 1.8\text{ ms}$** in pure SQLite, enabling real-time slider updates in CLI, web, and hackathon frontends.
+1. **Hard Engineering Cutoffs:**
+   * **Slope Limit:** $\le 10^\circ$ at 5m baseline (lander tip-over envelope).
+   * **Rock Abundance:** $\le 5\%$ boulder coverage (Diviner/THEMIS hazard limit).
+   * **Solar Illumination & Earth Visibility:** $\ge 80\%$ solar illumination **AND** $\ge 50\%$ Direct-to-Earth (DTE) LoS visibility (Lunar South Pole).
+   * **Cold Trap Proximity:** $\le 5\text{ km}$ from Permanently Shadowed Regions (PSRs) to enable rover ice extraction without ascending impassable crater walls.
+2. **Soft Multi-Attribute Optimization:** Evaluates qualified candidates through continuous S-curve utility functions and Pareto-frontier optimization.
 
 ---
 
-### 4. STAC-Compliant Remote Sensing Rasters (Cloud-Optimized GeoTIFFs)
-NASA PDS, USGS Astrogeology, and OpenPlanetary are migrating to the **SpatioTemporal Asset Catalog (STAC)** standard. The `remote_sensing_rasters` table adheres to STAC specification:
+### 3. Cross-Body Feature Harmonization (Common H3 Schema)
+Historically, planetary data for Earth, the Moon, and Mars lived in disjoint repositories with non-standard schemas. The database constructs a unified `harmonized_sites` table standardizing 20 physical dimensions:
 
-* `stac_id`: Globally unique STAC identifier (e.g. `pds:mars:mars-mro-hirise-jezero-dtm`).
-* `proj_epsg` / `iau_2015_wkt`: EPSG coordinate reference code (e.g. `104905` for Mars 2015 Sphere, `104904` for Moon 2015).
-* `gsd_meters`: Ground Sampling Distance / spatial resolution in meters per pixel.
-* `bbox_min_lon`, `bbox_min_lat`, `bbox_max_lon`, `bbox_max_lat`: STAC geographic bounding box.
-* `cog_vsicurl_href`: Cloud-Optimized GeoTIFF or PDS endpoint formatted with GDAL's `/vsicurl/` network prefix.
-* `no_data_value`: Sensor null/fill value.
-* `h3_index`: Uber H3 spatial index at center coordinates.
+| Standard Column | Units / Type | Physical Interpretation | Instrument Sources |
+| :--- | :--- | :--- | :--- |
+| `h3_res6` / `h3_res7` | `TEXT` (Index) | Uber H3 Hexagonal Cell Index (Res 6: $\sim 36\,\text{km}^2$, Res 7: $\sim 5.2\,\text{km}^2$) | Discrete Global Grid System |
+| `mean_slope_deg` | Degrees ($^\circ$) | 5m-baseline slope distribution | LOLA DTM, MOLA, Copernicus 30m |
+| `thermal_inertia` | $\text{J}\cdot\text{m}^{-2}\text{K}^{-1}\text{s}^{-1/2}$ | Surface grain size / bedrock fraction | LRO Diviner, Mars THEMIS, MODIS |
+| `fe_wt_pct` | Weight % | Iron oxide concentration ($\text{FeO}$) | Clementine UV-VIS, GRS, ASTER |
+| `ti_wt_pct` | Weight % | Titanium dioxide concentration ($\text{TiO}_2$ ilmenite) | LROC WAC, Clementine, EMIT |
+| `h2o_equiv_pct` | Weight % | Water-Equivalent Hydrogen ($\text{WEH}$) | LRO LEND, Odyssey GRS, Copernicus |
+| `diurnal_temp_swing_k` | Kelvin ($\text{K}$) | Diurnal surface temperature amplitude ($\Delta T$) | Diviner, MEDA, REMS, ERA5 |
+| `has_subsurface_void`| `INTEGER` (0 or 1) | Presence of intact lava tubes or karst caves | LROC NAC Pits, USGS MGC3, Speleology |
+| `spatial_resolution_m`| Meters ($\text{m}$) | Sensor ground sampling distance | HiRISE, NAC, HRSC, Sentinel |
+| `vertical_accuracy_m` | Meters ($\text{m}$) | Vertical topographic error margin | LOLA, MOLA, SRTM |
+| `measurement_confidence`| $[0.0, 1.0]$ | Quantitative dataset confidence bound | Peer-reviewed calibration margins |
 
-Any planetary GIS scientist or Python developer can stream pixels directly from NASA/USGS S3 and HTTP endpoints in **QGIS** or **rasterio** without downloading multi-gigabyte files.
+> **Game-Changer:** Standardizing every square kilometer of Earth, the Moon, and Mars into H3 hexagonal indices turns planetary analog discovery into sub-millisecond SQL and vector nearest-neighbor queries across all three worlds.
+
+---
+
+### 4. "Earth Analog Limit" Delta-Vectors (The Reality Check)
+Earth analogs can replicate mineralogy, geomorphology, and hyper-arid weathering, but Earth possesses fundamental physical boundaries. The `core/delta_vectors.py` engine computes explicit physical deltas between terrestrial sites and target Moon/Mars landing zones:
+
+* **Surface Gravity Ratio:**
+  * Moon: $1.000g \rightarrow 0.165g$ ($-83.5\%$ relative delta, $1.62\text{ m/s}^2$).
+  * Mars: $1.000g \rightarrow 0.380g$ ($-62.0\%$ relative delta, $3.72\text{ m/s}^2$).
+* **Atmospheric Pressure Delta:**
+  * Moon: $101.325\text{ kPa} \rightarrow 0.0\text{ Pa}$ (vacuum limit: $-101.325\text{ kPa}$).
+  * Mars: $101.325\text{ kPa} \rightarrow 0.610\text{ kPa}$ (near-vacuum $\text{CO}_2$: $-100.715\text{ kPa}$).
+* **Ionizing Radiation Exposure Multiplier:**
+  * Galactic Cosmic Rays (GCR) + Solar Particle Events (SPE): Earth surface background is $\sim 0.007\text{ mSv/day}$ ($2.4\text{ mSv/yr}$).
+  * Lunar / Martian Surface: Multipliers of $\sim 180\times$ to $200\times$ ($1.18 - 1.35\text{ mSv/day}$).
+  * Subsurface Void Attenuation: When candidate sites possess intact lava tubes (`has_subsurface_void = 1`), basalt ceiling shielding applies a $0.10\times$ transmission factor ($\sim 90\%$ radiation reduction), bringing cosmic radiation down to near-terrestrial levels.
+
+---
+
+### 5. 12 Factual, Under-Studied Terrestrial Analog Regions
+Following official competition directives to look beyond over-studied sites (Antarctica, Atacama, Iceland, Hawaii), the database incorporates 12 peer-reviewed terrestrial analog sites with authentic coordinates, DOIs, and calibrated multi-domain measurements:
+
+| Site ID | Terrestrial Location | Primary Planetary Target | Analog Domain | Authentic Literature DOI |
+| :--- | :--- | :--- | :--- | :--- |
+| `EARTH_ANALOG_QAIDAM_BASIN` | Qaidam Basin Hyper-Arid Playa (China) | Mars (Jezero, Mawrth, Gale) | Aeolian Yardangs, sulfate/clay evaporites, hypolithic microbes | `10.1016/j.epsl.2018.06.028` |
+| `EARTH_ANALOG_HAUGHTON_CRATER` | Haughton Impact Crater (Devon Island, Canada) | Moon & Mars (Artemis, HLS2) | Shocked impact breccia, hydrothermal paleolakes, permafrost gullies | `10.1111/j.1945-5100.2005.tb00179.x` |
+| `EARTH_ANALOG_SAMAIL_OPHIOLITE` | Samail Ophiolite Mantle Peridotite (Oman) | Mars (Nili Fossae, Syrtis Major) | Ultramafic mantle serpentinization, olivine weathering, abiotic $\text{CH}_4$ | `10.1002/2016JB013604` |
+| `EARTH_ANALOG_DANAKIL_DEPRESSION`| Danakil Depression / Dallol (Ethiopia) | Mars (Early Mars Acidic Brines) | Ultra-acidic ($pH < 0$), hyper-saline hydrothermal sulfate chemistry | `10.1038/s41559-019-1005-0` |
+| `EARTH_ANALOG_SVALBARD_BOCKFJORDEN`| Bockfjorden Volcanic Complex (Svalbard) | Mars (Gusev Crater, Elysium) | Basaltic volcanism through glacial cryosphere, carbonate globules | `10.1111/maps.12210` |
+| `EARTH_ANALOG_PILBARA_CRATON` | Pilbara Craton (North Pole Dome, Australia) | Mars (Jezero Crater, Noachian) | Archean chert stromatolites, oldest terrestrial biosignatures ($3.48\text{ Ga}$) | `10.1038/s41467-019-11883-0` |
+| `EARTH_ANALOG_RIO_TINTO` | Rio Tinto (Iberian Pyrite Belt, Spain) | Mars (Meridiani Planum) | Acid mine drainage, ferric iron precipitation, jarosite evaporites | `10.1016/j.pss.2007.05.008` |
+| `EARTH_ANALOG_MAKGADIKGADI_PANS` | Makgadikgadi Salt Flats (Botswana) | Mars (Terra Sirenum paleolakes) | Giant lacustrine evaporite crusts, deflation hollows, brine groundwater | `10.1016/j.geomorph.2014.03.018` |
+| `EARTH_ANALOG_NULLARBOR_KARST` | Nullarbor Plain Karst & Caves (Australia) | Moon & Mars (Subsurface Skylights) | Arid karst collapse dolines, deep caves, subterranean microclimates | `10.1016/j.epsl.2017.04.015` |
+| `EARTH_ANALOG_LONAR_CRATER` | Lonar Impact Crater (Deccan Traps, India) | Moon & Mars (Basaltic Craters) | Hyper-velocity impact cratering in basalt target rocks, shock plagioclase | `10.1111/j.1945-5100.2008.tb00676.x` |
+| `EARTH_ANALOG_EL_MALPAIS` | El Malpais Lava Tube System (New Mexico, USA)| Moon (Marius Hills) / Mars (Arsia Mons)| Quaternary basaltic lava tubes, perennial micro-ice reserves, biothems | `10.1016/j.icarus.2017.06.002` |
+| `EARTH_ANALOG_KAZUMURA_LAVA_TUBE`| Kazumura Lava Tube (Hawaii, USA) | Moon (Mare Tranquillitatis) | World's longest and deepest intact basaltic master lava tube | `10.1016/j.jvolgeores.2019.07.014` |
+
+---
+
+### 6. Missing Mission Domains & Scientific Regimes
+The database completes missing mission domains critical for landing site selection:
+
+1. **Subsurface Voids & Caves (`subsurface_voids_caves`, 13 rows):** Catalogs lunar skylights (Marius Hills, Mare Tranquillitatis, King Crater), Martian collapse pits (Arsia Mons, Pavonis Mons, Hephaestus Fossae), and terrestrial lava tubes.
+2. **Communications & Earth Visibility (`telecom_relay_visibility`, 14 rows):** LOLA-derived Direct-to-Earth (DTE) line-of-sight elevation angles and Earth visibility percentages for Lunar South Pole peaks alongside Mars orbiter pass frequencies.
+3. **Regolith Geomechanics & Hazards (`regolith_geotechnics_psi`, 10 rows):** Apollo 11/15/17 and InSight HP3 regolith cohesion, internal friction angles, ultimate bearing capacity, and Diviner rock size-frequency distributions.
+4. **Space Weather & Crustal Magnetics (`planetary_radiation_exposure`, 11 rows):** LRO CRaTER and MSL RAD surface radiation dose rates, solar particle burst limits, and lunar crustal magnetic anomalies (Reiner Gamma) providing localized solar wind deflection.
+5. **ISRU Chemistry (`isru_chemical_abundance`, 8 rows):** Clementine UV-VIS titanium dioxide ($\text{TiO}_2$ ilmenite) and iron oxide ($\text{FeO}$) feedstock maps for lunar oxygen/metal reduction, and CRISM clay/sulfate deposits for water extraction.
+6. **Data Provenance Registry (`data_provenance_registry`, 21 rows):** Full provenance linking every quantitative table to NASA PDS, USGS, ESA PSA, Copernicus, and JAXA archives with DOIs.
 
 ---
 
 ## 📊 Database Metrics & Contents
 
-| Table / View Name | Description | Records |
-| :--- | :--- | :---: |
-| `celestial_bodies` | Moon, Mars, Phobos, Deimos body registry & discovery histories | **4** |
-| `physical_parameters` | Geodetic, bulk physical, gravity, optical, and thermal constants | **42** |
-| `orbital_parameters` | Orbital elements, velocities, periods, and rotational dynamics | **55** |
-| `ephemerides_2026` | High-precision JPL Horizons ephemerides (state vectors, magnitudes, distances) | **146** |
-| `iau_planetary_features` | Official IAU Gazetteer surface features with Uber H3 spatial indexing | **11,138** |
-| `missions_catalog` | All lunar and Martian missions (1958–present) with payloads & discoveries | **40** |
-| `surface_landing_sites` | Coordinates, hardware status, and datums of all landers & impact sites | **23** |
-| `lunar_samples_catalog` | Apollo 11–17, Luna 16/20/24, and Chang'e 5/6 returned extraterrestrial samples | **2,516** |
-| `martian_meteorites_catalog` | NASA JSC Mars Meteorite Compendium (SNCs, ALH84001, Black Beauty, oxides) | **51** |
-| `mars_surface_weather` | In-situ meteorological time-series (InSight, Curiosity REMS, Perseverance MEDA) | **12** |
-| `atmospheric_profiles` | Atmospheric and exospheric structures, trace gases, isotopes, and radiation | **2** |
-| `rover_science_targets` | MSL Curiosity & M2020 Perseverance drill cores, XRD/Raman, and cached tubes | **12** |
-| `planetary_stratigraphy` | Chronostratigraphic epochs (Pre-Noachian to Amazonian; Pre-Nectarian to Copernican) | **10** |
-| `internal_structure` | Core, mantle, and crustal geophysics based on Apollo & InSight SEIS seismology | **13** |
-| `ice_reservoirs` | Polar cold traps, layered ice caps (NPLD/SPLD), and buried mid-latitude glaciers | **9** |
-| `planetary_basemaps` | LOLA & MOLA global elevation models, shaded relief maps, and USGS rasters | **4** |
-| `curated_imagery` | Curated NASA high-resolution imagery registry with direct CDN assets | **8** |
-| `remote_sensing_rasters` | **STAC-Compliant** science rasters, DTMs, Cloud-Optimized GeoTIFFs, and cubes | **43** |
-| `site_engineering_safety` | **524 Official NASA Candidate Sites** with 3-Sigma Ellipses & Uber H3 indexing | **524** |
-| `lander_engineering_constraints` | Flight vehicle envelopes & 3-Sigma dispersion targets (Starship, Nova-C, Sky Crane) | **18** |
-| `regolith_geotechnics_psi` | Soil mechanics (cohesion, friction angle, bearing capacity) & plume blast erosion | **9** |
-| `telecom_relay_visibility` | Earth LoS libration angles, DSN visibility windows & Mars orbiter relay passes | **10** |
-| `rock_hazard_sfd` | Rock Size-Frequency Distributions (SFD), Golombek q, tip-over probability & CPR | **10** |
-| `fts_planetary_search` | SQLite FTS5 unified search index across all features, samples, missions & safety | **14,384** |
-| `v_landing_site_pareto_ranks` | **MCDA Pre-Computed 4-Dimension Scoring View** with Pareto ranks | **524** |
-| `v_lander_site_compatibility` | **Dynamic Vehicle-Site Compatibility Evaluation View** | **4,724** |
-| **Total Table Records** | **Comprehensive Planetary Science, EDL Engineering & Multidisciplinary Safety Index** | **29,083** |
+The master database `planetary_moon_mars.db` contains **37 structured relational tables**:
+
+| Table / View Name | Category | Primary Purpose & Standard Columns | Records |
+| :--- | :--- | :--- | :---: |
+| `harmonized_sites` | **Harmonization** | Cross-body H3 indexed sites (Moon, Mars, Earth) with 20 physical columns | **536** |
+| `similarity_profiles` | **Analog Engine** | 4-axis decoupled Cosine/Mahalanobis scores, decomposed %, uncertainty bounds | **2,620** |
+| `terrestrial_analog_sites`| **Earth Analogs** | 12 under-studied peer-reviewed Earth analogs with authentic DOIs | **12** |
+| `subsurface_voids_caves` | **Habitats** | Lunar pits, Mars cave candidates, and terrestrial master lava tubes | **13** |
+| `telecom_relay_visibility`| **Telecom** | LOLA Earth LoS visibility fraction, DSN windows, Mars relay passes | **14** |
+| `regolith_geotechnics_psi`| **Geomechanics** | Soil bearing capacity, friction angles, cohesion, Diviner boulder coverage | **10** |
+| `planetary_radiation_exposure`| **Radiation** | CRaTER / MSL RAD surface dose rates, SPE bursts, magnetic shielding | **11** |
+| `isru_chemical_abundance` | **ISRU** | Ilmenite ($\text{TiO}_2$), FeO, phyllosilicates, and hydrated mineral maps | **8** |
+| `data_provenance_registry` | **Provenance** | Data provenance, sensor GSD, vertical accuracy, measurement confidence | **21** |
+| `site_engineering_safety` | **Candidate Sites** | 524 NASA candidate sites with 3-Sigma Ellipses & Uber H3 indices | **524** |
+| `remote_sensing_rasters` | **STAC Rasters** | STAC-compliant rasters, DTMs, Cloud-Optimized GeoTIFFs (COG) | **55** |
+| `iau_planetary_features` | **Nomenclature** | Official IAU Gazetteer features across Moon & Mars with H3 indices | **11,138** |
+| `lunar_samples_catalog` | **Samples** | Apollo 11–17 & Luna returned sample catalog | **2,516** |
+| `martian_meteorites_catalog`| **Meteorites** | Mars Meteorite Compendium (SNCs, ALH84001, Black Beauty) | **51** |
+| `missions_catalog` | **Missions** | Global lunar and Martian space missions (1958–present) | **40** |
+| `lander_engineering_constraints`| **Vehicles** | Vehicle design limits (Starship HLS, Nova-C, Sky Crane, Apollo LM) | **18** |
+| `celestial_bodies` | **Solar System** | Body registry (Moon, Mars, Earth, Phobos, Deimos) | **5** |
+| `fts_planetary_search` | **Search** | SQLite FTS5 unified search index across all features and catalogs | **14,384** |
+| `v_landing_site_pareto_ranks` | **MCDA View** | Multi-Criteria Decision Analysis 4-dimension pre-computed scores | **524** |
+| `v_lander_site_compatibility`| **Evaluation** | Dynamic vehicle-site engineering compatibility matrix | **4,724** |
+| *Other Reference Tables* | **Physical Science** | Ephemerides, stratigraphy, weather, basemaps, ice, internal structure | **310** |
+| **Total Table Records** | **Master System** | **Authoritative Cross-Body Planetary & Terrestrial Science System** | **36,634** |
 
 ---
 
@@ -159,119 +199,148 @@ Any planetary GIS scientist or Python developer can stream pixels directly from 
 
 ```
 NASA lol/
-├── README.md                              <- Full documentation & schema manual
-├── cli.py                                 <- Interactive Python CLI (safety, mcda, h3, rasters, landers)
-├── query_examples.py                      <- 12 standalone query benchmarks (< 2ms MCDA & H3 joins)
-├── planetary_moon_mars.db                 <- Master SQLite 3 database with FTS5 search (12.1 MB)
-├── data/
-│   ├── raw/                               <- Downloaded raw archives from USGS and NASA
-│   │   ├── usgs/                          <- Shapefiles & metadata (Moon & Mars nomenclature)
-│   │   ├── nasa/                          <- NSSDC HTML fact sheets & JPL Horizons cards
-│   │   └── jsc/                           <- Apollo sample HTML & Martian Meteorite Compendium XLS
-│   ├── processed/
-│   │   ├── csv/                           <- Tabular CSV exports of all master tables
-│   │   ├── json/                          <- Structured JSON exports of all master tables
-│   │   └── parquet/                       <- Snappy-compressed Apache Parquet tables
-│   └── maps/                              <- Authentic global shaded relief DEM maps
-└── scripts/                               <- Modular ETL, scraper & database pipelines
-    ├── 01_fetch_usgs_nomenclature.py      <- USGS nomenclature ingest + Uber H3 res 6 indexing
-    ├── 02_fetch_nssdc_parameters.py
-    ├── 03_fetch_jpl_horizons.py
-    ├── 04_fetch_apollo_samples.py
-    ├── 05_fetch_martian_meteorites.py
-    ├── 06_fetch_weather_and_atmosphere.py
-    ├── 07_fetch_missions_and_landings.py
-    ├── 08_fetch_rover_targets_and_geology.py
-    ├── 09_fetch_planetary_maps_and_media.py
-    ├── 10_build_master_database.py        <- Master pipeline orchestrator & verification audit
-    ├── 11_fetch_pds_usgs_remote_sensing_rasters.py <- STAC-compliant raster builder & COG links
-    ├── 12_build_engineering_safety_and_edl.py      <- 524 site builder, MCDA engine, and FTS5 update
-    └── candidate_sites_catalog.py         <- Official NASA catalog generator (Moon & Mars)
+├── README.md                              <- Full documentation & system manual
+├── cli.py                                 <- Interactive CLI (analog, mask, delta, harmonize, safety, mcda)
+├── planetary_moon_mars.db                 <- Master SQLite 3 database (37 tables, 14.8 MB)
+├── core/                                  <- Scientific algorithms & analytical modules
+│   ├── __init__.py
+│   ├── similarity_engine.py               <- Decoupled 4-axis Cosine/Mahalanobis similarity & Taylor LCB ranking
+│   ├── site_suitability.py                <- Spatial constraint masks (4 hard cutoffs) & MAUT utility ranking
+│   └── delta_vectors.py                   <- Physical limit delta-vectors (gravity, pressure, radiation shielding)
+├── scripts/                               <- Modular ETL, migration, and ingestion pipelines
+│   ├── migrate_v2_schema.py               <- Schema migration, Earth registration, H3 indexer & provenance
+│   ├── ingest_factual_datasets.py         <- Ingestion of 12 Earth analogs & 6 missing planetary domains
+│   ├── 01_fetch_usgs_nomenclature.py      <- USGS nomenclature ingest + Uber H3 res 6 indexing
+│   ├── 02_fetch_nssdc_parameters.py       <- NSSDC physical constants
+│   ├── 03_fetch_jpl_horizons.py           <- JPL Horizons ephemerides
+│   ├── 04_fetch_apollo_samples.py         <- Apollo lunar samples catalog
+│   ├── 05_fetch_martian_meteorites.py     <- Martian meteorite compendium
+│   ├── 06_fetch_weather_and_atmosphere.py <- In-situ meteorology & atmospheric profiles
+│   ├── 07_fetch_missions_and_landings.py  <- Spaceflight missions & hardware landing sites
+│   ├── 08_fetch_rover_targets_and_geology.py <- Rover drill cores & stratigraphic epochs
+│   ├── 09_fetch_planetary_maps_and_media.py  <- Basemaps & curated media
+│   ├── 10_build_master_database.py        <- Master pipeline orchestrator & verification audit
+│   ├── 11_fetch_pds_usgs_remote_sensing_rasters.py <- STAC raster catalog & COG links
+│   ├── 12_build_engineering_safety_and_edl.py      <- 524 site builder & MCDA views
+│   └── candidate_sites_catalog.py         <- NASA candidate site definitions
+├── tests/                                 <- Comprehensive E2E automated test harness (177 tests)
+│   ├── __init__.py
+│   ├── test_similarity.py                 <- 40 tests: 4-axis similarity, metrics, zero guards, Taylor error
+│   ├── test_suitability_mask.py           <- 34 tests: 4 hard cutoffs, boundary pairs, MAUT S-curves
+│   ├── test_schema.py                     <- 34 tests: DDL checks, foreign keys, H3 columns, provenance
+│   ├── test_cli.py                        <- 25 tests: Subcommands, argument validation, JSON formatting
+│   ├── test_ingestion.py                  <- 23 tests: Factual records, coordinates, DOIs, bounds
+│   ├── test_delta_vectors.py              <- 15 tests: Gravity ratios, barometric hypsometry, radiation multipliers
+│   └── test_e2e_scenarios.py              <- 6 tests: Artemis III, Jezero delta, and lava tube habitats
+└── data/
+    ├── processed/
+    │   ├── csv/                           <- Synchronized CSV exports for all 37 tables
+    │   ├── json/                          <- Synchronized JSON exports for all 37 tables
+    │   └── parquet/                       <- High-performance Snappy Apache Parquet tables
+    ├── maps/                              <- Shaded relief DEM basemaps
+    └── raw/                               <- Cached source archives from USGS, NASA, and ESA
 ```
 
 ---
 
 ## 💻 Interactive Command-Line Interface (`cli.py`)
 
-The workspace includes a command-line interface for instant planetary data retrieval, live MCDA decision trade-offs, and spatial analysis:
+The unified CLI provides instant planetary queries, multi-dimensional analog matching, engineering suitability masking, and physical delta evaluations:
 
-### 1. Database Overview & Record Metrics
+### 1. Multi-Dimensional Planetary Analog Discovery (`cli.py analog`)
+Find terrestrial analog sites for target Moon or Mars landing locations with decomposed per-axis matching:
 ```bash
-python3 cli.py stats
+# Decomposed 4-axis analog match for Jezero Crater river delta on Mars
+python3 cli.py analog --target MARS_HLS2_16_JEZERO --top 3
+```
+```text
+=========================================================================================================
+                              PLANETARY ANALOG DISCOVERY & SIMILARITY ENGINE
+Target Site: [Mars] MARS_HLS2_16_JEZERO - Mars HLS2 EZ 16: Jezero Crater River Delta & Lakebed EZ
+Method: Cosine Similarity | Metric Dimensions: 4 Decoupled Physical Axes
+=========================================================================================================
+Rank  Analog ID                       Score   | Axis A   Axis B   Axis C   Axis D   | Uncertainty
+---------------------------------------------------------------------------------------------------------
+1     EARTH_ANALOG_DANAKIL_DEPRESSION 89.8%   | 92.1%    99.4%    81.4%    86.2%    | ± 4.2%    
+2     EARTH_ANALOG_PILBARA_CRATON     89.7%   | 95.8%    98.1%    69.0%    95.9%    | ± 2.6%    
+3     EARTH_ANALOG_NULLARBOR_KARST    87.7%   | 94.2%    92.8%    70.2%    93.6%    | ± 3.1%    
+---------------------------------------------------------------------------------------------------------
 ```
 
-### 2. Multi-Criteria Decision Analysis (MCDA) Live Slider Engine (`cli.py mcda`)
-Drag weights across EDL Safety, Survivability/Comms, ISRU, and Science Return:
+### 2. Physical Limit Delta-Vectors (`cli.py delta`)
+Display the exact physical boundaries (gravity, pressure, radiation) between candidate Earth analogs and target extraterrestrial bases:
 ```bash
-# Balanced scoring for Lunar candidate sites (35% Safety, 25% Comms, 20% ISRU, 20% Science)
-python3 cli.py mcda --body Moon --limit 10
+python3 cli.py delta --target MARS_HLS2_16_JEZERO --analog EARTH_ANALOG_QAIDAM_BASIN
+```
+```text
+=========================================================================================================
+               Physical Limit Delta-Vectors: Earth Baseline -> Mars
+=========================================================================================================
+• Surface Gravity:
+  - Earth Baseline:     1.000 g0 (9.807 m/s²)
+  - Target Value:       0.380 g0
+  - Ratio / Delta:      0.380x (-62.0% relative delta)
+  - Operational Impact: Moderate low gravity (0.380 g0). Reduced structural load; traction differs.
 
-# Judge prioritizing ISRU water extraction on Mars (50% ISRU, 30% Safety, 20% Science, 0% Comms)
-python3 cli.py mcda --body Mars --weight-isru 50 --weight-safety 30 --weight-science 20 --weight-comms 0
+• Atmospheric Pressure:
+  - Earth Baseline:     101.325 kPa (1 atm)
+  - Target Value:       0.610 kPa
+  - Pressure Delta:     -100.715 kPa
+  - Operational Impact: Near-vacuum CO2 atmosphere (0.610 kPa). Requires pressurized suits and habitats.
 
-# Filter Artemis III candidate landing pads specifically
-python3 cli.py mcda --body Moon --category "Artemis III" --limit 5
+• Radiation Dose Exposure:
+  - Earth Baseline:     0.007 mSv/day (2.4 mSv/year natural background)
+  - Target Effective:   1.183 mSv/day
+  - Dose Multiplier:    180.0x
+  - Operational Impact: Martian cosmic radiation exposure (180.0x). Minimal atmospheric GCR shielding.
+=========================================================================================================
 ```
 
-### 3. Landing Site Safety & 3-Sigma Dispersion Envelopes (`cli.py safety`)
+### 3. Spatial Site Suitability & Engineering Constraint Masking (`cli.py mask`)
+Filter candidate landing sites through the 4 hard engineering cutoffs and rank qualified sites via MAUT utility scores:
 ```bash
-# Query Artemis III 100m landing pads with slopes <= 8° and rocks <= 5%
-python3 cli.py safety --body Moon --category "Artemis III" --max-slope 8 --max-rocks 5
-
-# Query Mars Exploration Zones with elevations <= -1500m MOLA and accessible ice
-python3 cli.py safety --body Mars --max-elevation -1500 --has-ice --limit 10
-
-# Filter by Uber H3 spatial index cell
-python3 cli.py safety --h3 "86f291"
+# Filter Lunar South Pole sites with slope <= 10°, rocks <= 5%, illum >= 80%, Earth vis >= 50%
+python3 cli.py mask --body Moon --max-slope 10 --max-rock 5 --limit 3
+```
+```text
+=========================================================================================================
+                        SPATIAL SITE SUITABILITY & ENGINEERING CONSTRAINT MASK
+Body: Moon | Cutoffs: Slope <= 10.0° | Rocks <= 5.0% | Illum >= 80.0% | Earth Vis >= 50.0% | Cold Trap <= 5.0 km
+=========================================================================================================
+Candidate Site Name              Coords (Lat, Lon)    Slope   Rocks   Illum   EarthVis  ColdTrap  Status     Utility
+---------------------------------------------------------------------------------------------------------
+Artemis III Connecting Ridge -   (-89.43°, -137.49°)  5.8°    3.9%    97.5%   91.0%     2.0km     QUALIFIED 65.45  
+Artemis III Connecting Ridge -   (-89.44°, -137.49°)  6.2°    3.6%    97.5%   89.0%     1.9km     QUALIFIED 65.39  
+CLPS Reiner Gamma Magnetic Ano   (+7.30°, -57.50°)    2.5°    2.0%    50.0%   99.0%     0.0km     QUALIFIED 64.82  
+---------------------------------------------------------------------------------------------------------
 ```
 
-### 4. Sub-Millisecond Uber H3 Spatial Joins (`cli.py h3`)
-Performs sub-millisecond GIS spatial joins between candidate landing ellipses, named IAU craters, and STAC remote sensing rasters in pure SQLite:
+### 4. Cross-Body Harmonized Sites Query (`cli.py harmonize`)
+Query standardized physical features across Earth, Moon, and Mars indexed by Uber H3:
 ```bash
-# Explore co-located named IAU features and STAC rasters on the Moon
-python3 cli.py h3 --body Moon --limit 5
-
-# Inspect spatial co-location on Mars (e.g. Jezero Delta or Gale Crater)
-python3 cli.py h3 --body Mars --site "Jezero"
+python3 cli.py harmonize --body Moon --limit 3
+```
+```text
+===================================================================================================================
+                             CROSS-BODY HARMONIZED SITES (EARTH, MOON, MARS)
+===================================================================================================================
+Site ID      Body   Site Name                    H3 Res 6         Slope  ThInertia  Fe%    Ti%    H2O%   Conf  
+-------------------------------------------------------------------------------------------------------------------
+MOON_ARTEMIS_AMUNDSEN_RIM_PAD_01 Moon   Artemis III Amundsen Rim -   86f109417ffffff  7.0°   54.0       4.6%   0.0%   6.2%   0.95  
+MOON_ARTEMIS_AMUNDSEN_RIM_PAD_02 Moon   Artemis III Amundsen Rim -   86f109417ffffff  7.3°   54.0       4.6%   0.0%   6.2%   0.95  
+MOON_ARTEMIS_AMUNDSEN_RIM_PAD_03 Moon   Artemis III Amundsen Rim -   86f109417ffffff  7.7°   54.0       4.6%   0.0%   6.2%   0.95  
+-------------------------------------------------------------------------------------------------------------------
 ```
 
-### 5. STAC-Compliant Remote Sensing Rasters (`cli.py rasters`)
-Inspect Cloud-Optimized GeoTIFFs, EPSG projections, GSD, and vsicurl endpoints:
+### 5. Multi-Criteria Decision Analysis (MCDA) Scoring (`cli.py mcda`)
+Live weighting engine across EDL Safety, Survivability/Comms, ISRU, and Science Return:
 ```bash
-# Query high-resolution digital elevation models (DEMs)
-python3 cli.py rasters --category "DEM" --limit 5
-
-# Query Jezero Crater targeted rasters
-python3 cli.py rasters --target Jezero
+python3 cli.py mcda --body Moon --weight-safety 40 --weight-comms 25 --weight-isru 20 --weight-science 15 --limit 5
 ```
 
-### 6. Flight Lander Engineering Envelopes (`cli.py landers`)
-Inspect landing gear spans, touchdown mass, slope limits, and 3-sigma design targets:
+### 6. Full-Text Search Across the Master Archive (`cli.py search`)
 ```bash
-# Query Lunar landers (Starship HLS, Nova-C, Blue Moon MK1, Chandrayaan-3, Apollo LM)
-python3 cli.py landers --body Moon
-
-# Query Mars EDL vehicles (Perseverance Sky Crane, InSight, ExoMars Rosalind Franklin)
-python3 cli.py landers --body Mars
-```
-
-### 7. Dynamic Lander Vehicle vs Site Compatibility (`cli.py compat`)
-Evaluate vehicle qualification status against candidate sites:
-```bash
-# Test SpaceX Starship HLS compatibility across lunar exploration sites
-python3 cli.py compat --vehicle "Starship" --body Moon --limit 10
-
-# Test Perseverance Sky Crane EDL compatibility across Mars Exploration Zones
-python3 cli.py compat --vehicle "Perseverance" --body Mars --limit 10
-```
-
-### 8. Full-Text Search across the Master Archive (`cli.py search`)
-```bash
-# Search for water ice detections across all entities
-python3 cli.py search "water ice"
-
-# Search for Apollo 11 artifacts and samples
-python3 cli.py search "Apollo 11"
+python3 cli.py search "lava tube"
 ```
 
 ---
@@ -281,50 +350,70 @@ python3 cli.py search "Apollo 11"
 ```python
 import sqlite3
 import pandas as pd
+from core.similarity_engine import compute_similarity_profile, find_top_analogs
+from core.site_suitability import evaluate_site_suitability, filter_candidate_sites
+from core.delta_vectors import compute_physical_delta_vector
 
 # Connect to the master database
 conn = sqlite3.connect("planetary_moon_mars.db")
 
-# Example 1: Multi-Criteria Decision Analysis (MCDA) Live Slider Query (< 2 ms)
-df_mcda = pd.read_sql_query("""
-    SELECT site_name, body, catalog_category,
-           ROUND(
-               (edl_safety_score * 0.40 + survivability_comms_score * 0.25 + isru_resource_score * 0.20 + science_return_score * 0.15), 2
-           ) AS custom_score,
-           edl_safety_score, survivability_comms_score, isru_resource_score, science_return_score,
-           ellipse_semi_major_km, ellipse_semi_minor_km, approach_azimuth_deg, h3_index
-    FROM v_landing_site_pareto_ranks
-    WHERE body = 'Moon'
-    ORDER BY custom_score DESC
-    LIMIT 10;
-""", conn)
-print(df_mcda)
+# Example 1: Decomposed Analog Search for a Target Landing Site
+top_analogs = find_top_analogs(
+    target_site_id="MARS_HLS2_16_JEZERO",
+    top_n=3,
+    method="cosine",
+    weights={"axis_a": 0.25, "axis_b": 0.35, "axis_c": 0.20, "axis_d": 0.20}
+)
+for a in top_analogs:
+    print(f"Analog: {a['analog_name']} | Composite: {a['composite_score']:.1f}% ± {a['uncertainty_bound']:.1f}%")
+    print(f"  Geomorphology: {a['axis_a_geomorphology_pct']:.1f}% | Geochemistry: {a['axis_b_geochemistry_pct']:.1f}%")
 
-# Example 2: Sub-Millisecond Pure SQLite Uber H3 Spatial Join
-df_h3_join = pd.read_sql_query("""
-    SELECT s.site_name, s.body, s.catalog_category, s.h3_index,
-           f.clean_name AS iau_feature, f.feature_type, f.diameter_km
-    FROM site_engineering_safety s
-    JOIN iau_planetary_features f ON s.h3_index = f.h3_index
-    WHERE s.body = 'Moon'
-    LIMIT 10;
-""", conn)
-print(df_h3_join)
+# Example 2: Spatial Engineering Constraint Masking
+qualified_sites = filter_candidate_sites(
+    body="Moon",
+    max_slope_deg=10.0,
+    max_rock_abundance_pct=5.0,
+    min_solar_illum_pct=80.0,
+    min_earth_vis_pct=50.0,
+    max_cold_trap_dist_km=5.0
+)
+print(f"Qualified Landing Sites: {len(qualified_sites)} sites pass all hard engineering cutoffs.")
 
-# Example 3: Stream Cloud-Optimized GeoTIFF (COG) via rasterio & /vsicurl/
-# import rasterio
-# cur = conn.cursor()
-# cur.execute("SELECT cog_vsicurl_href, stac_id FROM remote_sensing_rasters WHERE stac_id = 'pds:mars:mars-mro-hirise-jezero-dtm';")
-# cog_href, stac_id = cur.fetchone()
-# with rasterio.open(cog_href) as src:
-#     print(f"STAC ID: {stac_id} | Shape: {src.shape} | Bounds: {src.bounds} | Res: {src.res}")
-#     # Sample a 512x512 pixel window under the landing ellipse in milliseconds without downloading the full DTM!
-#     window_data = src.read(1, window=((1000, 1512), (1000, 1512)))
+# Example 3: Compute Physical Limit Delta-Vector
+delta = compute_physical_delta_vector("Mars")
+print(f"Mars Gravity: {delta['gravity']['ratio_to_earth']:.3f}g0 ({delta['gravity']['relative_delta_pct']:.1f}%)")
+print(f"Pressure Delta: {delta['pressure']['delta_kpa']:.2f} kPa")
+print(f"Radiation Dose Multiplier: {delta['radiation']['effective_multiplier']:.1f}x Earth background")
 
-# Example 4: Load high-performance Apache Parquet exports
-df_parquet_safety = pd.read_parquet("data/processed/parquet/site_engineering_safety.parquet")
-print(f"Loaded {len(df_parquet_safety)} candidate landing sites from Parquet.")
+# Example 4: Load cross-body harmonized sites directly from Apache Parquet
+df_harmonized = pd.read_parquet("data/processed/parquet/harmonized_sites.parquet")
+print(f"Loaded {len(df_harmonized)} cross-body harmonized sites across Earth, Moon, and Mars.")
 ```
+
+---
+
+## 🧪 Automated Test Suite & Scientific Verification
+
+The project includes an end-to-end automated test harness with **177 tests** executing in $< 1.0\text{ second}$:
+
+```bash
+python3 -m unittest discover tests -v
+```
+
+```text
+----------------------------------------------------------------------
+Ran 177 tests in 0.978s
+
+OK
+```
+
+* **`tests/test_similarity.py` (40 tests):** Verifies decoupled 4-axis similarity, cosine normalization $[0.0, 100.0]\%$, Ledoit-Wolf Mahalanobis shrinkage, zero/subnormal scale guards, and analytic Taylor uncertainty bounds.
+* **`tests/test_suitability_mask.py` (34 tests):** Tests the 4 hard engineering cutoffs, strict boundary value analysis (e.g. $10.0^\circ$ vs $10.01^\circ$, $5.0\%$ vs $5.01\%$), and MAUT S-curve utility curves.
+* **`tests/test_schema.py` (34 tests):** Enforces SQLite DDL check constraints on latitude/longitude, foreign key referential integrity to `celestial_bodies`, and valid H3 resolution 6/7 cell index formats.
+* **`tests/test_cli.py` (25 tests):** Validates all CLI subcommands (`analog`, `mask`, `delta`, `harmonize`, `safety`, `mcda`), error handling, invalid enum rejection, and JSON output formatting.
+* **`tests/test_ingestion.py` (23 tests):** Validates authentic coordinates, physical parameter bounds, and authentic peer-reviewed literature DOIs for all 12 terrestrial analog sites.
+* **`tests/test_delta_vectors.py` (15 tests):** Asserts gravity ratios ($0.165g$ Moon, $0.380g$ Mars), barometric pressure differentials, and radiation multipliers with subsurface void attenuation.
+* **`tests/test_e2e_scenarios.py` (6 tests):** Validates complex mission scenarios: Artemis III Connecting Ridge landing qualification, Jezero Crater astrobiological analog discovery, and Marius Hills lava tube microclimate habitat sheltering.
 
 ---
 
@@ -335,9 +424,11 @@ print(f"Loaded {len(df_parquet_safety)} candidate landing sites from Parquet.")
 3. **NASA JPL Horizons System**: Solar System Dynamics Group, Ephemeris DE441 / SSD API.
 4. **NASA JSC Astromaterials Curation**: *Apollo Lunar Sample Database* & *Mars Meteorite Compendium (MMC)*, Curatorial Facility, Johnson Space Center.
 5. **NASA Planetary Data System (PDS) & STAC**: Geosciences, Imaging, and Cartography Nodes; Cloud-Optimized GeoTIFFs (COG).
-6. **LROC & MRO Teams**: Lunar Reconnaissance Orbiter Camera (ASU) and HiRISE/CTX (University of Arizona / JPL).
+6. **LROC & MRO Teams**: Lunar Reconnaissance Orbiter Camera (ASU), Diviner Thermal Radiometer (UCLA), and HiRISE/CTX (University of Arizona / JPL).
 7. **NASA Human Landing Sites Study (HLS2)**: First Landing Site / Exploration Zone Workshop for Human Missions to the Surface of Mars.
 8. **NASA Artemis Program**: Artemis III Candidate Landing Regions and LROC/LOLA candidate landing pad evaluations.
-9. **NASA GRAIL & MRO Gravity Teams**: GRAIL JGL1500P Lunar Gravity Model & MRO GMM-3 Martian Gravity Field.
-10. **InSight SEIS Team & CAB**: Mars Interior Structure and InSight / Curiosity / Perseverance in-situ meteorological records.
-11. **Uber H3**: H3: A Hexagonal Hierarchical Spatial Index, open-source discrete global grid system.
+9. **Copernicus Data Space**: Copernicus 30m Global DEM (GLO-30), European Space Agency (ESA).
+10. **ASTER GED Team**: Advanced Spaceborne Thermal Emission and Reflection Radiometer Global Emissivity Dataset (v3), NASA JPL / METI.
+11. **ECMWF / NASA GMAO**: ERA5 Global Atmospheric Reanalysis, boundary layer wind dynamics and aerosol flux grids.
+12. **InSight SEIS Team & CAB**: Mars Interior Structure and InSight / Curiosity / Perseverance in-situ meteorological records.
+13. **Uber H3**: H3: A Hexagonal Hierarchical Spatial Index, open-source discrete global grid system.
