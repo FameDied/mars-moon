@@ -1,3 +1,4 @@
+from pathlib import Path
 import urllib.request
 import ssl
 import certifi
@@ -8,6 +9,7 @@ import xlrd
 import pyarrow as pa
 import pyarrow.parquet as pq
 
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 ctx = ssl.create_default_context(cafile=certifi.where())
 
 FILES = {
@@ -16,11 +18,11 @@ FILES = {
     "Ancient, Nakhlites, Chassignites & Lherzolites": "https://curator.jsc.nasa.gov/antmet/mmc/MMC-chemical-Ancient-Nak-Chass-Lherz.xls"
 }
 
-raw_dir = "data/raw/jsc/mmc"
+raw_dir = PROJECT_ROOT / "data/raw/jsc/mmc"
 os.makedirs(raw_dir, exist_ok=True)
-os.makedirs("data/processed/json", exist_ok=True)
-os.makedirs("data/processed/csv", exist_ok=True)
-os.makedirs("data/processed/parquet", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/json", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/csv", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/parquet", exist_ok=True)
 
 all_meteorites = []
 
@@ -29,10 +31,15 @@ for group_name, url in FILES.items():
     local_path = os.path.join(raw_dir, filename)
     
     if not os.path.exists(local_path):
-        print(f"Downloading {filename} from {url}...")
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (NASA Harvester)"})
-        with urllib.request.urlopen(req, context=ctx) as resp, open(local_path, "wb") as f:
-            f.write(resp.read())
+        try:
+            print(f"Downloading {filename} from {url}...")
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (NASA Harvester)"})
+            with urllib.request.urlopen(req, context=ctx, timeout=15) as resp, open(local_path, "wb") as f:
+                f.write(resp.read())
+        except Exception as e:
+            print(f"Offline fallback warning for {filename}: {e}")
+            if not os.path.exists(local_path):
+                continue
             
     print(f"Parsing {filename} ({group_name})...")
     book = xlrd.open_workbook(local_path)
@@ -129,18 +136,23 @@ for m in all_meteorites:
     flat_meteorites.append(item)
 
 # Save JSON
-with open("data/processed/json/martian_meteorites.json", "w", encoding="utf-8") as f:
+json_path = PROJECT_ROOT / "data/processed/json/martian_meteorites.json"
+with open(json_path, "w", encoding="utf-8") as f:
     json.dump(all_meteorites, f, indent=2)
-print(f"Saved JSON ({os.path.getsize('data/processed/json/martian_meteorites.json'):,} bytes)")
+print(f"Saved JSON ({os.path.getsize(json_path):,} bytes)")
 
 # Save CSV
-with open("data/processed/csv/martian_meteorites.csv", "w", newline="", encoding="utf-8") as f:
-    writer = csv.DictWriter(f, fieldnames=list(flat_meteorites[0].keys()))
-    writer.writeheader()
-    writer.writerows(flat_meteorites)
-print(f"Saved CSV ({os.path.getsize('data/processed/csv/martian_meteorites.csv'):,} bytes)")
+csv_path = PROJECT_ROOT / "data/processed/csv/martian_meteorites.csv"
+if flat_meteorites:
+    with open(csv_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=list(flat_meteorites[0].keys()))
+        writer.writeheader()
+        writer.writerows(flat_meteorites)
+    print(f"Saved CSV ({os.path.getsize(csv_path):,} bytes)")
 
 # Save Parquet
-pq.write_table(pa.Table.from_pylist(flat_meteorites), "data/processed/parquet/martian_meteorites.parquet")
-print(f"Saved Parquet ({os.path.getsize('data/processed/parquet/martian_meteorites.parquet'):,} bytes)")
+parquet_path = PROJECT_ROOT / "data/processed/parquet/martian_meteorites.parquet"
+if flat_meteorites:
+    pq.write_table(pa.Table.from_pylist(flat_meteorites), str(parquet_path))
+    print(f"Saved Parquet ({os.path.getsize(parquet_path):,} bytes)")
 

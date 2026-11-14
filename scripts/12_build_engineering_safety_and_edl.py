@@ -27,13 +27,15 @@ import json
 import csv
 import sqlite3
 import pyarrow as pa
+from pathlib import Path
 import pyarrow.parquet as pq
 
 # Add scripts directory to path to import candidate sites catalog
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from candidate_sites_catalog import get_all_candidate_sites
 
-DB_PATH = "planetary_moon_mars.db"
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+DB_PATH = str(PROJECT_ROOT / "planetary_moon_mars.db")
 
 # =============================================================================
 # 1. CANDIDATE LANDING SITES DATASET (~500+ Official NASA Candidate Sites)
@@ -1443,9 +1445,9 @@ def export_multiformat():
     ]
 
     for name, data in exports:
-        csv_file = f"data/processed/csv/{name}.csv"
-        json_file = f"data/processed/json/{name}.json"
-        parquet_file = f"data/processed/parquet/{name}.parquet"
+        csv_file = str(PROJECT_ROOT / f"data/processed/csv/{name}.csv")
+        json_file = str(PROJECT_ROOT / f"data/processed/json/{name}.json")
+        parquet_file = str(PROJECT_ROOT / f"data/processed/parquet/{name}.parquet")
 
         # CSV
         keys = list(data[0].keys())

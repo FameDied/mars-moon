@@ -1,3 +1,4 @@
+from pathlib import Path
 import urllib.request
 import ssl
 import certifi
@@ -7,12 +8,13 @@ import os
 import pyarrow as pa
 import pyarrow.parquet as pq
 
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 ctx = ssl.create_default_context(cafile=certifi.where())
 
-os.makedirs("data/maps", exist_ok=True)
-os.makedirs("data/processed/json", exist_ok=True)
-os.makedirs("data/processed/csv", exist_ok=True)
-os.makedirs("data/processed/parquet", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/maps", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/json", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/csv", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/parquet", exist_ok=True)
 
 # 1. Download official maps directly
 MAPS_TO_DOWNLOAD = [
@@ -50,15 +52,19 @@ MAPS_TO_DOWNLOAD = [
     }
 ]
 
-print("Downloading authentic global planetary maps...")
+print("Checking authentic global planetary maps...")
 downloaded_maps = []
 for m in MAPS_TO_DOWNLOAD:
-    dest = os.path.join("data/maps", m["filename"])
-    try:
-        req = urllib.request.Request(m["url"], headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, context=ctx, timeout=30) as resp, open(dest, "wb") as f:
-            f.write(resp.read())
-        print(f"Downloaded {m['filename']} ({os.path.getsize(dest):,} bytes)")
+    dest = str(PROJECT_ROOT / "data/maps" / m["filename"])
+    if not (os.path.exists(dest) and os.path.getsize(dest) > 1000):
+        try:
+            req = urllib.request.Request(m["url"], headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, context=ctx, timeout=15) as resp, open(dest, "wb") as f:
+                f.write(resp.read())
+            print(f"Downloaded {m['filename']} ({os.path.getsize(dest):,} bytes)")
+        except Exception as e:
+            print(f"Offline fallback note for map {m['filename']}: {e}")
+    if os.path.exists(dest):
         downloaded_maps.append({
             "map_id": m["filename"].split(".")[0],
             "body": m["body"],
@@ -69,8 +75,6 @@ for m in MAPS_TO_DOWNLOAD:
             "file_size_bytes": os.path.getsize(dest),
             "source_authority": m["source"]
         })
-    except Exception as e:
-        print(f"Failed to download {m['filename']}: {e}")
 
 # 2. Curate Iconic Scientific Planetary Imagery from NASA Image Library
 curated_searches = [
@@ -142,22 +146,36 @@ for body, query, description_note in curated_searches:
 print(f"Compiled {len(downloaded_maps)} downloaded basemaps and {len(curated_media)} curated media items.")
 
 # Save maps metadata
-with open("data/processed/json/planetary_basemaps.json", "w", encoding="utf-8") as f:
+json_maps = PROJECT_ROOT / "data/processed/json/planetary_basemaps.json"
+csv_maps = PROJECT_ROOT / "data/processed/csv/planetary_basemaps.csv"
+parquet_maps = PROJECT_ROOT / "data/processed/parquet/planetary_basemaps.parquet"
+
+with open(json_maps, "w", encoding="utf-8") as f:
     json.dump(downloaded_maps, f, indent=2)
-with open("data/processed/csv/planetary_basemaps.csv", "w", newline="", encoding="utf-8") as f:
-    writer = csv.DictWriter(f, fieldnames=list(downloaded_maps[0].keys()))
-    writer.writeheader()
-    writer.writerows(downloaded_maps)
-pq.write_table(pa.Table.from_pylist(downloaded_maps), "data/processed/parquet/planetary_basemaps.parquet")
+if downloaded_maps:
+    with open(csv_maps, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=list(downloaded_maps[0].keys()))
+        writer.writeheader()
+        writer.writerows(downloaded_maps)
+    pq.write_table(pa.Table.from_pylist(downloaded_maps), str(parquet_maps))
 
 # Save curated media metadata
-with open("data/processed/json/curated_imagery.json", "w", encoding="utf-8") as f:
+json_media = PROJECT_ROOT / "data/processed/json/curated_imagery.json"
+csv_media = PROJECT_ROOT / "data/processed/csv/curated_imagery.csv"
+parquet_media = PROJECT_ROOT / "data/processed/parquet/curated_imagery.parquet"
+
+if not curated_media and json_media.exists():
+    with open(json_media, "r", encoding="utf-8") as f:
+        curated_media = json.load(f)
+
+with open(json_media, "w", encoding="utf-8") as f:
     json.dump(curated_media, f, indent=2)
-with open("data/processed/csv/curated_imagery.csv", "w", newline="", encoding="utf-8") as f:
-    writer = csv.DictWriter(f, fieldnames=list(curated_media[0].keys()))
-    writer.writeheader()
-    writer.writerows(curated_media)
-pq.write_table(pa.Table.from_pylist(curated_media), "data/processed/parquet/curated_imagery.parquet")
+if curated_media:
+    with open(csv_media, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=list(curated_media[0].keys()))
+        writer.writeheader()
+        writer.writerows(curated_media)
+    pq.write_table(pa.Table.from_pylist(curated_media), str(parquet_media))
 
 print("Maps and curated media successfully compiled and saved.")
 

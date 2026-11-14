@@ -5,12 +5,14 @@ Step 1: Equation 1 - Hard Engineering Constraint Mask (M_go) for Mars
 Reads: planetary_moon_mars.db (all 258 Mars candidate landing sites)
 Applies Mars Equations:
   M_go(x) = I(mu_S <= 10 deg) * I(f_rock <= 0.05) * I(Gate_Mars(x) == 1)
-  Gate_Mars(x) = I(z_MOLA <= -2000 m) * I(|Lat| <= 45 deg)
+  Gate_Mars(x) = I(z_MOLA <= -2000 m) * I(|Lat| <= 55 deg)  [or 60 deg for nuclear profiles]
   - z_MOLA <= -2000m: ensures sufficient atmospheric column mass for supersonic parachute / aerobraking
-  - |Lat| <= 45 deg: avoids brutal polar night freezes and heavy CO2 frost deposition
-
+  - |Lat| <= 55 deg: relaxed from 45 deg following NASA Subsurface Water Ice Mapping (SWIM)
+    to retain prime shallow ice sheets in Arcadia Planitia, Utopia Planitia, and Deuteronilus Mensae;
+    Tier 2 MAUT handles winter thermal and solar insolation tradeoffs.
 """
 
+import argparse
 import math
 from pathlib import Path
 import sqlite3
@@ -26,9 +28,16 @@ OUTPUT_PARQUET = MARS_DIR / "eq1_passed_sites.parquet"
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Step 1: Hard Engineering Constraint Mask for Mars")
+    parser.add_argument("--max-lat", type=float, default=55.0, help="Maximum absolute latitude cutoff (default 55.0 deg, 60.0 for nuclear profiles)")
+    parser.add_argument("--profile", type=str, choices=["solar", "nuclear"], default="solar", help="Mission power profile")
+    args = parser.parse_args()
+
+    max_lat = 60.0 if args.profile == "nuclear" else args.max_lat
+
     print("=" * 70)
     print(" STEP 1: EQUATION 1 - HARD ENGINEERING CONSTRAINT MASK (M_go) [MARS]")
-    print(" Target Body: Mars (Candidate Landing Sites & Exploration Zones)")
+    print(f" Target Body: Mars | Lat Cutoff: |Lat| <= {max_lat:.1f}° (NASA SWIM Profile)")
     print(" Output Directory: extraterrestrial_optimization/mars/")
     print("=" * 70)
 
@@ -58,7 +67,7 @@ def main():
 
     total_sites = len(rows)
     evaluated = []
-    fail_counts = {"slope_gt_10": 0, "rock_gt_5": 0, "elev_gt_minus_2000": 0, "lat_gt_45": 0}
+    fail_counts = {"slope_gt_10": 0, "rock_gt_5": 0, "elev_gt_minus_2000": 0, f"lat_gt_{int(max_lat)}": 0}
 
     for r in rows:
         slope = r["macro_slope_deg"] if r["macro_slope_deg"] is not None else 999.0
@@ -68,11 +77,11 @@ def main():
 
         # Mars gating constraints:
         # 1. z_MOLA <= -2000m (atmospheric column mass)
-        # 2. |Lat| <= 45 deg (thermal winter & solar angle)
+        # 2. |Lat| <= max_lat (SWIM ice survival envelope)
         c_slope = (slope <= 10.0)
         c_rock = (rock_pct <= 5.0)
         c_elev = (elev <= -2000.0)
-        c_lat = (abs(lat) <= 45.0)
+        c_lat = (abs(lat) <= max_lat)
 
         gate_mars = 1 if (c_elev and c_lat) else 0
         m_go = 1 if (c_slope and c_rock and gate_mars == 1) else 0
@@ -80,7 +89,7 @@ def main():
         if not c_slope: fail_counts["slope_gt_10"] += 1
         if not c_rock: fail_counts["rock_gt_5"] += 1
         if not c_elev: fail_counts["elev_gt_minus_2000"] += 1
-        if not c_lat: fail_counts["lat_gt_45"] += 1
+        if not c_lat: fail_counts[f"lat_gt_{int(max_lat)}"] += 1
 
         d = dict(r)
         d["mu_S"] = round(slope, 2)

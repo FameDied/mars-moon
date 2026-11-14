@@ -69,6 +69,9 @@ def run_full_convergence_matrix():
         mc = verif["monte_carlo"]
         sp = verif["spatial_contiguity"]
         sample_v = verif.get("sample_verification", {})
+        power = summary.get("power_sizing", {})
+        topo = summary.get("base_topology", {})
+        cospar = summary.get("cospar_planetary_protection", {})
 
         row_data = {
             "target_rank": (idx % 5) + 1,
@@ -81,6 +84,7 @@ def run_full_convergence_matrix():
             "U_base": target.get("U_base", 0.0),
             "M_go": target.get("m_go", 1),
             "e_haul_j_kg": target.get("e_haul_j_kg", 0.0),
+            "kwh_per_ton": topo.get("kwh_per_ton", 0.0),
             "primary_analog_id": prim["site_id"],
             "primary_analog_name": prim["site_name"],
             "primary_h3_res6": prim.get("h3_res6", ""),
@@ -104,6 +108,20 @@ def run_full_convergence_matrix():
             "mc_ci_high": round(mc.get("ci_95_high", 0.0), 1),
             "spatial_contiguity_ratio": round(sp.get("ratio", 0.0), 3),
             "is_verified": bool(mc.get("is_verified", False) and sp.get("is_contiguous", False)),
+            # Permanent Base Architecture Layers A & B
+            "dark_duration_hours": power.get("max_eclipse_hours", 0.0),
+            "energy_storage_kwh": power.get("energy_storage_kwh", 0.0),
+            "rfc_mass_kg": power.get("rfc_mass_kg", 0.0),
+            "li_ion_mass_kg": power.get("li_ion_mass_kg", 0.0),
+            "rfc_mass_savings_kg": power.get("rfc_mass_savings_kg", 0.0),
+            "cospar_category": cospar.get("cospar_category", "Category II"),
+            "is_special_region": cospar.get("is_special_region", False),
+            "h3_pad": topo.get("h_pad", ""),
+            "h3_hab": topo.get("h_hab", ""),
+            "h3_isru": topo.get("h_isru", ""),
+            "d_pad_hab_km": topo.get("d_pad_hab", 0.0),
+            "d_hab_isru_km": topo.get("d_hab_isru", 0.0),
+            "blast_standoff_met": topo.get("blast_standoff_met", True),
         }
         matrix_rows.append(row_data)
         scorecards.append(scorecard_text)
@@ -148,7 +166,24 @@ def run_full_convergence_matrix():
         "",
         "---",
         "",
-        "## 2. Detailed Decision Scorecards for Top Base Candidates",
+        "## 2. Permanent Base Operational Architecture: Spatial Triad & Power Sizing",
+        "",
+        "| Rank | Body | Extraterrestrial Base Target | COSPAR Protection | Dark Duration | Storage (kWh) | RFC vs Li-ion Mass Saved | H3 Pad Hex | Standoff $d(Pad, Hab)$ | H3 ISRU Hex | Haul $d(Hab, ISRU)$ | Haul Energy |",
+        "| :---: | :---: | :--- | :--- | :---: | :---: | :---: | :--- | :---: | :--- | :---: | :---: |",
+    ])
+
+    for _, r in matrix_df.iterrows():
+        report_lines.append(
+            f"| #{r['target_rank']} | **{r['body']}** | `{r['target_id']}` | {r['cospar_category']} | {r['dark_duration_hours']:.1f} h | "
+            f"{r['energy_storage_kwh']:,.0f} kWh | **SAVE {r['rfc_mass_savings_kg']/1000.0:.2f} t** | `{r['h3_pad']}` | {r['d_pad_hab_km']:.2f} km (SAFE) | "
+            f"`{r['h3_isru']}` | {r['d_hab_isru_km']:.2f} km | {r['kwh_per_ton']:.2f} kWh/t |"
+        )
+
+    report_lines.extend([
+        "",
+        "---",
+        "",
+        "## 3. Detailed Decision Scorecards for Top Base Candidates",
         "",
     ])
 

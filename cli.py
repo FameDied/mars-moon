@@ -906,6 +906,59 @@ def cmd_match(args):
 
     print(scorecard_str)
 
+def cmd_topology(args):
+    """
+    Computes 3-Hexagon Base Topology (Pad, Hab, ISRU), blast separation, and power sizing.
+    """
+    from analog_engine import (
+        resolve_extraterrestrial_target,
+        compute_three_hexagon_base_topology,
+        calculate_temporal_power_sizing,
+        get_cospar_planetary_protection_flag,
+    )
+
+    target_query = getattr(args, "target", None) or "Jezero Crater"
+    res = getattr(args, "res", 7) or 7
+
+    try:
+        target = resolve_extraterrestrial_target(target_query)
+    except Exception as e:
+        print(f"Error resolving target '{target_query}': {e}")
+        sys.exit(1)
+
+    topo = compute_three_hexagon_base_topology(target, h3_resolution=res)
+    power = calculate_temporal_power_sizing(target["body"], max_eclipse_hours=target.get("max_eclipse_hours"))
+    vec_12 = target.get("vector_12d")
+    w_ice = float(vec_12[5]) if (vec_12 is not None and len(vec_12) > 5) else 0.0
+    cospar = get_cospar_planetary_protection_flag(
+        target["site_id"], target["body"], target["center_lat"], water_ice_pct=w_ice
+    )
+
+    if getattr(args, "json", False):
+        print(json.dumps({
+            "target": target["site_name"],
+            "body": target["body"],
+            "base_topology": topo,
+            "power_sizing": power,
+            "cospar_protection": cospar
+        }, indent=2, default=str))
+        return
+
+    print("\n" + "=" * 90)
+    print(f"       3-HEXAGON PERMANENT BASE TOPOLOGY & SURFACE LOGISTICS: {target['site_name'].upper()}")
+    print("=" * 90)
+    print(f"• Target Celestial Body:      {target['body']} | Coordinates: ({target['center_lat']:.4f}°, {target['center_lon']:.4f}°)")
+    print(f"• Uber H3 Grid Resolution:    Resolution {topo['h3_resolution']} (Edge ~{topo['edge_length_km']:.2f} km, Centroid Spacing ~{topo['spacing_km']:.2f} km)")
+    print("• Triad Functional Allocation:")
+    print(f"  1. Landing Pad Hexagon (H_pad):    {topo['h_pad']} | Standoff: {topo['d_pad_hab']:.2f} km (>1.5 km Blast Constraint: MET - SAFE)")
+    print(f"  2. Shielded Habitat Core (H_hab):  {topo['h_hab']} | 3-5m Regolith Overburden / Lava Tube Skylight")
+    print(f"  3. ISRU Extraction Zone (H_isru):  {topo['h_isru']} | Distance: {topo['d_hab_isru']:.2f} km | E_haul: {topo['e_haul_j_kg']:.1f} J/kg ({topo['kwh_per_ton']:.2f} kWh/ton)")
+    print(f"• COSPAR Protection:          {cospar['cospar_category']} - {cospar['classification']}")
+    print(f"• Temporal Power Sizing:      {power['recommended_architecture']}")
+    print("\n★ ASCII BASE TOPOLOGY LAYOUT:")
+    print(topo["ascii_diagram"])
+    print("=" * 90 + "\n")
+
 def cmd_mask(args):
     """
     R2 Engineering Constraint Masks & Soft MAUT Utility Evaluator.
@@ -918,6 +971,7 @@ def cmd_mask(args):
     min_illum = getattr(args, "min_illum", 80.0)
     min_vis = getattr(args, "min_earth_vis", 50.0)
     max_cold = getattr(args, "max_cold_trap_km", 5.0)
+    max_lat = getattr(args, "max_lat", 55.0)
     limit = getattr(args, "limit", 15) or 15
 
     constraints = {
@@ -926,6 +980,7 @@ def cmd_mask(args):
         "min_solar_illum_pct": float(min_illum),
         "min_earth_vis_pct": float(min_vis),
         "max_cold_trap_dist_km": float(max_cold),
+        "max_lat_deg": float(max_lat),
     }
 
     try:
@@ -946,7 +1001,7 @@ def cmd_mask(args):
 
     print("\n" + "=" * 105)
     print("                        SPATIAL SITE SUITABILITY & ENGINEERING CONSTRAINT MASK")
-    print(f"Body: {body} | Cutoffs: Slope <= {max_slope:.1f}° | Rocks <= {max_rock:.1f}% | Illum >= {min_illum:.1f}% | Earth Vis >= {min_vis:.1f}% | Cold Trap <= {max_cold:.1f} km")
+    print(f"Body: {body} | Cutoffs: Slope <= {max_slope:.1f}° | Rocks <= {max_rock:.1f}% | Illum >= {min_illum:.1f}% | Earth Vis >= {min_vis:.1f}% | Cold Trap <= {max_cold:.1f} km | Max Lat <= {max_lat:.1f}°")
     print("=" * 105)
     print(f"{'Candidate Site Name':<32} {'Coords (Lat, Lon)':<20} {'Slope':<7} {'Rocks':<7} {'Illum':<7} {'EarthVis':<9} {'ColdTrap':<9} {'Status':<10} {'Utility':<7}")
     print("-" * 105)
@@ -1236,8 +1291,15 @@ def main():
     p_msk.add_argument("--min-illum", type=float, default=80.0, help="Minimum continuous solar illumination for polar sites (default: 80.0)")
     p_msk.add_argument("--min-earth-vis", type=float, default=50.0, help="Minimum direct-to-Earth visibility fraction (default: 50.0)")
     p_msk.add_argument("--max-cold-trap-km", type=float, default=5.0, help="Maximum distance to cold trap in km (default: 5.0)")
+    p_msk.add_argument("--max-lat", type=float, default=55.0, help="Maximum absolute latitude for Mars candidates (default: 55.0 deg to include NASA SWIM ice)")
     p_msk.add_argument("--limit", type=int, default=15, help="Max candidate landing sites to display (default: 15)")
     p_msk.add_argument("--json", action="store_true", help="Output machine-readable JSON")
+
+    # Topology (Multi-Zone 3-Hexagon Base Triad)
+    p_top = subparsers.add_parser("topology", help="Evaluate 3-Hexagon Base Topology (Pad, Hab, ISRU), blast standoff, and logistics")
+    p_top.add_argument("--target", "-t", default="Jezero Crater", help="Target extraterrestrial site name or preset (default: 'Jezero Crater')")
+    p_top.add_argument("--res", "-r", type=int, default=7, choices=[6, 7], help="Uber H3 resolution (default: 7)")
+    p_top.add_argument("--json", action="store_true", help="Output machine-readable JSON")
 
     # Delta (R5 Physical Limit Delta-Vectors)
     p_dlt = subparsers.add_parser("delta", help="Compute physical limit delta-vectors (gravity, pressure, radiation) between Earth and destination")
@@ -1296,6 +1358,7 @@ def main():
         "harmonize": cmd_harmonize,
         "harmonized": cmd_harmonize,
         "match": cmd_match,
+        "topology": cmd_topology,
     }
     dispatch[args.command](args)
 

@@ -69,9 +69,9 @@ def main():
     df["e_haul_j_kg"] = df.apply(calc_e_haul, axis=1)
 
     # Populate 12-Dimensional Physical Vector components for Mars
-    # Axis B: Geochem/ISRU
+    # Axis B: Geochem/ISRU (calibrated to CRISM continuum-removed band depth in [0.01, 0.15])
     df["I_mafic"] = (df["fe_wt_pct"] + df["ti_wt_pct"]).round(2)
-    df["I_hyd"] = df["mineral_resource_pct"].apply(lambda m: round(min(1.0, (m or 5.0) / 15.0), 3))
+    df["I_hyd"] = df["mineral_resource_pct"].apply(lambda m: round(min(0.15, 0.015 + 0.005 * (m or 5.0)), 4))
     df["W_ice"] = df["water_equivalent_hydrogen_pct"].fillna(10.0).round(2)
 
     # Axis C: Thermophysics

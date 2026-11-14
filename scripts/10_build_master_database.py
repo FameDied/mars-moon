@@ -1,10 +1,12 @@
+from pathlib import Path
 import sqlite3
 import json
 import csv
 import os
 import time
 
-DB_PATH = "planetary_moon_mars.db"
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+DB_PATH = str(PROJECT_ROOT / "planetary_moon_mars.db")
 
 if os.path.exists(DB_PATH):
     os.remove(DB_PATH)
@@ -390,7 +392,7 @@ print("Populated celestial_bodies.")
 # --- INGEST TABLE DATA ---
 
 # Ingest physical parameters
-with open("data/processed/json/physical_parameters.json", "r", encoding="utf-8") as f:
+with open(PROJECT_ROOT / "data/processed/json/physical_parameters.json", "r", encoding="utf-8") as f:
     phys_data = json.load(f)
 phys_rows = [
     (item["body"], item["category"], item["parameter"], item.get("raw_parameter"), item["value_str"], item.get("unit"), item.get("earth_comparison_value"), item.get("ratio_to_earth"), item["source"])
@@ -399,7 +401,7 @@ phys_rows = [
 cursor.executemany("INSERT INTO physical_parameters (body_id, category, parameter, raw_parameter, value_str, unit, earth_comparison_value, ratio_to_earth, source) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", phys_rows)
 
 # Ingest orbital parameters
-with open("data/processed/json/orbital_parameters.json", "r", encoding="utf-8") as f:
+with open(PROJECT_ROOT / "data/processed/json/orbital_parameters.json", "r", encoding="utf-8") as f:
     orb_data = json.load(f)
 orb_rows = [
     (item["body"], item["category"], item["parameter"], item.get("raw_parameter"), item["value_str"], item.get("unit"), item.get("earth_comparison_value"), item["source"])
@@ -408,7 +410,7 @@ orb_rows = [
 cursor.executemany("INSERT INTO orbital_parameters (body_id, category, parameter, raw_parameter, value_str, unit, earth_comparison_value, source) VALUES (?, ?, ?, ?, ?, ?, ?, ?);", orb_rows)
 
 # Ingest ephemerides
-with open("data/processed/json/jpl_ephemerides_2026.json", "r", encoding="utf-8") as f:
+with open(PROJECT_ROOT / "data/processed/json/jpl_ephemerides_2026.json", "r", encoding="utf-8") as f:
     eph_data = json.load(f)
 eph_rows = [
     (item["body"], item["datetime_utc"], item["ra_icrf"], item["dec_icrf"], item.get("apparent_visual_magnitude"), item.get("surface_brightness"), item["heliocentric_distance_au"], item["heliocentric_range_rate_kms"], item["geocentric_distance_au"], item["geocentric_range_rate_kms"], item["sun_observer_target_deg"], item.get("phase_angle_sto_deg"), item["source"])
@@ -418,7 +420,7 @@ cursor.executemany("INSERT INTO ephemerides_2026 (body_id, datetime_utc, ra_icrf
 
 # Ingest IAU features (11,139 records)
 print("Ingesting 11,139 IAU Planetary Features...")
-with open("data/processed/json/iau_features.json", "r", encoding="utf-8") as f:
+with open(PROJECT_ROOT / "data/processed/json/iau_features.json", "r", encoding="utf-8") as f:
     feat_data = json.load(f)
 feat_rows = [
     (item["body"], item.get("feature_id"), item["name"], item["clean_name"], item["feature_type"], item.get("type_code"), item["diameter_km"], item["center_lat"], item["center_lon"], item["center_lon_180"], item.get("min_lat"), item.get("max_lat"), item.get("min_lon"), item.get("max_lon"), item.get("origin"), item.get("approval_date"), item.get("approval_status"), item.get("ethnicity"), item.get("continent"), item.get("quad_name"), item.get("quad_code"), item.get("usgs_link"), item.get("h3_index"))
@@ -430,7 +432,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 """, feat_rows)
 
 # Ingest Missions
-with open("data/processed/json/missions_catalog.json", "r", encoding="utf-8") as f:
+with open(PROJECT_ROOT / "data/processed/json/missions_catalog.json", "r", encoding="utf-8") as f:
     miss_data = json.load(f)
 miss_rows = [
     (m["mission_id"], m["target_body"], m["mission_name"], m["space_agency"], m["country"], m["launch_date"], m.get("arrival_date"), m.get("end_date"), m["mission_type"], m["status"], m.get("launch_vehicle"), m.get("mass_kg"), m["objectives"], m["key_discoveries"], json.dumps(m.get("payload", [])))
@@ -442,7 +444,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 """, miss_rows)
 
 # Ingest Surface Landing Sites
-with open("data/processed/json/surface_landing_sites.json", "r", encoding="utf-8") as f:
+with open(PROJECT_ROOT / "data/processed/json/surface_landing_sites.json", "r", encoding="utf-8") as f:
     site_data = json.load(f)
 site_rows = [
     (s["site_id"], s["body"], s["mission_id"], s["site_name"], s["target_feature"], s["latitude_deg"], s["longitude_deg"], s.get("elevation_m"), s["landing_type"], s["touchdown_date"], s.get("operational_days"), s["current_status"], json.dumps(s.get("hardware_inventory", [])), s.get("coordinate_reference"))
@@ -455,7 +457,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 # Ingest Lunar Samples
 print("Ingesting Lunar Samples Catalog...")
-with open("data/processed/json/lunar_samples.json", "r", encoding="utf-8") as f:
+with open(PROJECT_ROOT / "data/processed/json/lunar_samples.json", "r", encoding="utf-8") as f:
     lunar_data = json.load(f)
 lunar_rows = [
     (s["sample_id"], s["mission"], s["return_year"], s["collection_site"], s["rock_class"], s.get("rock_subclass"), s["weight_grams"], s["pristine_percent"], s.get("documentation_url"), s["curating_institution"])
@@ -467,7 +469,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 """, lunar_rows)
 
 # Ingest Martian Meteorites
-with open("data/processed/json/martian_meteorites.json", "r", encoding="utf-8") as f:
+with open(PROJECT_ROOT / "data/processed/json/martian_meteorites.json", "r", encoding="utf-8") as f:
     met_data = json.load(f)
 met_rows = [
     (m["meteorite_name"], m["petrologic_classification"], m["sample_group"], m["fall_or_find"], json.dumps(m.get("major_oxides_wt_pct", {})), json.dumps(m.get("trace_elements_ppm", {})), m.get("literature_references"), m.get("scientific_significance"), m["compendium_source"])
@@ -479,7 +481,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
 """, met_rows)
 
 # Ingest Weather
-with open("data/processed/json/mars_surface_weather.json", "r", encoding="utf-8") as f:
+with open(PROJECT_ROOT / "data/processed/json/mars_surface_weather.json", "r", encoding="utf-8") as f:
     weather_data = json.load(f)
 weather_rows = [
     (w["body"], w["mission"], w["site"], w["sol"], w.get("season_ls_deg"), w.get("first_utc"), w.get("last_utc"), w.get("temp_air_min_c"), w.get("temp_air_max_c"), w.get("temp_air_avg_c"), w.get("pressure_min_pa"), w.get("pressure_max_pa"), w.get("pressure_avg_pa"), w.get("wind_speed_min_mps"), w.get("wind_speed_max_mps"), w.get("wind_speed_avg_mps"), w.get("wind_direction_compass"), w.get("wind_direction_deg"), w["source"])
@@ -491,7 +493,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 """, weather_rows)
 
 # Ingest Atmospheric Profiles
-with open("data/processed/json/atmospheric_profiles.json", "r", encoding="utf-8") as f:
+with open(PROJECT_ROOT / "data/processed/json/atmospheric_profiles.json", "r", encoding="utf-8") as f:
     atm_data = json.load(f)
 atm_rows = [
     (a["body"], a["atmosphere_classification"], a["surface_pressure_range"], a.get("total_mass_kg"), a.get("scale_height_km"), a["diurnal_temperature_range_k"], a.get("cold_trap_temperatures_k"), json.dumps(a.get("primary_composition", {})), json.dumps(a.get("trace_gases_and_isotopes", {}) or a.get("optical_trace_species", {})), a.get("dust_and_meteorology") or a.get("dust_environment"), a.get("radiation_environment"), a["key_missions"])
@@ -503,7 +505,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 """, atm_rows)
 
 # Ingest Rover Science Targets
-with open("data/processed/json/rover_targets.json", "r", encoding="utf-8") as f:
+with open(PROJECT_ROOT / "data/processed/json/rover_targets.json", "r", encoding="utf-8") as f:
     tgt_data = json.load(f)
 tgt_rows = [
     (t["target_id"], t["rover"], t["target_name"], t["sol"], t["site_feature"], t["formation_or_member"], t["rock_type"], t["tools_used"], t["mineralogy"], t.get("organic_molecules"), t["scientific_significance"], t["sample_cache_status"])
@@ -515,7 +517,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 """, tgt_rows)
 
 # Ingest Stratigraphy
-with open("data/processed/json/planetary_stratigraphy.json", "r", encoding="utf-8") as f:
+with open(PROJECT_ROOT / "data/processed/json/planetary_stratigraphy.json", "r", encoding="utf-8") as f:
     strat_data = json.load(f)
 strat_rows = [
     (s["body"], s["era_name"], s["start_ga"], s["end_ga"], s["duration_ma"], s["defining_events"], s["key_formations_and_rocks"], s["seismic_and_thermal_state"])
@@ -527,7 +529,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?);
 """, strat_rows)
 
 # Ingest Internal Structure
-with open("data/processed/json/internal_structure.json", "r", encoding="utf-8") as f:
+with open(PROJECT_ROOT / "data/processed/json/internal_structure.json", "r", encoding="utf-8") as f:
     int_data = json.load(f)
 int_rows = [
     (i["body"], i["layer_name"], i["depth_min_km"], i["depth_max_km"], i["composition"], i["density_g_cm3"], i["physical_state"], i.get("seismic_p_velocity_kms"), i["discovery_notes"])
@@ -539,7 +541,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
 """, int_rows)
 
 # Ingest Ice Reservoirs
-with open("data/processed/json/ice_reservoirs.json", "r", encoding="utf-8") as f:
+with open(PROJECT_ROOT / "data/processed/json/ice_reservoirs.json", "r", encoding="utf-8") as f:
     ice_data = json.load(f)
 ice_rows = [
     (r["body"], r["reservoir_name"], r["latitude_deg"], r["longitude_deg"], r.get("area_km2"), r.get("ice_purity_pct"), r.get("estimated_volume_km3"), r.get("depth_m"), r.get("temperature_k"), r["detection_method"], r["description"])
@@ -551,7 +553,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 """, ice_rows)
 
 # Ingest Basemaps
-with open("data/processed/json/planetary_basemaps.json", "r", encoding="utf-8") as f:
+with open(PROJECT_ROOT / "data/processed/json/planetary_basemaps.json", "r", encoding="utf-8") as f:
     map_data = json.load(f)
 map_rows = [
     (m["map_id"], m["body"], m["map_title"], m["instrument"], m["local_file_path"], m["remote_url"], m["file_size_bytes"], m["source_authority"])
@@ -563,7 +565,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?);
 """, map_rows)
 
 # Ingest Curated Imagery
-with open("data/processed/json/curated_imagery.json", "r", encoding="utf-8") as f:
+with open(PROJECT_ROOT / "data/processed/json/curated_imagery.json", "r", encoding="utf-8") as f:
     media_data = json.load(f)
 media_rows = [
     (img["media_id"], img["body"], img["title"], img["curated_topic"], img.get("date_created"), img["description"], img["high_res_image_url"], img["thumbnail_url"], img.get("keywords_json"), img["source"])

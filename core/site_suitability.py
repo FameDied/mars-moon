@@ -32,6 +32,7 @@ DEFAULT_THRESHOLDS = {
     "min_earth_vis_pct": 50.0,
     "max_cold_trap_dist_km": 5.0,
     "lunar_polar_lat_cutoff": 80.0,
+    "mars_max_lat_deg": 55.0,
 }
 
 DEFAULT_UTILITY_WEIGHTS = {
@@ -83,14 +84,16 @@ def check_hard_cutoffs(
     cold_trap_dist_km: Optional[float] = None,
     body: str = "Moon",
     latitude_deg: float = -85.0,
+    max_lat_deg: Optional[float] = None,
     **kwargs: Any,
 ) -> bool:
     """
-    Evaluates the 4 R2 Hard Engineering Cutoffs:
+    Evaluates the R2 Hard Engineering Cutoffs:
     1. Slope <= 10.0 deg (tip-over stability limit at 5m baseline).
     2. Rock Abundance <= 5.0% (Diviner boulder strike hazard limit).
     3. Solar Illumination >= 80.0% AND Earth Visibility >= 50.0% (Lunar South Pole |lat| >= 80.0 deg).
     4. Proximity to Cold Trap <= 5.0 km (polar ice harvesting access, if specified).
+    5. Mars Latitude Cutoff |lat| <= 55.0 deg (NASA SWIM subsurface ice boundary).
 
     Accepts either individual parameter values or a candidate site dictionary as first argument.
 
@@ -153,6 +156,14 @@ def check_hard_cutoffs(
     # Cutoff 4: Cold trap proximity <= 5.0 km
     if cold_val is not None and cold_val > 5.0:
         return False
+
+    # Cutoff 5: Mars latitude cutoff (|lat| <= max_lat_deg)
+    # NASA SWIM subsurface water ice mapping boundary relaxes cutoff to 55.0 deg
+    is_mars = (str(body).strip().lower() == "mars")
+    if is_mars:
+        effective_max_lat = max_lat_deg if max_lat_deg is not None else kwargs.get("mars_max_lat_deg", 55.0)
+        if abs(lat_val) > effective_max_lat:
+            return False
 
     return True
 
@@ -559,6 +570,7 @@ def filter_candidate_sites(
             cold_trap_dist_km=cold_trap,
             body=body,
             latitude_deg=lat,
+            max_lat_deg=c_map.get("max_lat_deg", c_map.get("mars_max_lat_deg", 55.0)),
         )
 
         # Further filter against custom thresholds if tighter than defaults

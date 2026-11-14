@@ -12,13 +12,15 @@ import os
 import sys
 import json
 import csv
+from pathlib import Path
 import sqlite3
 import requests
 import pyarrow as pa
 import pyarrow.parquet as pq
 import h3
 
-DB_PATH = "planetary_moon_mars.db"
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+DB_PATH = str(PROJECT_ROOT / "planetary_moon_mars.db")
 
 RASTERS = [
     # =========================================================================
@@ -1408,9 +1410,9 @@ def export_multiformat():
     os.makedirs("data/processed/json", exist_ok=True)
     os.makedirs("data/processed/parquet", exist_ok=True)
 
-    csv_path = "data/processed/csv/remote_sensing_rasters.csv"
-    json_path = "data/processed/json/remote_sensing_rasters.json"
-    parquet_path = "data/processed/parquet/remote_sensing_rasters.parquet"
+    csv_path = str(PROJECT_ROOT / "data/processed/csv/remote_sensing_rasters.csv")
+    json_path = str(PROJECT_ROOT / "data/processed/json/remote_sensing_rasters.json")
+    parquet_path = str(PROJECT_ROOT / "data/processed/parquet/remote_sensing_rasters.parquet")
 
     # Ensure all rasters have STAC and H3 attributes
     for r in RASTERS:

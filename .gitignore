@@ -2,3 +2,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 .DS_Store
+
+# Temporary teamwork and swarm handoff artifacts
+*teamwork*.md
+*TEAMWORK*.md
+TEAMWORK*
+teamwork*
+

@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 import zipfile
 import shapefile
 import json
@@ -7,9 +8,11 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 import h3
 
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
 DATASETS = {
-    "Mars": "data/raw/usgs/Mars/MARS_nomenclature_center_pts.shp",
-    "Moon": "data/raw/usgs/Moon/MOON_nomenclature_center_pts.shp"
+    "Mars": str(PROJECT_ROOT / "data/raw/usgs/Mars/MARS_nomenclature_center_pts.shp"),
+    "Moon": str(PROJECT_ROOT / "data/raw/usgs/Moon/MOON_nomenclature_center_pts.shp")
 }
 
 all_features = []
@@ -74,14 +77,14 @@ for body, shp_path in DATASETS.items():
 print(f"Total features collected: {len(all_features)}")
 
 # Save to JSON
-json_path = "data/processed/json/iau_features.json"
+json_path = str(PROJECT_ROOT / "data/processed/json/iau_features.json")
 os.makedirs(os.path.dirname(json_path), exist_ok=True)
 with open(json_path, "w", encoding="utf-8") as f:
     json.dump(all_features, f, indent=2, ensure_ascii=False)
 print(f"Saved {json_path} ({os.path.getsize(json_path):,} bytes)")
 
 # Save to CSV
-csv_path = "data/processed/csv/iau_features.csv"
+csv_path = str(PROJECT_ROOT / "data/processed/csv/iau_features.csv")
 os.makedirs(os.path.dirname(csv_path), exist_ok=True)
 if all_features:
     fieldnames = list(all_features[0].keys())
@@ -92,7 +95,7 @@ if all_features:
 print(f"Saved {csv_path} ({os.path.getsize(csv_path):,} bytes)")
 
 # Save to Parquet
-parquet_path = "data/processed/parquet/iau_features.parquet"
+parquet_path = str(PROJECT_ROOT / "data/processed/parquet/iau_features.parquet")
 os.makedirs(os.path.dirname(parquet_path), exist_ok=True)
 table = pa.Table.from_pylist(all_features)
 pq.write_table(table, parquet_path, compression="snappy")

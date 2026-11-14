@@ -1,3 +1,4 @@
+from pathlib import Path
 import urllib.request
 import urllib.parse
 import ssl
@@ -9,6 +10,7 @@ import re
 import pyarrow as pa
 import pyarrow.parquet as pq
 
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 ctx = ssl.create_default_context(cafile=certifi.where())
 
 BODIES = {
@@ -18,43 +20,63 @@ BODIES = {
     "Deimos": "402"
 }
 
-os.makedirs("data/raw/nasa/horizons", exist_ok=True)
-os.makedirs("data/processed/json", exist_ok=True)
-os.makedirs("data/processed/csv", exist_ok=True)
-os.makedirs("data/processed/parquet", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/raw/nasa/horizons", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/json", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/csv", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/parquet", exist_ok=True)
 
 # 1. Fetch raw geophysical texts
 geophysical_cards = {}
 for name, cmd in BODIES.items():
     print(f"Fetching JPL Horizons data for {name} ({cmd})...")
-    url = f"https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27{cmd}%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27NO%27"
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (NASA Harvester)"})
-    with urllib.request.urlopen(req, context=ctx) as resp:
-        data = json.loads(resp.read().decode("utf-8"))
-        raw_text = data.get("result", "")
-        geophysical_cards[name] = raw_text
-        with open(f"data/raw/nasa/horizons/{name}_horizons_card.txt", "w", encoding="utf-8") as f:
-            f.write(raw_text)
+    card_path = PROJECT_ROOT / "data/raw/nasa/horizons" / f"{name}_horizons_card.txt"
+    raw_text = None
+    if card_path.exists():
+        with open(card_path, "r", encoding="utf-8") as f:
+            raw_text = f.read()
+    if not raw_text:
+        try:
+            url = f"https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27{cmd}%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27NO%27"
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (NASA Harvester)"})
+            with urllib.request.urlopen(req, context=ctx, timeout=10) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+                raw_text = data.get("result", "")
+                with open(card_path, "w", encoding="utf-8") as f:
+                    f.write(raw_text)
+        except Exception as e:
+            print(f"Offline fallback warning for {name}: {e}")
+            raw_text = ""
+    geophysical_cards[name] = raw_text
 
 # 2. Fetch Ephemeris Observer Tables for Moon and Mars (2026 full year sample)
 ephemerides_records = []
 for name, cmd in [("Moon", "301"), ("Mars", "499")]:
     print(f"Fetching 2026 Ephemeris for {name} ({cmd})...")
-    # Step size: 5 days for full year coverage
-    url = (
-        f"https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27{cmd}%27"
-        f"&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27500@399%27"
-        f"&START_TIME=%272026-01-01%27&STOP_TIME=%272026-12-31%27&STEP_SIZE=%275d%27"
-        f"&QUANTITIES=%271,9,19,20,23,24%27"
-    )
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (NASA Harvester)"})
-    with urllib.request.urlopen(req, context=ctx) as resp:
-        data = json.loads(resp.read().decode("utf-8"))
-        raw_text = data.get("result", "")
-        with open(f"data/raw/nasa/horizons/{name}_ephemeris_2026.txt", "w", encoding="utf-8") as f:
-            f.write(raw_text)
+    ephem_path = PROJECT_ROOT / "data/raw/nasa/horizons" / f"{name}_ephemeris_2026.txt"
+    raw_text = None
+    if ephem_path.exists():
+        with open(ephem_path, "r", encoding="utf-8") as f:
+            raw_text = f.read()
+    if not raw_text:
+        try:
+            url = (
+                f"https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27{cmd}%27"
+                f"&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27500@399%27"
+                f"&START_TIME=%272026-01-01%27&STOP_TIME=%272026-12-31%27&STEP_SIZE=%275d%27"
+                f"&QUANTITIES=%271,9,19,20,23,24%27"
+            )
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (NASA Harvester)"})
+            with urllib.request.urlopen(req, context=ctx, timeout=10) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+                raw_text = data.get("result", "")
+                with open(ephem_path, "w", encoding="utf-8") as f:
+                    f.write(raw_text)
+        except Exception as e:
+            print(f"Offline fallback warning for {name} ephemeris: {e}")
+            raw_text = ""
             
-        # Parse between $$SOE and $$EOE
+    # Parse between $$SOE and $$EOE
+    if raw_text:
         soe_idx = raw_text.find("$$SOE")
         eoe_idx = raw_text.find("$$EOE")
         if soe_idx != -1 and eoe_idx != -1:
@@ -96,14 +118,19 @@ for name, cmd in [("Moon", "301"), ("Mars", "499")]:
 
 print(f"Total ephemeris points parsed: {len(ephemerides_records)}")
 
-# Save ephemerides
-with open("data/processed/json/jpl_ephemerides_2026.json", "w", encoding="utf-8") as f:
+# Save Ephemerides
+json_ephem = PROJECT_ROOT / "data/processed/json/jpl_ephemerides_2026.json"
+csv_ephem = PROJECT_ROOT / "data/processed/csv/jpl_ephemerides_2026.csv"
+parquet_ephem = PROJECT_ROOT / "data/processed/parquet/jpl_ephemerides_2026.parquet"
+
+with open(json_ephem, "w", encoding="utf-8") as f:
     json.dump(ephemerides_records, f, indent=2)
-with open("data/processed/csv/jpl_ephemerides_2026.csv", "w", newline="", encoding="utf-8") as f:
-    writer = csv.DictWriter(f, fieldnames=list(ephemerides_records[0].keys()))
-    writer.writeheader()
-    writer.writerows(ephemerides_records)
-pq.write_table(pa.Table.from_pylist(ephemerides_records), "data/processed/parquet/jpl_ephemerides_2026.parquet")
+if ephemerides_records:
+    with open(csv_ephem, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=list(ephemerides_records[0].keys()))
+        writer.writeheader()
+        writer.writerows(ephemerides_records)
+    pq.write_table(pa.Table.from_pylist(ephemerides_records), str(parquet_ephem))
 
 # Save horizons geophysical metadata overview
 horizons_summary = []
@@ -113,7 +140,8 @@ for name, raw in geophysical_cards.items():
         "raw_header": raw[:300].strip(),
         "source": "NASA JPL Solar System Dynamics (SSD) Group Horizons System"
     })
-with open("data/processed/json/horizons_summary.json", "w", encoding="utf-8") as f:
+json_horizons = PROJECT_ROOT / "data/processed/json/horizons_summary.json"
+with open(json_horizons, "w", encoding="utf-8") as f:
     json.dump(horizons_summary, f, indent=2)
 
 print("JPL Horizons data harvesting and ephemerides successfully compiled.")

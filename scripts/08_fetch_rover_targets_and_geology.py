@@ -1,12 +1,15 @@
+from pathlib import Path
 import json
 import csv
 import os
 import pyarrow as pa
 import pyarrow.parquet as pq
 
-os.makedirs("data/processed/json", exist_ok=True)
-os.makedirs("data/processed/csv", exist_ok=True)
-os.makedirs("data/processed/parquet", exist_ok=True)
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
+os.makedirs(PROJECT_ROOT / "data/processed/json", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/csv", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/parquet", exist_ok=True)
 
 # 1. Mars In-Situ Rover Science Targets (Curiosity & Perseverance Drills & Caches)
 rover_targets = [
@@ -564,40 +567,56 @@ ice_reservoirs = [
 print(f"Compiled {len(rover_targets)} rover targets, {len(stratigraphy)} stratigraphy eras, {len(internal_structure)} internal layers, {len(ice_reservoirs)} ice reservoirs.")
 
 # Save Rover Targets
-with open("data/processed/json/rover_targets.json", "w", encoding="utf-8") as f:
+json_rov = PROJECT_ROOT / "data/processed/json/rover_targets.json"
+csv_rov = PROJECT_ROOT / "data/processed/csv/rover_targets.csv"
+parquet_rov = PROJECT_ROOT / "data/processed/parquet/rover_targets.parquet"
+
+with open(json_rov, "w", encoding="utf-8") as f:
     json.dump(rover_targets, f, indent=2)
-with open("data/processed/csv/rover_targets.csv", "w", newline="", encoding="utf-8") as f:
+with open(csv_rov, "w", newline="", encoding="utf-8") as f:
     writer = csv.DictWriter(f, fieldnames=list(rover_targets[0].keys()))
     writer.writeheader()
     writer.writerows(rover_targets)
-pq.write_table(pa.Table.from_pylist(rover_targets), "data/processed/parquet/rover_targets.parquet")
+pq.write_table(pa.Table.from_pylist(rover_targets), str(parquet_rov))
 
 # Save Stratigraphy
-with open("data/processed/json/planetary_stratigraphy.json", "w", encoding="utf-8") as f:
+json_strat = PROJECT_ROOT / "data/processed/json/planetary_stratigraphy.json"
+csv_strat = PROJECT_ROOT / "data/processed/csv/planetary_stratigraphy.csv"
+parquet_strat = PROJECT_ROOT / "data/processed/parquet/planetary_stratigraphy.parquet"
+
+with open(json_strat, "w", encoding="utf-8") as f:
     json.dump(stratigraphy, f, indent=2)
-with open("data/processed/csv/planetary_stratigraphy.csv", "w", newline="", encoding="utf-8") as f:
+with open(csv_strat, "w", newline="", encoding="utf-8") as f:
     writer = csv.DictWriter(f, fieldnames=list(stratigraphy[0].keys()))
     writer.writeheader()
     writer.writerows(stratigraphy)
-pq.write_table(pa.Table.from_pylist(stratigraphy), "data/processed/parquet/planetary_stratigraphy.parquet")
+pq.write_table(pa.Table.from_pylist(stratigraphy), str(parquet_strat))
 
 # Save Internal Structure
-with open("data/processed/json/internal_structure.json", "w", encoding="utf-8") as f:
+json_int = PROJECT_ROOT / "data/processed/json/internal_structure.json"
+csv_int = PROJECT_ROOT / "data/processed/csv/internal_structure.csv"
+parquet_int = PROJECT_ROOT / "data/processed/parquet/internal_structure.parquet"
+
+with open(json_int, "w", encoding="utf-8") as f:
     json.dump(internal_structure, f, indent=2)
-with open("data/processed/csv/internal_structure.csv", "w", newline="", encoding="utf-8") as f:
+with open(csv_int, "w", newline="", encoding="utf-8") as f:
     writer = csv.DictWriter(f, fieldnames=list(internal_structure[0].keys()))
     writer.writeheader()
     writer.writerows(internal_structure)
-pq.write_table(pa.Table.from_pylist(internal_structure), "data/processed/parquet/internal_structure.parquet")
+pq.write_table(pa.Table.from_pylist(internal_structure), str(parquet_int))
 
 # Save Ice Reservoirs
-with open("data/processed/json/ice_reservoirs.json", "w", encoding="utf-8") as f:
+json_ice = PROJECT_ROOT / "data/processed/json/ice_reservoirs.json"
+csv_ice = PROJECT_ROOT / "data/processed/csv/ice_reservoirs.csv"
+parquet_ice = PROJECT_ROOT / "data/processed/parquet/ice_reservoirs.parquet"
+
+with open(json_ice, "w", encoding="utf-8") as f:
     json.dump(ice_reservoirs, f, indent=2)
-with open("data/processed/csv/ice_reservoirs.csv", "w", newline="", encoding="utf-8") as f:
+with open(csv_ice, "w", newline="", encoding="utf-8") as f:
     writer = csv.DictWriter(f, fieldnames=list(ice_reservoirs[0].keys()))
     writer.writeheader()
     writer.writerows(ice_reservoirs)
-pq.write_table(pa.Table.from_pylist(ice_reservoirs), "data/processed/parquet/ice_reservoirs.parquet")
+pq.write_table(pa.Table.from_pylist(ice_reservoirs), str(parquet_ice))
 
 print("All geology, stratigraphy, internal geophysics, and ice reservoirs successfully processed.")
 

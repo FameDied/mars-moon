@@ -1,3 +1,4 @@
+from pathlib import Path
 import urllib.request
 import ssl
 import certifi
@@ -9,6 +10,7 @@ from bs4 import BeautifulSoup
 import pyarrow as pa
 import pyarrow.parquet as pq
 
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 ctx = ssl.create_default_context(cafile=certifi.where())
 
 PAGES = {
@@ -16,23 +18,33 @@ PAGES = {
     "Mars": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html"
 }
 
-os.makedirs("data/raw/nasa", exist_ok=True)
-os.makedirs("data/processed/json", exist_ok=True)
-os.makedirs("data/processed/csv", exist_ok=True)
-os.makedirs("data/processed/parquet", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/raw/nasa", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/json", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/csv", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/parquet", exist_ok=True)
 
 all_params = []
 all_orbital = []
 
 for body_name, url in PAGES.items():
     print(f"Scraping NSSDC Fact Sheet for {body_name} from {url}...")
-    raw_path = f"data/raw/nasa/nssdc_{body_name.lower()}_factsheet.html"
+    raw_path = PROJECT_ROOT / "data/raw/nasa" / f"nssdc_{body_name.lower()}_factsheet.html"
     
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (NASA Data Harvester)"})
-    with urllib.request.urlopen(req, context=ctx) as resp:
-        html = resp.read().decode("utf-8", errors="replace")
-        with open(raw_path, "w", encoding="utf-8") as f:
-            f.write(html)
+    html = None
+    if raw_path.exists():
+        with open(raw_path, "r", encoding="utf-8", errors="replace") as f:
+            html = f.read()
+    if not html:
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (NASA Data Harvester)"})
+            with urllib.request.urlopen(req, context=ctx, timeout=10) as resp:
+                html = resp.read().decode("utf-8", errors="replace")
+                with open(raw_path, "w", encoding="utf-8") as f:
+                    f.write(html)
+        except Exception as e:
+            print(f"Offline fallback warning for {body_name}: {e}")
+            if not html:
+                continue
             
     soup = BeautifulSoup(html, "html.parser")
     tables = soup.find_all("table")
@@ -156,22 +168,28 @@ for body_name, url in PAGES.items():
                 })
 
 # Save Physical Parameters
-with open("data/processed/json/physical_parameters.json", "w", encoding="utf-8") as f:
+json_phys = PROJECT_ROOT / "data/processed/json/physical_parameters.json"
+csv_phys = PROJECT_ROOT / "data/processed/csv/physical_parameters.csv"
+parquet_phys = PROJECT_ROOT / "data/processed/parquet/physical_parameters.parquet"
+with open(json_phys, "w", encoding="utf-8") as f:
     json.dump(all_params, f, indent=2)
-with open("data/processed/csv/physical_parameters.csv", "w", newline="", encoding="utf-8") as f:
+with open(csv_phys, "w", newline="", encoding="utf-8") as f:
     writer = csv.DictWriter(f, fieldnames=list(all_params[0].keys()))
     writer.writeheader()
     writer.writerows(all_params)
-pq.write_table(pa.Table.from_pylist(all_params), "data/processed/parquet/physical_parameters.parquet")
+pq.write_table(pa.Table.from_pylist(all_params), str(parquet_phys))
 
 # Save Orbital Parameters
-with open("data/processed/json/orbital_parameters.json", "w", encoding="utf-8") as f:
+json_orb = PROJECT_ROOT / "data/processed/json/orbital_parameters.json"
+csv_orb = PROJECT_ROOT / "data/processed/csv/orbital_parameters.csv"
+parquet_orb = PROJECT_ROOT / "data/processed/parquet/orbital_parameters.parquet"
+with open(json_orb, "w", encoding="utf-8") as f:
     json.dump(all_orbital, f, indent=2)
-with open("data/processed/csv/orbital_parameters.csv", "w", newline="", encoding="utf-8") as f:
+with open(csv_orb, "w", newline="", encoding="utf-8") as f:
     writer = csv.DictWriter(f, fieldnames=list(all_orbital[0].keys()))
     writer.writeheader()
     writer.writerows(all_orbital)
-pq.write_table(pa.Table.from_pylist(all_orbital), "data/processed/parquet/orbital_parameters.parquet")
+pq.write_table(pa.Table.from_pylist(all_orbital), str(parquet_orb))
 
 print(f"Successfully processed {len(all_params)} physical parameters and {len(all_orbital)} orbital parameters.")
 

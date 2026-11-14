@@ -1,3 +1,4 @@
+from pathlib import Path
 import urllib.request
 import urllib.parse
 import ssl
@@ -10,6 +11,7 @@ from bs4 import BeautifulSoup
 import pyarrow as pa
 import pyarrow.parquet as pq
 
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 ctx = ssl.create_default_context(cafile=certifi.where())
 
 url = "https://curator.jsc.nasa.gov/lunar/samplecatalog/sample_results_list.cfm"
@@ -20,17 +22,28 @@ data = urllib.parse.urlencode({
     "searchadvsample": "Search"
 }).encode("utf-8")
 
-os.makedirs("data/raw/jsc", exist_ok=True)
-os.makedirs("data/processed/json", exist_ok=True)
-os.makedirs("data/processed/csv", exist_ok=True)
-os.makedirs("data/processed/parquet", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/raw/jsc", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/json", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/csv", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/parquet", exist_ok=True)
 
 print("Harvesting complete Apollo Lunar Sample collection from NASA JSC Curation...")
-req = urllib.request.Request(url, data=data, headers={"User-Agent": "Mozilla/5.0 (NASA Harvester)"})
-with urllib.request.urlopen(req, context=ctx, timeout=60) as resp:
-    html = resp.read().decode("utf-8", errors="replace")
-    with open("data/raw/jsc/apollo_samples_raw.html", "w", encoding="utf-8") as f:
-        f.write(html)
+raw_path = PROJECT_ROOT / "data/raw/jsc/apollo_samples_raw.html"
+html = None
+if raw_path.exists():
+    with open(raw_path, "r", encoding="utf-8", errors="replace") as f:
+        html = f.read()
+
+if not html:
+    try:
+        req = urllib.request.Request(url, data=data, headers={"User-Agent": "Mozilla/5.0 (NASA Harvester)"})
+        with urllib.request.urlopen(req, context=ctx, timeout=60) as resp:
+            html = resp.read().decode("utf-8", errors="replace")
+            with open(raw_path, "w", encoding="utf-8") as f:
+                f.write(html)
+    except Exception as e:
+        print(f"Offline fallback warning for Apollo samples: {e}")
+        html = ""
 
 soup = BeautifulSoup(html, "html.parser")
 table = soup.find("table")
@@ -149,18 +162,23 @@ samples.extend(international_lunar_samples)
 print(f"Total lunar sample records compiled: {len(samples)}")
 
 # Save to JSON
-with open("data/processed/json/lunar_samples.json", "w", encoding="utf-8") as f:
+json_path = PROJECT_ROOT / "data/processed/json/lunar_samples.json"
+with open(json_path, "w", encoding="utf-8") as f:
     json.dump(samples, f, indent=2)
-print(f"Saved JSON ({os.path.getsize('data/processed/json/lunar_samples.json'):,} bytes)")
+print(f"Saved JSON ({os.path.getsize(json_path):,} bytes)")
 
 # Save to CSV
-with open("data/processed/csv/lunar_samples.csv", "w", newline="", encoding="utf-8") as f:
-    writer = csv.DictWriter(f, fieldnames=list(samples[0].keys()))
-    writer.writeheader()
-    writer.writerows(samples)
-print(f"Saved CSV ({os.path.getsize('data/processed/csv/lunar_samples.csv'):,} bytes)")
+csv_path = PROJECT_ROOT / "data/processed/csv/lunar_samples.csv"
+if samples:
+    with open(csv_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=list(samples[0].keys()))
+        writer.writeheader()
+        writer.writerows(samples)
+    print(f"Saved CSV ({os.path.getsize(csv_path):,} bytes)")
 
 # Save to Parquet
-pq.write_table(pa.Table.from_pylist(samples), "data/processed/parquet/lunar_samples.parquet")
-print(f"Saved Parquet ({os.path.getsize('data/processed/parquet/lunar_samples.parquet'):,} bytes)")
+parquet_path = PROJECT_ROOT / "data/processed/parquet/lunar_samples.parquet"
+if samples:
+    pq.write_table(pa.Table.from_pylist(samples), str(parquet_path))
+    print(f"Saved Parquet ({os.path.getsize(parquet_path):,} bytes)")
 

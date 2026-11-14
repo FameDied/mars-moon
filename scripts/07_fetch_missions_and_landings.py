@@ -1,12 +1,15 @@
+from pathlib import Path
 import json
 import csv
 import os
 import pyarrow as pa
 import pyarrow.parquet as pq
 
-os.makedirs("data/processed/json", exist_ok=True)
-os.makedirs("data/processed/csv", exist_ok=True)
-os.makedirs("data/processed/parquet", exist_ok=True)
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
+os.makedirs(PROJECT_ROOT / "data/processed/json", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/csv", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/parquet", exist_ok=True)
 
 # 1. Complete Catalog of Space Missions to Moon and Mars
 missions = [
@@ -1086,22 +1089,30 @@ for s in surface_sites:
     flat_sites.append(item)
 
 # Save Missions
-with open("data/processed/json/missions_catalog.json", "w", encoding="utf-8") as f:
+json_m = PROJECT_ROOT / "data/processed/json/missions_catalog.json"
+csv_m = PROJECT_ROOT / "data/processed/csv/missions_catalog.csv"
+parquet_m = PROJECT_ROOT / "data/processed/parquet/missions_catalog.parquet"
+
+with open(json_m, "w", encoding="utf-8") as f:
     json.dump(missions, f, indent=2)
-with open("data/processed/csv/missions_catalog.csv", "w", newline="", encoding="utf-8") as f:
+with open(csv_m, "w", newline="", encoding="utf-8") as f:
     writer = csv.DictWriter(f, fieldnames=list(flat_missions[0].keys()))
     writer.writeheader()
     writer.writerows(flat_missions)
-pq.write_table(pa.Table.from_pylist(flat_missions), "data/processed/parquet/missions_catalog.parquet")
+pq.write_table(pa.Table.from_pylist(flat_missions), str(parquet_m))
 
 # Save Sites
-with open("data/processed/json/surface_landing_sites.json", "w", encoding="utf-8") as f:
+json_s = PROJECT_ROOT / "data/processed/json/surface_landing_sites.json"
+csv_s = PROJECT_ROOT / "data/processed/csv/surface_landing_sites.csv"
+parquet_s = PROJECT_ROOT / "data/processed/parquet/surface_landing_sites.parquet"
+
+with open(json_s, "w", encoding="utf-8") as f:
     json.dump(surface_sites, f, indent=2)
-with open("data/processed/csv/surface_landing_sites.csv", "w", newline="", encoding="utf-8") as f:
+with open(csv_s, "w", newline="", encoding="utf-8") as f:
     writer = csv.DictWriter(f, fieldnames=list(flat_sites[0].keys()))
     writer.writeheader()
     writer.writerows(flat_sites)
-pq.write_table(pa.Table.from_pylist(flat_sites), "data/processed/parquet/surface_landing_sites.parquet")
+pq.write_table(pa.Table.from_pylist(flat_sites), str(parquet_s))
 
 print("Space missions and landing sites successfully saved.")
 

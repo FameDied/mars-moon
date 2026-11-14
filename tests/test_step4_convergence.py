@@ -30,11 +30,16 @@ from analog_engine import (
     monte_carlo_rank_stability_test,
     spatial_contiguity_verification,
     compute_earth_analog_limit_delta,
+    calculate_temporal_power_sizing,
+    get_cospar_planetary_protection_flag,
+    compute_three_hexagon_base_topology,
+    compute_decomposed_4axis_scores,
     CANONICAL_12_KEYS,
     FEATURE_BOUNDS_12D,
     PROJECT_ROOT,
     DB_PATH,
 )
+from core.site_suitability import check_hard_cutoffs
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 
@@ -198,3 +203,97 @@ class TestStep4CLIMatchCommand:
         assert "STEP 4 MASTER CROSS-PLANETARY MATCHING MATRIX" in out
         assert "MOON_CLPS_GRIFFIN_VIPER_NOBILE" in out
         assert "MARS_PAD_HELLAS_DEEP_FLOOR_12" in out
+
+
+class TestStep4PermanentBaseLayers:
+    def test_temporal_power_sizing_moon(self):
+        power = calculate_temporal_power_sizing("Moon", max_eclipse_hours=102.5, base_power_kw=25.0)
+        assert power["body"] == "Moon"
+        assert power["energy_storage_kwh"] == 2562.5
+        assert power["rfc_mass_kg"] < power["li_ion_mass_kg"]
+        assert power["mass_savings_pct"] == pytest.approx(60.0, abs=0.5)
+        assert power["rfc_mass_savings_kg"] > 8500.0  # Saves ~8.5 metric tons
+
+    def test_temporal_power_sizing_mars_dust_storm(self):
+        power = calculate_temporal_power_sizing("Mars", dust_storm_tau=3.0)
+        assert power["body"] == "Mars"
+        assert power["solar_reduction_pct"] >= 90.0
+        assert power["kilopower_units"] == 2
+        assert power["kilopower_total_mass_kg"] == 3000.0
+
+    def test_cospar_planetary_protection_classification(self):
+        # Moon polar cold trap with volatiles
+        cospar_moon = get_cospar_planetary_protection_flag("LUNAR_PAD_NOBILE_01", "Moon", center_lat=-85.2, water_ice_pct=5.5)
+        assert cospar_moon["cospar_category"] == "Category II*"
+        assert cospar_moon["is_special_region"] is False
+
+        # Mars accessible ice deposit
+        cospar_mars_ice = get_cospar_planetary_protection_flag("MARS_PAD_HELLAS_ICE_01", "Mars", center_lat=-38.94, water_ice_pct=25.0)
+        assert "Category IVb" in cospar_mars_ice["cospar_category"]
+        assert cospar_mars_ice["is_special_region"] is True
+        assert "< 0.03" in cospar_mars_ice["bioburden_limit"]
+
+        # Mars dry surface
+        cospar_mars_dry = get_cospar_planetary_protection_flag("MARS_PAD_GALE_01", "Mars", center_lat=-4.5, water_ice_pct=0.5)
+        assert cospar_mars_dry["cospar_category"] == "Category IVa"
+        assert cospar_mars_dry["is_special_region"] is False
+
+    def test_three_hexagon_base_topology(self):
+        target = resolve_extraterrestrial_target("Jezero Crater")
+        topo = compute_three_hexagon_base_topology(target, h3_resolution=7)
+
+        assert "h_pad" in topo and "h_hab" in topo and "h_isru" in topo
+        assert topo["blast_standoff_met"] is True, "Plume blast standoff must be met (>= 1.5 km)"
+        assert topo["d_pad_hab"] >= 1.5, f"Pad-Hab standoff {topo['d_pad_hab']} km must be >= 1.5 km"
+        assert topo["d_hab_isru"] > 0.0
+        assert "ascii_diagram" in topo and len(topo["ascii_diagram"]) > 50
+
+    def test_jezero_axis_b_geochemistry_score_is_calibrated(self):
+        """
+        Verifies that Axis B for Jezero Crater is physically calibrated to continuum-removed
+        band depth, scoring ~40-75% against terrestrial hydrothermal suites rather than 0.12%.
+        """
+        target = resolve_extraterrestrial_target("Jezero Crater")
+        candidates = fetch_earth_candidates()
+
+        danakil = next(c for c in candidates if "DANAKIL" in c["site_id"])
+        scores_4axis = compute_decomposed_4axis_scores(
+            target["vector_12d"],
+            danakil["vector_12d"],
+            target["sigma_12d"],
+            danakil["sigma_12d"]
+        )
+        axis_b_score = scores_4axis["Axis_B_Geochem"]["score"]
+        assert 40.0 <= axis_b_score <= 80.0, f"Axis B score {axis_b_score:.2f}% must be in realistic [40, 80]% range, not 0.12%"
+
+    def test_mars_latitude_cutoff_relaxation_55_degrees(self):
+        """
+        Verifies that relaxing Mars latitude cutoff to 55 deg allows high-latitude NASA SWIM ice
+        candidates (e.g. Utopia Planitia at 46.8 deg) to qualify, but disqualifies them at 45 deg.
+        """
+        # Site at latitude 46.8 deg
+        utopia_site = {
+            "body": "Mars",
+            "center_lat": 46.76,
+            "center_lon": 110.05,
+            "slope_deg": 1.4,
+            "rock_abundance_pct": 2.1,
+            "solar_illum_pct": 98.3,
+            "earth_vis_pct": 70.0,
+            "cold_trap_dist_km": 0.0,
+        }
+        # Passes with 55 deg cutoff
+        assert check_hard_cutoffs(utopia_site, max_lat_deg=55.0) is True
+        # Fails with legacy 45 deg cutoff
+        assert check_hard_cutoffs(utopia_site, max_lat_deg=45.0) is False
+
+    def test_cli_topology_command(self):
+        cmd = [sys.executable, str(ROOT_DIR / "cli.py"), "topology", "--target", "Jezero Crater", "--json"]
+        res = subprocess.run(cmd, capture_output=True, text=True, cwd=str(ROOT_DIR))
+        assert res.returncode == 0, f"CLI topology failed: {res.stderr}"
+
+        data = json.loads(res.stdout)
+        assert "base_topology" in data
+        assert "power_sizing" in data
+        assert "cospar_protection" in data
+        assert data["base_topology"]["blast_standoff_met"] is True

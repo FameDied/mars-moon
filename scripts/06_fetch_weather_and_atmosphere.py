@@ -1,3 +1,4 @@
+from pathlib import Path
 import urllib.request
 import ssl
 import certifi
@@ -7,11 +8,12 @@ import os
 import pyarrow as pa
 import pyarrow.parquet as pq
 
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 ctx = ssl.create_default_context(cafile=certifi.where())
 
-os.makedirs("data/processed/json", exist_ok=True)
-os.makedirs("data/processed/csv", exist_ok=True)
-os.makedirs("data/processed/parquet", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/json", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/csv", exist_ok=True)
+os.makedirs(PROJECT_ROOT / "data/processed/parquet", exist_ok=True)
 
 # 1. Fetch InSight Weather from NASA API
 insight_records = []
@@ -167,13 +169,17 @@ all_weather_records = insight_records + curiosity_rems_samples
 print(f"Total Mars surface weather records: {len(all_weather_records)}")
 
 # Save Weather
-with open("data/processed/json/mars_surface_weather.json", "w", encoding="utf-8") as f:
+json_w = PROJECT_ROOT / "data/processed/json/mars_surface_weather.json"
+csv_w = PROJECT_ROOT / "data/processed/csv/mars_surface_weather.csv"
+parquet_w = PROJECT_ROOT / "data/processed/parquet/mars_surface_weather.parquet"
+
+with open(json_w, "w", encoding="utf-8") as f:
     json.dump(all_weather_records, f, indent=2)
-with open("data/processed/csv/mars_surface_weather.csv", "w", newline="", encoding="utf-8") as f:
+with open(csv_w, "w", newline="", encoding="utf-8") as f:
     writer = csv.DictWriter(f, fieldnames=list(all_weather_records[0].keys()))
     writer.writeheader()
     writer.writerows(all_weather_records)
-pq.write_table(pa.Table.from_pylist(all_weather_records), "data/processed/parquet/mars_surface_weather.parquet")
+pq.write_table(pa.Table.from_pylist(all_weather_records), str(parquet_w))
 
 # 3. Comprehensive Atmospheric & Exospheric Profiles
 atmospheric_profiles = [
@@ -237,7 +243,8 @@ atmospheric_profiles = [
     }
 ]
 
-with open("data/processed/json/atmospheric_profiles.json", "w", encoding="utf-8") as f:
+json_atm = PROJECT_ROOT / "data/processed/json/atmospheric_profiles.json"
+with open(json_atm, "w", encoding="utf-8") as f:
     json.dump(atmospheric_profiles, f, indent=2)
 
 flat_atm = []
@@ -256,10 +263,13 @@ for item in flat_atm:
         if k not in item:
             item[k] = None
 
-with open("data/processed/csv/atmospheric_profiles.csv", "w", newline="", encoding="utf-8") as f:
+csv_atm = PROJECT_ROOT / "data/processed/csv/atmospheric_profiles.csv"
+parquet_atm = PROJECT_ROOT / "data/processed/parquet/atmospheric_profiles.parquet"
+
+with open(csv_atm, "w", newline="", encoding="utf-8") as f:
     writer = csv.DictWriter(f, fieldnames=fieldnames)
     writer.writeheader()
     writer.writerows(flat_atm)
-pq.write_table(pa.Table.from_pylist(flat_atm), "data/processed/parquet/atmospheric_profiles.parquet")
+pq.write_table(pa.Table.from_pylist(flat_atm), str(parquet_atm))
 
 print("Atmospheric, weather, and environmental profiles compiled successfully.")
