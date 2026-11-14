@@ -12,6 +12,7 @@ import os
 import sqlite3
 import argparse
 import time
+import json
 
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "planetary_moon_mars.db")
 
@@ -752,6 +753,268 @@ def cmd_compat(args):
     print("="*105 + "\n")
     conn.close()
 
+def cmd_analog(args):
+    """
+    R1 Planetary Analog Discovery & Decomposed 4-Axis Similarity Runner.
+    """
+    from core.similarity_engine import find_top_analogs, get_site_by_id
+
+    target_id = getattr(args, "target", None)
+    if not target_id:
+        print("Error: --target <SITE_ID> is required for analog similarity analysis.")
+        sys.exit(1)
+
+    # Check if target_id exists directly, else try case-insensitive or name substring match
+    conn = get_connection()
+    c = conn.cursor()
+    c.execute("""
+        SELECT site_id FROM harmonized_sites 
+        WHERE site_id = ? OR LOWER(site_id) = LOWER(?) OR site_name LIKE ? OR target_region LIKE ?
+        LIMIT 1;
+    """, (target_id, target_id, f"%{target_id}%", f"%{target_id}%"))
+    row = c.fetchone()
+    conn.close()
+    if row:
+        target_id = row["site_id"]
+
+    method = getattr(args, "method", "cosine") or "cosine"
+    top_n = getattr(args, "top", None) or getattr(args, "limit", 5) or 5
+
+    try:
+        profiles = find_top_analogs(
+            target_site_id=target_id,
+            method=method,
+            top_n=top_n,
+            db_path=DB_PATH
+        )
+    except Exception as e:
+        print(f"Error executing analog similarity search: {e}")
+        sys.exit(1)
+
+    if getattr(args, "json", False):
+        print(json.dumps(profiles, indent=2))
+        return
+
+    target_site = get_site_by_id(target_id, db_path=DB_PATH) or {}
+    t_name = target_site.get("site_name", target_id)
+    t_body = target_site.get("body", "Target")
+    t_lat = target_site.get("center_lat", 0.0)
+    t_lon = target_site.get("center_lon", 0.0)
+
+    print("\n" + "=" * 105)
+    print("                              PLANETARY ANALOG DISCOVERY & SIMILARITY ENGINE")
+    print(f"Target Site: [{t_body}] {target_id} - {t_name} (Lat: {t_lat:.2f}°, Lon: {t_lon:.2f}°)")
+    print(f"Method: {method.capitalize()} Similarity | Metric Dimensions: 4 Decoupled Physical Axes")
+    print("=" * 105)
+    print(f"{'Rank':<5} {'Analog ID':<12} {'Name & Region':<32} {'Score':<8} | {'Axis A':<8} {'Axis B':<8} {'Axis C':<8} {'Axis D':<8} | {'Uncertainty':<10}")
+    print("-" * 105)
+
+    if not profiles:
+        print("No matching terrestrial analog profiles found.")
+    else:
+        for p in profiles:
+            rank = p.get("rank", 1)
+            a_id = p.get("analog_site_id", "N/A")
+            a_name = (p.get("analog_name", a_id))[:30]
+            score = f"{p.get('composite_score', 0.0):.1f}%"
+            ax_a = f"{p.get('axis_a_geomorphology_pct', 0.0):.1f}%"
+            ax_b = f"{p.get('axis_b_geochemistry_pct', 0.0):.1f}%"
+            ax_c = f"{p.get('axis_c_thermophysics_pct', 0.0):.1f}%"
+            ax_d = f"{p.get('axis_d_volatiles_pct', 0.0):.1f}%"
+            unc = f"± {p.get('uncertainty_bound', 0.0):.1f}%"
+            print(f"{rank:<5} {a_id:<12} {a_name:<32} {score:<8} | {ax_a:<8} {ax_b:<8} {ax_c:<8} {ax_d:<8} | {unc:<10}")
+
+    print("-" * 105 + "\n")
+
+def cmd_mask(args):
+    """
+    R2 Engineering Constraint Masks & Soft MAUT Utility Evaluator.
+    """
+    from core.site_suitability import filter_candidate_sites
+
+    body = getattr(args, "body", "Moon") or "Moon"
+    max_slope = getattr(args, "max_slope", 10.0)
+    max_rock = getattr(args, "max_rock", 5.0)
+    min_illum = getattr(args, "min_illum", 80.0)
+    min_vis = getattr(args, "min_earth_vis", 50.0)
+    max_cold = getattr(args, "max_cold_trap_km", 5.0)
+    limit = getattr(args, "limit", 15) or 15
+
+    constraints = {
+        "max_slope_deg": float(max_slope),
+        "max_rock_abundance_pct": float(max_rock),
+        "min_solar_illum_pct": float(min_illum),
+        "min_earth_vis_pct": float(min_vis),
+        "max_cold_trap_dist_km": float(max_cold),
+    }
+
+    try:
+        candidates = filter_candidate_sites(
+            db_path=DB_PATH,
+            body=body,
+            constraints=constraints,
+            apply_soft_ranking=True,
+            limit=limit,
+        )
+    except Exception as e:
+        print(f"Error evaluating site suitability: {e}")
+        sys.exit(1)
+
+    if getattr(args, "json", False):
+        print(json.dumps(candidates, indent=2))
+        return
+
+    print("\n" + "=" * 105)
+    print("                        SPATIAL SITE SUITABILITY & ENGINEERING CONSTRAINT MASK")
+    print(f"Body: {body} | Cutoffs: Slope <= {max_slope:.1f}° | Rocks <= {max_rock:.1f}% | Illum >= {min_illum:.1f}% | Earth Vis >= {min_vis:.1f}% | Cold Trap <= {max_cold:.1f} km")
+    print("=" * 105)
+    print(f"{'Candidate Site Name':<32} {'Coords (Lat, Lon)':<20} {'Slope':<7} {'Rocks':<7} {'Illum':<7} {'EarthVis':<9} {'ColdTrap':<9} {'Status':<10} {'Utility':<7}")
+    print("-" * 105)
+
+    if not candidates:
+        print("No compliant landing candidates satisfied all engineering cutoffs.")
+    else:
+        for c in candidates:
+            name = (c.get("site_name") or c.get("site_id", "N/A"))[:30]
+            raw = c.get("raw_parameters", {})
+            lat = raw.get("center_lat", 0.0)
+            lon = raw.get("center_lon", 0.0)
+            coords = f"({lat:+.2f}°, {lon:+.2f}°)"
+            slope = f"{raw.get('slope_deg', 0.0):.1f}°"
+            rock = f"{raw.get('rock_abundance_pct', 0.0):.1f}%"
+            illum = f"{raw.get('solar_illum_pct', 0.0):.1f}%"
+            vis = f"{raw.get('earth_vis_pct', 0.0):.1f}%"
+            cold = f"{raw.get('cold_trap_dist_km', 0.0):.1f}km"
+            status = "QUALIFIED" if c.get("is_suitable", False) else "DISQUALIFIED"
+            status_str = f"\033[1;32m{status}\033[0m" if status == "QUALIFIED" else f"\033[1;31m{status}\033[0m"
+            util = f"{c.get('conservative_utility_score', c.get('utility_score', 0.0)):.2f}"
+            print(f"{name:<32} {coords:<20} {slope:<7} {rock:<7} {illum:<7} {vis:<9} {cold:<9} {status_str:<19} {util:<7}")
+
+    print("-" * 105)
+    print(f"Total Displayed Candidates: {len(candidates)}")
+    print("=" * 105 + "\n")
+
+def cmd_delta(args):
+    """
+    R5 Physical Limit Delta-Vectors Runner.
+    """
+    from core.delta_vectors import compute_physical_delta_vector, format_delta_vector_cli
+
+    raw_target = getattr(args, "target", None)
+    raw_body = getattr(args, "body", None)
+
+    if raw_target is not None:
+        if not str(raw_target).strip():
+            print("Error: Target celestial body or site cannot be empty.")
+            sys.exit(1)
+        target = str(raw_target).strip()
+    elif raw_body is not None:
+        if not str(raw_body).strip():
+            print("Error: Celestial body cannot be empty.")
+            sys.exit(1)
+        target = str(raw_body).strip()
+    else:
+        target = "Moon"
+    elevation = getattr(args, "elevation", None)
+    void = getattr(args, "subsurface_void", False)
+
+    target_site = None
+    if target.lower() not in ("moon", "mars", "earth", "luna", "ares", "terra"):
+        conn = get_connection()
+        c = conn.cursor()
+        c.execute("""
+            SELECT site_id, body, site_name, target_region, center_lat, center_lon,
+                   mean_slope_deg, has_subsurface_void
+            FROM harmonized_sites
+            WHERE site_id = ? OR site_name LIKE ?
+            LIMIT 1;
+        """, (target, f"%{target}%"))
+        row = c.fetchone()
+        conn.close()
+        if row:
+            target_site = dict(row)
+            if void is None or not void:
+                void = bool(target_site.get("has_subsurface_void", 0))
+
+    try:
+        dv = compute_physical_delta_vector(
+            target_body=target if target_site is None else None,
+            target_site=target_site,
+            elevation_m=elevation,
+            has_subsurface_void=void,
+        )
+    except Exception as e:
+        print(f"Error computing physical delta-vectors: {e}")
+        sys.exit(1)
+
+    if getattr(args, "json", False):
+        print(json.dumps(dv, indent=2))
+        return
+
+    print("\n" + format_delta_vector_cli(dv) + "\n")
+
+def cmd_harmonize(args):
+    """
+    R3 Cross-Body Harmonized Sites Catalog Runner.
+    """
+    conn = get_connection()
+    c = conn.cursor()
+    sql = """
+        SELECT site_id, body, site_name, target_region, center_lat, center_lon,
+               h3_res6, h3_res7, mean_slope_deg, thermal_inertia, fe_wt_pct,
+               ti_wt_pct, h2o_equiv_pct, measurement_confidence, data_source, doi
+        FROM harmonized_sites
+        WHERE 1=1
+    """
+    params = []
+    if getattr(args, "body", None):
+        sql += " AND LOWER(body) = LOWER(?)"
+        params.append(args.body)
+    if getattr(args, "h3", None):
+        sql += " AND (h3_res6 LIKE ? OR h3_res7 LIKE ?)"
+        params.extend([f"%{args.h3}%", f"%{args.h3}%"])
+    if getattr(args, "site", None):
+        sql += " AND (site_id LIKE ? OR site_name LIKE ? OR target_region LIKE ?)"
+        params.extend([f"%{args.site}%", f"%{args.site}%", f"%{args.site}%"])
+
+    sql += " ORDER BY body, site_id"
+    limit = getattr(args, "limit", 20) or 20
+    sql += f" LIMIT {int(limit)}"
+
+    c.execute(sql, params)
+    rows = [dict(r) for r in c.fetchall()]
+    conn.close()
+
+    if getattr(args, "json", False):
+        print(json.dumps(rows, indent=2))
+        return
+
+    print("\n" + "=" * 115)
+    print("                             CROSS-BODY HARMONIZED SITES (EARTH, MOON, MARS)")
+    print("=" * 115)
+    print(f"{'Site ID':<12} {'Body':<6} {'Site Name':<28} {'H3 Res 6':<16} {'Slope':<6} {'ThInertia':<10} {'Fe%':<6} {'Ti%':<6} {'H2O%':<6} {'Conf':<6}")
+    print("-" * 115)
+
+    if not rows:
+        print("No harmonized sites matched the specified filters.")
+    else:
+        for r in rows:
+            sid = r["site_id"]
+            body = r["body"]
+            name = (r["site_name"] or "")[:26]
+            h3_val = r["h3_res6"] or "N/A"
+            slope = f"{r['mean_slope_deg']:.1f}°" if r.get("mean_slope_deg") is not None else "N/A"
+            ti = f"{r['thermal_inertia']:.1f}" if r.get("thermal_inertia") is not None else "N/A"
+            fe = f"{r['fe_wt_pct']:.1f}%" if r.get("fe_wt_pct") is not None else "N/A"
+            ti_p = f"{r['ti_wt_pct']:.1f}%" if r.get("ti_wt_pct") is not None else "N/A"
+            h2o = f"{r['h2o_equiv_pct']:.1f}%" if r.get("h2o_equiv_pct") is not None else "N/A"
+            conf = f"{r['measurement_confidence']:.2f}" if r.get("measurement_confidence") is not None else "N/A"
+            print(f"{sid:<12} {body:<6} {name:<28} {h3_val:<16} {slope:<6} {ti:<10} {fe:<6} {ti_p:<6} {h2o:<6} {conf:<6}")
+
+    print("-" * 115)
+    print(f"Total Records Displayed: {len(rows)}")
+    print("=" * 115 + "\n")
+
 def main():
     parser = argparse.ArgumentParser(description="Master Database CLI for Moon and Mars")
     subparsers = parser.add_subparsers(dest="command")
@@ -877,6 +1140,42 @@ def main():
     p_cmp.add_argument("--status", help="Filter by qualification status (e.g. QUALIFIED, Slope, Density, Eclipse, Boulder)")
     p_cmp.add_argument("--limit", type=int, default=20, help="Max results (default: 20)")
 
+    # Analog (R1 Multi-Axis Similarity Engine)
+    p_ana = subparsers.add_parser("analog", help="Find Earth analogs for target Moon/Mars landing sites across 4 decoupled physical axes")
+    p_ana.add_argument("--target", help="Target planetary site ID (e.g. LLS-001) or site keyword")
+    p_ana.add_argument("--method", choices=["cosine", "mahalanobis"], default="cosine", help="Similarity metric (default: cosine)")
+    p_ana.add_argument("--top", "--limit", dest="top", type=int, default=5, help="Top N analog matches to return (default: 5)")
+    p_ana.add_argument("--body", choices=["Moon", "Mars"], help="Filter by target body")
+    p_ana.add_argument("--json", action="store_true", help="Output machine-readable JSON")
+
+    # Mask / Suitability (R2 Engineering Constraint Masks)
+    p_msk = subparsers.add_parser("mask", aliases=["suitability"], help="Evaluate site suitability mask and hard engineering cutoffs")
+    p_msk.add_argument("--body", choices=["Moon", "Mars"], default="Moon", help="Celestial body (default: Moon)")
+    p_msk.add_argument("--max-slope", type=float, default=10.0, help="Maximum allowable slope in degrees at 5m baseline (default: 10.0)")
+    p_msk.add_argument("--max-rock", type=float, default=5.0, help="Maximum allowable rock abundance percentage (default: 5.0)")
+    p_msk.add_argument("--min-illum", type=float, default=80.0, help="Minimum continuous solar illumination for polar sites (default: 80.0)")
+    p_msk.add_argument("--min-earth-vis", type=float, default=50.0, help="Minimum direct-to-Earth visibility fraction (default: 50.0)")
+    p_msk.add_argument("--max-cold-trap-km", type=float, default=5.0, help="Maximum distance to cold trap in km (default: 5.0)")
+    p_msk.add_argument("--limit", type=int, default=15, help="Max candidate landing sites to display (default: 15)")
+    p_msk.add_argument("--json", action="store_true", help="Output machine-readable JSON")
+
+    # Delta (R5 Physical Limit Delta-Vectors)
+    p_dlt = subparsers.add_parser("delta", help="Compute physical limit delta-vectors (gravity, pressure, radiation) between Earth and destination")
+    p_dlt.add_argument("--target", help="Target landing site ID or body (Moon, Mars, Earth)")
+    p_dlt.add_argument("--analog", help="Earth analog site ID or name")
+    p_dlt.add_argument("--body", choices=["Moon", "Mars", "Earth"], help="Celestial body override")
+    p_dlt.add_argument("--elevation", type=float, help="Elevation in meters (for Martian barometric pressure scaling)")
+    p_dlt.add_argument("--subsurface-void", action="store_true", help="Model radiation attenuation inside subsurface void / lava tube")
+    p_dlt.add_argument("--json", action="store_true", help="Output machine-readable JSON")
+
+    # Harmonize / Harmonized (R3 Cross-Body Harmonized Sites)
+    p_hrm = subparsers.add_parser("harmonize", aliases=["harmonized"], help="Query cross-body harmonized sites table indexed with Uber H3")
+    p_hrm.add_argument("--body", choices=["Earth", "Moon", "Mars"], help="Filter by celestial body")
+    p_hrm.add_argument("--h3", help="Filter by Uber H3 Res 6 or Res 7 hexadecimal index substring")
+    p_hrm.add_argument("--site", help="Search keyword in site name or target region")
+    p_hrm.add_argument("--limit", type=int, default=20, help="Max results (default: 20)")
+    p_hrm.add_argument("--json", action="store_true", help="Output machine-readable JSON")
+
     args = parser.parse_args()
     if not args.command:
         parser.print_help()
@@ -901,7 +1200,13 @@ def main():
         "geotechnics": cmd_geotechnics,
         "telecom": cmd_telecom,
         "hazards": cmd_hazards,
-        "compat": cmd_compat
+        "compat": cmd_compat,
+        "analog": cmd_analog,
+        "mask": cmd_mask,
+        "suitability": cmd_mask,
+        "delta": cmd_delta,
+        "harmonize": cmd_harmonize,
+        "harmonized": cmd_harmonize,
     }
     dispatch[args.command](args)
 
