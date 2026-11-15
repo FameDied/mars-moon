@@ -163,7 +163,7 @@ Hard Engineering Gate:     M_go = 1 (PASSED ALL HARD CONSTRAINTS)
 ------------------------------------------------------------------------------------------------------------------------
 ★ DEEP MARS ARCHITECTURE REALITY CHECK: EDL LANDED MASS vs ISRU HAULING WORK TRADE-OFF
 ------------------------------------------------------------------------------------------------------------------------
-Why Hellas Basin Wins Despite an 11.4 km Hauling Distance:
+Why Hellas Basin Is Selected Despite an 11.4 km Hauling Distance:
   • Entry, Descent, and Landing (EDL) is the primary mass bottleneck for human Mars exploration.
   • Landing at Hellas Basin's deep floor (elevation z = -7,150 m, surface air pressure P ≈ 1,155 Pa) provides Mars'
     thickest aerodynamic deceleration column (atmospheric column mass > 300 kg/m^2).
