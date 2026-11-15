@@ -82,14 +82,14 @@ $$\text{Composite Score} = w_A S_{\text{Geomorph}} + w_B S_{\text{Geochem}} + w_
 
 #### Dual Similarity Metrics & Uncertainty Propagation
 * **Normalized Cosine Similarity:** Scaled to $[0.0, 100.0]\%$ with magnitude overflow immunity and zero-division safeguards.
-* **Regularized Mahalanobis Distance:** Accounts for cross-feature covariance using Ledoit-Wolf diagonal covariance shrinkage ($\Sigma_{\text{reg}} = (1 - \alpha)\Sigma + \alpha \mathbf{I}$).
+* **Regularized Mahalanobis Distance:** Accounts for cross-feature covariance using Ledoit-Wolf diagonal covariance shrinkage ($\Sigma_{\text{reg}} = (1-\alpha)\Sigma + \alpha\mathbf{I}$).
 * **Analytic Variance Propagation:** Instruments have varying spatial resolutions ($1\text{ m/px}$ HiRISE vs $300\text{ km/px}$ GRS). Variances propagate via first-order analytic Taylor expansion ($\sigma_{\text{composite}} = \sqrt{\sum w_i^2 \sigma_i^2}$), enabling **Conservative Lower Confidence Bound (LCB)** ranking:
   $$\text{Score}_{\text{LCB}} = \text{Score}_{\text{composite}} - 1.96 \cdot \sigma_{\text{composite}}$$
 
 ---
 
 ### 2. Engineering Constraint Masks (Hard "No-Go" Filters vs. Soft Optimization)
-Planetary scientists often nominate scientifically rich sites that spacecraft engineers must reject due to landing hazard envelopes. The database implements a dual-tier Site Suitability Mask:
+Scientific exploration objectives often prioritize landing sites that mission engineering must screen for landing hazard envelopes. The database implements a dual-tier Site Suitability Mask:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -162,13 +162,13 @@ Earth analogs can replicate mineralogy, geomorphology, and hyper-arid weathering
 * **Ionizing Radiation Exposure Multiplier:**
   * Galactic Cosmic Rays (GCR) + Solar Particle Events (SPE): Earth surface background is $\sim 0.007\text{ mSv/day}$ ($2.8\text{ mSv/yr}$).
   * Lunar Surface: $73.5\times$ multiplier ($207.2\text{ mSv/yr}$).
-  * Martian Surface: $65.4\times$ to $77.9\times$ multiplier ($184.5 - 219.6\text{ mSv/yr}$).
+  * Martian Surface: $65.4\times$ to $77.9\times$ multiplier ($184.5\text{ to }219.6\text{ mSv/yr}$).
   * Subsurface Void Attenuation: When candidate sites possess intact lava tubes (`has_subsurface_void = 1`), basalt ceiling shielding applies a $0.10\times$ transmission factor ($\sim 90\%$ radiation reduction), bringing cosmic radiation down to near-terrestrial levels.
 
 ---
 
 ### 5. 12 Factual, Under-Studied Terrestrial Analog Regions
-Following official competition directives to look beyond over-studied sites (Antarctica, Atacama, Iceland, Hawaii), the database incorporates 12 peer-reviewed terrestrial analog sites with authentic coordinates, DOIs, calibrated multi-domain measurements, and proactive diplomatic field-access classifications:
+To address the recognized sampling bias toward over-studied sites (Antarctica, Atacama, Iceland, Hawaii), the database incorporates 12 peer-reviewed terrestrial analog sites with authentic coordinates, DOIs, calibrated multi-domain measurements, and proactive diplomatic field-access classifications:
 
 | Site ID | Terrestrial Location | Primary Planetary Target | Analog Domain | Field Access Status | Authentic Literature DOI |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -246,7 +246,7 @@ The core innovation of ATLAS-X is its 4-step modular architecture that mathemati
    $$U_{\text{base}}(x) = M_{\text{go}}(x) \times \left[ \sum_{k=1}^K w_k \hat{u}_k(x) - \lambda \sqrt{\sum_{k=1}^K w_k^2 \left( \frac{\sigma_k(x)}{\text{Range}_k} \right)^2} \right]$$
 
 4. **Step 2: "Anti-Cliché" Spatial Novelty Prior ($P_{\text{novelty}}$):**
-   $$P_{\text{novelty}}(y) = \prod_{m=1}^{M_{\text{famous}}} \left( 1 - 0.85 \exp\left( -\frac{d_{\text{haversine}}^2(y, c_m)}{2 L_m^2} \right) \right) \quad (L_m = 250\text{ km})$$
+   $$P_{\text{novelty}}(y) = \prod_{m=1}^{M_{\text{famous}}} \left( 1-0.85 \exp\left( -\frac{d_{\text{haversine}}^2(y, c_m)}{2 L_m^2} \right) \right) \quad (L_m = 250\text{ km})$$
    Mathematically suppresses over-studied sites (Antarctica, Atacama, Iceland, Hawaii) by $85\%$ so under-studied terrestrial analogs dominate the rankings.
 
 5. **Step 3: Dimensionless Cross-Planetary Physics Scaling:**
@@ -280,12 +280,11 @@ The core innovation of ATLAS-X is its 4-step modular architecture that mathemati
 
 *Complete mission control telemetry is recorded in [FINAL_BASE_SELECTION_RESULTS.txt](./FINAL_BASE_SELECTION_RESULTS.txt) and [STEP4_CONVERGENCE_REPORT.md](./STEP4_CONVERGENCE_REPORT.md).*
 
-> ### 💡 Scientific Fidelity Notice: Why Decoupled Physics Scores Defeat "Fake 99%" Tools
-> Non-specialist judges might wonder why overall single-site analog scores are $\sim 55\%–77\%$, or why certain decomposed axes like Lunar Thermophysics ($1.13\%$) are decoupled.
-> **This is ATLAS-X's greatest scientific strength, not a bug:**
-> * **Physics-First Realism:** Legacy tools claim "95%–99% analogs" by ignoring non-negotiable physical laws (e.g. ignoring that Earth has an atmosphere and ambient temperatures above $200\text{ K}$). Earth **cannot** naturally duplicate Lunar South Pole cryogenic PSR conditions ($35\text{ K}$ vs $250\text{ K}$ Arctic $\rightarrow$ Axis C: **$1.13\%$ match**), requiring ground cryogenic vacuum chillers.
-> * **Geochemistry Fidelity:** Terrestrial analogs (Pilbara Craton, Danakil Depression) match ancient Martian hydrothermal phyllosilicates, carbonates, and iron oxides at **$\sim 55\%–77\%$ fidelity** (Axis B) using continuum-removed spectral absorption band depths, while honestly reflecting authentic differences in atmospheric weathering and hydration state.
-> * **Systems Solution:** By exposing unvarnished physical reality, ATLAS-X mathematically proves to NASA mission architects why **Complementary Split-Twin Sites** (e.g., Pilbara + Samail reaching **$61.5\%$** for the Moon, or Danakil + Svalbard reaching **$80.6\%$** for Mars) paired with **Environmental Chamber Offloads** ($+213.8\text{ K}$ cryogenic chiller, vacuum chambers, $62.1\%–83.5\%$ active gravity cranes) are strictly mandatory for flight hardware certification.
+> ### 💡 Scientific Fidelity Notice: Decomposed Multi-Axis Physics vs. Single-Index Matching
+> Single-site terrestrial analog scores realistically range from $55\%$ to $77\%$ across composite indices because physical laws impose distinct boundaries across decoupled planetary regimes:
+> * **Physics-First Realism:** Unconstrained tools report artificially inflated ($>95\%$) match figures by omitting non-negotiable physical parameters (such as the presence of an atmosphere or ambient temperatures above $200\text{ K}$). Terrestrial environments cannot passively replicate Lunar South Pole cryogenic PSR conditions ($35\text{ K}$ vs. $250\text{ K}$ Arctic, resulting in an Axis C Thermophysics match of $1.13\%$), necessitating ground cryogenic vacuum chambers during flight hardware qualification.
+> * **Geochemistry Fidelity:** Terrestrial analogs (e.g., Pilbara Craton, Danakil Depression) match ancient Martian hydrothermal phyllosilicates, carbonates, and iron oxides at $55\%$ to $77\%$ fidelity (Axis B) using continuum-removed spectral absorption band depths, reflecting authentic differences in atmospheric weathering and hydration state.
+> * **Systems Architecture:** Decomposing similarity across four orthogonal axes demonstrates why **Complementary Split-Twin Sites** (e.g., Pilbara + Samail reaching $61.5\%$ combined fidelity for the Moon, or Danakil + Svalbard reaching $80.6\%$ for Mars) paired with **Environmental Chamber Offloads** ($+213.8\text{ K}$ cryogenic chiller, vacuum chambers, $62.1\%\text{ to }83.5\%$ active gravity cranes) are required for complete flight hardware certification.
 
 ---
 
@@ -297,14 +296,14 @@ Moving beyond temporary sortie missions, permanent lunar and Martian settlements
                       [ H_pad: DEDICATED LANDING PAD ]
                       • Uber H3 Res 7: 87f146493ffffff
                       • Standoff: 2.30 km to Core (>1.5 km Blast Limit: SAFE)
-                      • Eliminates supersonic ejecta sandblasting (500-1500 m/s)
+                      • Eliminates supersonic ejecta sandblasting (500 to 1,500 m/s)
                                     \
                             2.30 km  \  Supersonic Plume Impingement Corridor
                                       \  (Topographic Berm / Crater Wall Shadow)
                                        v
 [ H_hab: SHIELDED HABITAT CORE ] ------------------------ [ H_isru: VOLATILE EXTRACTION ]
 • Uber H3 Res 7: 87f15586cffffff           3.20 km        • Uber H3 Res 7: 87f15586effffff
-• 3-5m Regolith Overburden (<35 mSv/yr)   Rover Haul      • Resource: PSR Cold Trap Water Ice
+• 3 to 5 m Regolith Overburden (<35 mSv/yr)   Rover Haul      • Resource: PSR Cold Trap Water Ice
 • ECLSS / Life Support & Crew Modules     Corridor        • Hauling Work: 596.5 J/kg (0.17 kWh/ton)
 ```
 
@@ -314,17 +313,17 @@ Moving beyond temporary sortie missions, permanent lunar and Martian settlements
   * **Regenerative Fuel Cell (RFC) vs. Lithium-Ion:**
     $$\Delta M_{\text{saved}} = \frac{E_{\text{dark}}}{\eta_{\text{Li}}} - \frac{E_{\text{dark}}}{\eta_{\text{RFC}}} = \frac{2562.5}{0.180\text{ kWh/kg}} - \frac{2562.5}{0.450\text{ kWh/kg}} = 14,236\text{ kg} - 5,694\text{ kg} = \mathbf{8,542\text{ kg}}$$
     Utilizing $H_2/O_2$ RFCs saves **8.54 metric tons (60.0%) of landed launch mass** over heavy lithium-ion batteries.
-* **Martian Dust Storm Resilience:** During Global Dust Storms (GDS), atmospheric optical depth increases to $\tau \approx 3.0 - 4.5$.
+* **Martian Dust Storm Resilience:** During Global Dust Storms (GDS), atmospheric optical depth increases to $\tau \approx 3.0\text{ to }4.5$.
   * Beer-Lambert direct solar transmission drops to $T_{\text{direct}} = \exp(-\tau / \cos \theta_z) \approx 3.1\%$ (overall solar generation slashed by **$-93.3\%$**).
   * ATLAS-X sizes a **Dual Kilopower 10 kWe Fission Surface Power (FSP)** architecture ($2 \times 10\text{ kWe}$ Stirling reactors, $3,000\text{ kg}$ total) delivering $20\text{ kWe}$ of continuous, weather-independent ECLSS power.
 * **COSPAR Planetary Protection & Zoning:**
   * **Moon:** Classifies sites into **Category II** (nominal surface) vs. **Category II\*** (Sensitive Polar Volatile Cold Traps requiring organic and propellant accounting to preserve historical prebiotic records under NPR 8715.24).
-  * **Mars:** Identifies **Category IVb / IVc Special Regions** (accessible subsurface ice or RSL), enforcing sterile robotic drilling barriers ($< 0.03\text{ bacterial spores/m}^2$) and a $500\text{ m} - 1\text{ km}$ buffer between human habitats and ice extraction faces.
+  * **Mars:** Identifies **Category IVb / IVc Special Regions** (accessible subsurface ice or RSL), enforcing sterile robotic drilling barriers ($< 0.03\text{ bacterial spores/m}^2$) and a $500\text{ m}\text{ to }1\text{ km}$ buffer between human habitats and ice extraction faces.
 
 ### Layer B: Multi-Zone 3-Hexagon Base Topology (Uber H3 Spatial Triad)
 A permanent base cannot exist at a single geographic point. ATLAS-X partitions each base into a functional spatial triad using **Uber H3 discrete global grid cells (Resolution 7, edge $\sim 1.22\text{ km}$, centroid spacing $\sim 2.10\text{ km}$)**:
-1. **Landing Pad Hexagon ($H_{\text{pad}}$):** Standoff distance $d(\text{Pad}, \text{Hab}) \ge 1.5 - 2.5\text{ km}$ behind natural terrain berms, completely shielding habitat inflatable membranes and solar arrays from Plume-Surface Interaction (PSI) supersonic gravel ejecta ($500 - 1,500\text{ m/s}$).
-2. **Shielded Habitat Core Hexagon ($H_{\text{hab}}$):** Positioned at central coordinates under $3 - 5\text{ m}$ of unconsolidated regolith overburden or lava tube void, attenuating GCR and SPE ionizing radiation to $< 35\text{ mSv/yr}$.
+1. **Landing Pad Hexagon ($H_{\text{pad}}$):** Standoff distance $d(\text{Pad}, \text{Hab}) \ge 1.5\text{ to }2.5\text{ km}$ behind natural terrain berms, completely shielding habitat inflatable membranes and solar arrays from Plume-Surface Interaction (PSI) supersonic gravel ejecta ($500\text{ to }1,500\text{ m/s}$).
+2. **Shielded Habitat Core Hexagon ($H_{\text{hab}}$):** Positioned at central coordinates under $3\text{ to }5\text{ m}$ of unconsolidated regolith overburden or lava tube void, attenuating GCR and SPE ionizing radiation to $< 35\text{ mSv/yr}$.
 3. **ISRU Extraction Hexagon ($H_{\text{isru}}$):** Positioned at the cold trap or glacial ice deposit within rover range ($d_{\text{haul}} \le 15\text{ km}$), computing mechanical traction energy $E_{\text{haul}}$.
 
 ### Layer C: Executive Mission Storytelling (Plain-English Takeaways)
@@ -470,11 +469,11 @@ python3 cli.py match --target "Jezero Crater"
    • Axis D (Environment & Subsurface Void): 70.42% ± 7.5%
 
    ★ SCIENTIFIC FIDELITY NOTICE (PHYSICAL REALITY vs FAKE MATCHES):
-     • Non-rigorous tools generate fake 95-99% scores by ignoring non-negotiable physical laws.
+     • Non-rigorous tools report unconstrained 95% to 99% scores by ignoring non-negotiable physical laws.
      • ATLAS-X is physically unvarnished: Earth CANNOT naturally replicate Lunar South Pole cryo-temperatures
        (35 K PSR cryo vs 250 K Arctic -> Axis C: ~1.1% match), requiring ground cryogenic vacuum chambers.
      • Geochemistry Fidelity: Terrestrial analogs (Pilbara Craton, Danakil Depression) match ancient Martian
-       hydrothermal phyllosilicates, carbonates, and iron oxides at ~55%-75% fidelity (Axis B), while capturing
+       hydrothermal phyllosilicates, carbonates, and iron oxides at 55% to 75% fidelity (Axis B), while capturing
        unvarnished differences in atmospheric weathering and hydration state.
      • Systems Solution: Decoupled scores mathematically prove to NASA mission architects why a Complementary
        Split-Twin + Environmental Offloads (vacuum chamber, cryo-chiller, gravity crane) are strictly mandatory
@@ -504,7 +503,7 @@ python3 cli.py match --target "Jezero Crater"
      - Verification Status:             PASSED (d_A <= 3.5 compositional simplex boundary)
    • Tier 2: Monte Carlo Uncertainty Perturbation Test (N = 1,000 Realizations):
      - Rank Stability Pass Rate:        90.7% (Candidate remains in Top 5% Pareto Frontier)
-     - 95% Confidence Interval:         [66.4% - 81.2%]
+     - 95% Confidence Interval:         [66.4% to 81.2%]
      - Verification Status:             PASSED
    • Tier 3: Spatial Contiguity Verification (Local Moran's I / 6-Ring H3 Hexagon Cluster):
      - Center Hex Score:                74.82% | Mean 6-Ring Neighbor Score: 74.81%
@@ -536,9 +535,9 @@ python3 cli.py match --target "Jezero Crater"
    • Triad Functional Allocation:
      1. Landing Pad Hexagon (H_pad):    87608680dffffff | Coords: (18.3792°, 77.6020°)
         - Plume Blast Standoff Margin:  2.32 km to Hab Core (>1.5 km Blast Constraint: MET - SAFE)
-        - PSI Hazard Mitigation:        Dedicated landing zone; blast berm eliminates supersonic ejecta sandblasting (500-1500 m/s)
+        - PSI Hazard Mitigation:        Dedicated landing zone; blast berm eliminates supersonic ejecta sandblasting (500 to 1,500 m/s)
      2. Shielded Habitat Core (H_hab):  876086872ffffff | Coords: (18.3800°, 77.5800°)
-        - Cosmic Radiation Shielding:   3-5m Regolith Overburden / Lava Tube Skylight attenuates GCR/SPE to < 35 mSv/yr
+        - Cosmic Radiation Shielding:   3 to 5 m Regolith Overburden / Lava Tube Skylight attenuates GCR/SPE to < 35 mSv/yr
      3. ISRU Extraction Zone (H_isru):  876086876ffffff | Coords: (18.3571°, 77.5973°)
         - Resource Extraction Site:     Lobate Debris Apron / Glacial Subsurface Ice Sheet (3.20 km hauling traverse)
         - Mechanical Traction Work:     E_haul = 918.0 J/kg (0.26 kWh per metric ton hauled)
@@ -555,7 +554,7 @@ python3 cli.py match --target "Jezero Crater"
                          v
        [ H_hab: SHIELDED HABITAT CORE ] ------------------------ [ H_isru: VOLATILE MINING ]
        • H3 Index: 876086872ffffff (Resolution 7)            3.20 km        • H3 Index: 876086876ffffff (Resolution 7)
-       • Shielding: 3-5m Regolith Overburden / Void      Rover Haul      • Resource: Lobate Debris Apron / Glacial Su
+       • Shielding: 3 to 5 m Regolith Overburden / Void      Rover Haul      • Resource: Lobate Debris Apron / Glacial Su
        • Radiation: Attenuated to < 35 mSv/yr            Corridor        • Hauling Work: 918.0 J/kg (0.26 kWh/ton)
 
 10. EXECUTIVE MISSION STORYTELLING (Layer C - Plain-English Mission Takeaways)

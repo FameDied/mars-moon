@@ -351,7 +351,7 @@ Rank Body Target Base ID                     Coords (Lat, Lon)    U_base  M_go E
 
 
 ========================================================================================================================
-SECTION 5: OPERATIONAL CLI COMMANDS FOR LIVE HACKATHON DEMONSTRATION
+SECTION 5: OPERATIONAL CLI COMMANDS FOR LIVE DEMONSTRATION & VERIFICATION
 ========================================================================================================================
 
 The following commands can be executed directly from the terminal to demonstrate live convergence and decision scorecards:

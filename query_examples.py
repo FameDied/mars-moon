@@ -139,42 +139,42 @@ cursor.execute("""
 SELECT site_name, body, catalog_category,
        ROUND(
            (edl_safety_score * 0.40 + survivability_comms_score * 0.25 + isru_resource_score * 0.20 + science_return_score * 0.15), 2
-       ) AS judge_custom_score,
+       ) AS mcda_custom_score,
        edl_safety_score, survivability_comms_score, isru_resource_score, science_return_score,
        pareto_rank
 FROM v_landing_site_pareto_ranks
 WHERE body = 'Moon'
-ORDER BY judge_custom_score DESC
+ORDER BY mcda_custom_score DESC
 LIMIT 5;
 """)
 top_moon_mcda = cursor.fetchall()
 dt_moon_mcda = (time.time() - t0) * 1000.0
 
 print(f"  [Lunar Candidate Sites Query Execution Time: {dt_moon_mcda:.2f} ms (< 2.0 ms real-time goal reached)]")
-print(f"  Judge Weighting: 40% Safety, 25% Comms, 20% ISRU, 15% Science Return:")
+print(f"  Custom Weighting: 40% Safety, 25% Comms, 20% ISRU, 15% Science Return:")
 for r in top_moon_mcda:
-    print(f"  • {r['site_name']:<46} | Custom: {r['judge_custom_score']:>5.1f} | Safety: {r['edl_safety_score']:>5.1f} | Comms: {r['survivability_comms_score']:>5.1f} | ISRU: {r['isru_resource_score']:>5.1f} | Sci: {r['science_return_score']:>5.1f} | Pareto #{r['pareto_rank']}")
+    print(f"  • {r['site_name']:<46} | Custom: {r['mcda_custom_score']:>5.1f} | Safety: {r['edl_safety_score']:>5.1f} | Comms: {r['survivability_comms_score']:>5.1f} | ISRU: {r['isru_resource_score']:>5.1f} | Sci: {r['science_return_score']:>5.1f} | Pareto #{r['pareto_rank']}")
 
 t0 = time.time()
 cursor.execute("""
 SELECT site_name, body, catalog_category,
        ROUND(
            (edl_safety_score * 0.30 + survivability_comms_score * 0.10 + isru_resource_score * 0.40 + science_return_score * 0.20), 2
-       ) AS judge_custom_score,
+       ) AS mcda_custom_score,
        edl_safety_score, survivability_comms_score, isru_resource_score, science_return_score,
        pareto_rank
 FROM v_landing_site_pareto_ranks
 WHERE body = 'Mars'
-ORDER BY judge_custom_score DESC
+ORDER BY mcda_custom_score DESC
 LIMIT 5;
 """)
 top_mars_mcda = cursor.fetchall()
 dt_mars_mcda = (time.time() - t0) * 1000.0
 
 print(f"\n  [Martian Candidate Sites Query Execution Time: {dt_mars_mcda:.2f} ms (< 2.0 ms real-time goal reached)]")
-print(f"  Judge Weighting: 30% Safety, 10% Comms, 40% ISRU, 20% Science Return:")
+print(f"  Custom Weighting: 30% Safety, 10% Comms, 40% ISRU, 20% Science Return:")
 for r in top_mars_mcda:
-    print(f"  • {r['site_name']:<46} | Custom: {r['judge_custom_score']:>5.1f} | Safety: {r['edl_safety_score']:>5.1f} | Comms: {r['survivability_comms_score']:>5.1f} | ISRU: {r['isru_resource_score']:>5.1f} | Sci: {r['science_return_score']:>5.1f} | Pareto #{r['pareto_rank']}")
+    print(f"  • {r['site_name']:<46} | Custom: {r['mcda_custom_score']:>5.1f} | Safety: {r['edl_safety_score']:>5.1f} | Comms: {r['survivability_comms_score']:>5.1f} | ISRU: {r['isru_resource_score']:>5.1f} | Sci: {r['science_return_score']:>5.1f} | Pareto #{r['pareto_rank']}")
 
 # 10. Sub-Millisecond Uber H3 Spatial Joins (Pure SQLite GIS)
 print_section("10. SUB-MILLISECOND UBER H3 SPATIAL JOINS IN PURE SQLITE")
