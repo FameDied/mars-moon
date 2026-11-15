@@ -393,8 +393,8 @@ def build_atlas_x_presentation(output_path="ATLAS-X_Planetary_Architecture_Prese
     p = tf.paragraphs[0]
     r = p.add_run(); r.text = "OPTIMIZATION HIGHLIGHTS: MARS & MOON TARGETS\n"; r.font.name = FONT_MONO; r.font.size = Pt(9.5); r.font.bold = True; r.font.color.rgb = C_EMERALD
     bullets_opt = [
-        ("Hellas Basin (-7,150 m Elevation): ", "Wins for heavy payload Entry, Descent & Landing (EDL). Maximized atmospheric column provides a +45% to +60% aerodynamic deceleration mass bonus."),
-        ("Jezero Crater (Astrobiology): ", "Wins for delta clay & carbonate biosignature detection under strict COSPAR Category IVb/c Special Region planetary protection buffers."),
+        ("Hellas Basin (-7,150 m Elevation): ", "Optimal candidate for heavy payload Entry, Descent & Landing (EDL). Maximized atmospheric column provides a +45% to +60% aerodynamic deceleration mass bonus."),
+        ("Jezero Crater (Astrobiology): ", "Optimal candidate for delta clay & carbonate biosignature detection under strict COSPAR Category IVb/c Special Region planetary protection buffers."),
         ("Nobile South Plateau (Moon, +3,480 m): ", "Rank #1 Lunar Outpost: 94.9% peak solar illumination, 85.0% Direct-to-Earth LoS, and 1.90 km rover haul distance to cryogenic PSR water ice.")
     ]
     for btitle, bbody in bullets_opt:

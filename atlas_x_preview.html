@@ -114,16 +114,16 @@
         <span class="text-[#57554F]">GUIDED ARCHITECTURE WALKTHROUGH:</span>
       </div>
       <div class="flex flex-wrap gap-1.5">
-        <button onclick="activatePitchStep(1)" id="pitchStep1" class="px-2.5 py-1 border border-black bg-black text-white font-bold transition-all">
+        <button onclick="activateDemoStep(1)" id="demoStep1" class="px-2.5 py-1 border border-black bg-black text-white font-bold transition-all">
           Phase 1: Engineering Screening (No-Go Sliders)
         </button>
-        <button onclick="activatePitchStep(2)" id="pitchStep2" class="px-2.5 py-1 border border-[#D8D4C7] bg-[#F5F4F0] hover:bg-white text-black transition-all">
+        <button onclick="activateDemoStep(2)" id="demoStep2" class="px-2.5 py-1 border border-[#D8D4C7] bg-[#F5F4F0] hover:bg-white text-black transition-all">
           Phase 2: Twin Reveal &amp; Sampling Filter
         </button>
-        <button onclick="activatePitchStep(3)" id="pitchStep3" class="px-2.5 py-1 border border-[#D8D4C7] bg-[#F5F4F0] hover:bg-white text-black transition-all">
+        <button onclick="activateDemoStep(3)" id="demoStep3" class="px-2.5 py-1 border border-[#D8D4C7] bg-[#F5F4F0] hover:bg-white text-black transition-all">
           Phase 3: 5-Axis Fingerprint &amp; Reality Gap
         </button>
-        <button onclick="activatePitchStep(4)" id="pitchStep4" class="px-2.5 py-1 border border-[#D8D4C7] bg-[#F5F4F0] hover:bg-white text-black transition-all">
+        <button onclick="activateDemoStep(4)" id="demoStep4" class="px-2.5 py-1 border border-[#D8D4C7] bg-[#F5F4F0] hover:bg-white text-black transition-all">
           Phase 4: Data Provenance &amp; Verification
         </button>
       </div>
@@ -1068,9 +1068,9 @@ WHERE s.site_id = 'MOON_ARTEMIS_PEAK_NEAR_SHACKLETON_PAD_01';
       document.getElementById('provenanceDrawer').classList.add('closed');
     }
 
-    function activatePitchStep(stepNumber) {
+    function activateDemoStep(stepNumber) {
       [1, 2, 3, 4].forEach(i => {
-        const btn = document.getElementById(`pitchStep${i}`);
+        const btn = document.getElementById(`demoStep${i}`);
         if (i === stepNumber) {
           btn.className = "px-2.5 py-1 border border-black bg-black text-white font-bold transition-all";
         } else {
