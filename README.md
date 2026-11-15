@@ -6,6 +6,14 @@
 [![Python Version](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13%20%7C%203.14-blue.svg)](pyproject.toml)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Open Science](https://img.shields.io/badge/Open%20Science-Reproducible%20Pipeline-blueviolet.svg)](#)
+[![Live Mission Control](https://img.shields.io/badge/Live%20Mission%20Control-Online%2024%2F7-brightgreen.svg)](https://famedied.github.io/mars-moon/)
+
+---
+
+> [!TIP]
+> **Live 3D Mission Control Application (24/7/365 Public Access):**
+> Experience the full interactive 3D planetary explorer, 524 candidate landing sites, 12 terrestrial analogs, Split-Twin radar, and multi-attribute utility tradespace live in your browser:
+> 🌐 **[https://famedied.github.io/mars-moon/](https://famedied.github.io/mars-moon/)**
 
 ---
 
