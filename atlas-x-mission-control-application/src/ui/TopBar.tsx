@@ -35,6 +35,16 @@ export function TopBar() {
       <div className="flex items-center gap-2">
         <button className={`btn-ghost ${a.focus === 'earth' ? 'active' : ''}`} onClick={a.focusEarth}>🌍 Focus Earth Analogs</button>
         <button className="btn-ghost" onClick={() => a.setRepoOpen(true)}>&lt;/&gt; Repo</button>
+        <a
+          href="https://github.com/FameDied/mars-moon"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-ghost !text-[#38BDF8] !border-[#38BDF8]/40 hover:!bg-[#38BDF8]/10 flex items-center gap-1.5"
+          title="Open repository on GitHub in a new tab"
+        >
+          <span>View GitHub Repo</span>
+          <span className="text-[11px]">↗</span>
+        </a>
       </div>
     </div>
   );

@@ -17,13 +17,27 @@ export function Hero() {
     <div className="absolute inset-0 z-20 pointer-events-none">
       <div className="absolute inset-x-0 top-0 h-[62%]" style={{ background: 'linear-gradient(180deg, rgba(4,6,9,.55), rgba(4,6,9,0))', opacity: out ? 0 : 1, transition: `opacity 600ms ${ease}` }} />
 
-      <button
-        className="pointer-events-auto absolute top-5 right-5 btn-ghost"
+      <div
+        className="pointer-events-auto absolute top-5 right-5 flex items-center gap-2"
         style={{ opacity: out ? 0 : 1, transition: `opacity 600ms ${ease}` }}
-        onClick={() => a.setRepoOpen(true)}
       >
-        &lt;/&gt; Repo & Verification (220 Tests)
-      </button>
+        <a
+          href="https://github.com/FameDied/mars-moon"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-ghost !text-[#38BDF8] !border-[#38BDF8]/40 hover:!bg-[#38BDF8]/10 flex items-center gap-1.5"
+          title="Open repository in a new tab"
+        >
+          <span>View GitHub Repo</span>
+          <span className="text-[11px]">↗</span>
+        </a>
+        <button
+          className="btn-ghost"
+          onClick={() => a.setRepoOpen(true)}
+        >
+          &lt;/&gt; Repo &amp; Verification (220 Tests)
+        </button>
+      </div>
 
       <div
         className="absolute inset-x-0 flex flex-col items-center text-center px-6"

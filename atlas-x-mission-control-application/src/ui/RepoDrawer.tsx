@@ -50,9 +50,40 @@ export function RepoDrawer() {
       >
         <div className="flex items-center justify-between px-5 h-12 border-b border-white/10 sticky top-0 z-10" style={{ background: 'rgba(7,10,16,.96)' }}>
           <span className="eyebrow !text-[#c4ccd8]">&lt;/&gt; Repo &amp; Verification</span>
-          <button className="btn-ghost" onClick={() => setRepoOpen(false)}>Close ×</button>
+          <div className="flex items-center gap-2">
+            <a
+              href="https://github.com/FameDied/mars-moon"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ghost !text-[#38BDF8] !border-[#38BDF8]/40 hover:!bg-[#38BDF8]/10 flex items-center gap-1.5 !px-2.5 !py-1 text-[11px]"
+              title="Open repository in a new tab"
+            >
+              <span>View GitHub Repo</span>
+              <span className="text-[11px]">↗</span>
+            </a>
+            <button className="btn-ghost" onClick={() => setRepoOpen(false)}>Close ×</button>
+          </div>
         </div>
         <div className="px-5 py-5 space-y-7">
+          <a
+            href="https://github.com/FameDied/mars-moon"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-between p-3 border border-[#38BDF8]/30 bg-[#38BDF8]/5 hover:bg-[#38BDF8]/15 transition-all rounded block group"
+          >
+            <div className="flex items-center gap-2.5">
+              <span className="text-[#38BDF8] text-base">⌥</span>
+              <div>
+                <div className="mono text-[12px] font-medium text-white flex items-center gap-1.5">
+                  <span>github.com/FameDied/mars-moon</span>
+                  <span className="text-[#38BDF8] group-hover:translate-x-0.5 transition-transform">↗</span>
+                </div>
+                <div className="text-[10px] text-[#7c8797]">Branch: main · Official NPR 7150.2D Class B Architecture</div>
+              </div>
+            </div>
+            <span className="mono text-[10px] text-[#38BDF8] border border-[#38BDF8]/40 px-2 py-0.5 group-hover:border-[#38BDF8] transition-colors">OPEN REPO ↗</span>
+          </a>
+
           <section>
             <div className="eyebrow">License</div>
             <div className="flex items-baseline justify-between mt-1.5">
