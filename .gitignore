@@ -11,3 +11,8 @@ atlas-x-mission-control-application.zip
 TEAMWORK*
 teamwork*
 
+# Video production assets (local only)
+videos/
+*.mp4
+*.wav
+
