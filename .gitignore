@@ -1,6 +1,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.pytest_cache/
 .DS_Store
 node_modules/
 atlas-x-mission-control-application.zip
@@ -11,8 +12,22 @@ atlas-x-mission-control-application.zip
 TEAMWORK*
 teamwork*
 
+# Extraneous and temporary scratch/working files
+claudenasa*
+*claudenasa*
+gpt6nasa*
+*gpt6nasa*
+*scratch*
+*stockcake*
+astronaut-on-moon-stockcake.jpg
+*.tmp
+*.bak
+*.swp
+*~
+
 # Video production assets (local only)
 videos/
 *.mp4
 *.wav
+
 

@@ -37,7 +37,7 @@ def build_atlas_x_presentation(output_path="ATLAS-X_Planetary_Architecture_Prese
     FONT_BODY = "Arial"
     FONT_MONO = "Courier New"
 
-    def add_bg_and_header(slide, slide_num, total_slides, eyebrow_text, title_text, category_badge="SPACE APPS 2024"):
+    def add_bg_and_header(slide, slide_num, total_slides, eyebrow_text, title_text, category_badge="ATLAS-X ARCHITECTURE"):
         # Full void background
         bg = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, prs.slide_width, prs.slide_height)
         bg.fill.solid()
@@ -215,10 +215,10 @@ def build_atlas_x_presentation(output_path="ATLAS-X_Planetary_Architecture_Prese
 
     print("Generating Slide 1: Title & Core Problem...")
     # ==========================================
-    # SLIDE 1: Title & The Core Problem (Impact / Relevance)
+    # SLIDE 1: Title & The Core Problem (Architecture Overview)
     # ==========================================
     s1 = prs.slides.add_slide(blank_layout)
-    add_bg_and_header(s1, 1, 7, "Impact / Relevance", "ATLAS-X: Physics-First Planetary Base Architecture & Split-Twin Analog Engine")
+    add_bg_and_header(s1, 1, 7, "Architecture Overview", "ATLAS-X: Physics-First Planetary Base Architecture & Split-Twin Analog Engine")
 
     col1_w = Inches(5.6)
     c1_left = Inches(0.8)
@@ -281,10 +281,10 @@ def build_atlas_x_presentation(output_path="ATLAS-X_Planetary_Architecture_Prese
 
     print("Generating Slide 2: System Architecture & Data Provenance...")
     # ==========================================
-    # SLIDE 2: System Architecture & Data Provenance (Best Use of Data)
+    # SLIDE 2: System Architecture & Data Provenance
     # ==========================================
     s2 = prs.slides.add_slide(blank_layout)
-    add_bg_and_header(s2, 2, 7, "Best Use of Data", "System Architecture & Multi-Agency Data Provenance")
+    add_bg_and_header(s2, 2, 7, "Data Provenance", "System Architecture & Multi-Agency Data Provenance")
 
     # Top: 4 Key Numbers Stat Banners
     stat_w = Inches(2.78)
@@ -359,10 +359,10 @@ def build_atlas_x_presentation(output_path="ATLAS-X_Planetary_Architecture_Prese
 
     print("Generating Slide 3: Live Mission Director & Engineering Cutoffs...")
     # ==========================================
-    # SLIDE 3: Live Mission Director & Engineering Cutoffs (Best Use of Science)
+    # SLIDE 3: Live Mission Director & Engineering Cutoffs
     # ==========================================
     s3 = prs.slides.add_slide(blank_layout)
-    add_bg_and_header(s3, 3, 7, "Best Use of Science", "Live Mission Director & Engineering Cutoffs")
+    add_bg_and_header(s3, 3, 7, "Physical Constraints", "Live Mission Director & Engineering Cutoffs")
 
     col3_w = Inches(5.5)
 
@@ -411,10 +411,10 @@ def build_atlas_x_presentation(output_path="ATLAS-X_Planetary_Architecture_Prese
 
     print("Generating Slide 4: Permanent Base Topology & Survival Engineering...")
     # ==========================================
-    # SLIDE 4: Permanent Base Topology & Survival Engineering (Creativity / Feasibility)
+    # SLIDE 4: Permanent Base Topology & Survival Engineering
     # ==========================================
     s4 = prs.slides.add_slide(blank_layout)
-    add_bg_and_header(s4, 4, 7, "Creativity / Feasibility", "Permanent Base Topology & Survival Engineering")
+    add_bg_and_header(s4, 4, 7, "Base Triad Topology", "Permanent Base Topology & Survival Engineering")
 
     col4_w = Inches(5.5)
 
@@ -463,10 +463,10 @@ def build_atlas_x_presentation(output_path="ATLAS-X_Planetary_Architecture_Prese
 
     print("Generating Slide 5: The Split-Twin Discovery & Sample Verification...")
     # ==========================================
-    # SLIDE 5: The "Split-Twin" Discovery & Sample Verification (Best Use of Science)
+    # SLIDE 5: The "Split-Twin" Discovery & Sample Verification
     # ==========================================
     s5 = prs.slides.add_slide(blank_layout)
-    add_bg_and_header(s5, 5, 7, "Best Use of Science", "The \"Split-Twin\" Discovery & Sample Verification")
+    add_bg_and_header(s5, 5, 7, "Split-Twin Analogs", "The \"Split-Twin\" Discovery & Sample Verification")
 
     col5_w = Inches(5.5)
 
@@ -517,10 +517,10 @@ def build_atlas_x_presentation(output_path="ATLAS-X_Planetary_Architecture_Prese
 
     print("Generating Slide 6: Verification, Reproducibility & Open Science...")
     # ==========================================
-    # SLIDE 6: Verification, Reproducibility & Open Science (Validity / Best Technology)
+    # SLIDE 6: Verification, Reproducibility & Open Science
     # ==========================================
     s6 = prs.slides.add_slide(blank_layout)
-    add_bg_and_header(s6, 6, 7, "Validity / Best Technology", "Verification, Reproducibility & Open Science")
+    add_bg_and_header(s6, 6, 7, "Verification & Open Science", "Verification, Reproducibility & Open Science")
 
     col6_w = Inches(5.5)
 
@@ -577,23 +577,23 @@ def build_atlas_x_presentation(output_path="ATLAS-X_Planetary_Architecture_Prese
                            spec_hint="Terminal Execution: 220 passed in 6.22s",
                            aspect_ratio="16:9 Terminal View")
 
-    print("Generating Slide 7: Try ATLAS-X Live (Call to Action for Judges)...")
+    print("Generating Slide 7: Try ATLAS-X Live (Live Access & Deployment)...")
     # ==========================================
-    # SLIDE 7: Try ATLAS-X Live (Call to Action for Judges)
+    # SLIDE 7: Try ATLAS-X Live (Live Access & Deployment)
     # ==========================================
     s7 = prs.slides.add_slide(blank_layout)
-    add_bg_and_header(s7, 7, 7, "Call to Action for Judges", "Try ATLAS-X Live — Explore 524 Sites & Split-Twins")
+    add_bg_and_header(s7, 7, 7, "Live Access & Deployment", "Try ATLAS-X Live — Explore 524 Sites & Split-Twins")
 
     col7_w = Inches(5.5)
 
-    # Card 1: Direct Judge Access Links
+    # Card 1: Direct Access Links
     c7_1 = create_card(s7, Inches(0.8), Inches(1.65), col7_w, Inches(2.55), border_color=C_CYAN, fill_color=C_CARD_ALT)
     s7_ind1 = s7.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.8), Inches(1.65), Inches(0.08), Inches(2.55))
     s7_ind1.fill.solid(); s7_ind1.fill.fore_color.rgb = C_CYAN; s7_ind1.line.fill.background()
     tf = c7_1.text_frame; tf.word_wrap = True
     tf.margin_left = Inches(0.22); tf.margin_top = Inches(0.12); tf.margin_right = Inches(0.15); tf.margin_bottom = Inches(0.1)
     p = tf.paragraphs[0]
-    r = p.add_run(); r.text = "DIRECT JUDGE ACCESS LINKS (ONLINE 24/7/365)\n"; r.font.name = FONT_MONO; r.font.size = Pt(9.5); r.font.bold = True; r.font.color.rgb = C_CYAN
+    r = p.add_run(); r.text = "DIRECT ACCESS & VERIFICATION LINKS (ONLINE 24/7/365)\n"; r.font.name = FONT_MONO; r.font.size = Pt(9.5); r.font.bold = True; r.font.color.rgb = C_CYAN
 
     p1 = tf.add_paragraph()
     r = p1.add_run(); r.text = "🌐 LIVE 3D MISSION CONTROL APP:\n"; r.font.name = FONT_MONO; r.font.size = Pt(9); r.font.bold = True; r.font.color.rgb = C_WHITE
@@ -613,19 +613,19 @@ def build_atlas_x_presentation(output_path="ATLAS-X_Planetary_Architecture_Prese
     r_u3.hyperlink.address = "https://famedied.github.io/mars-moon/atlas-x-architecture.pdf"
     r_desc3 = p3.add_run(); r_desc3.text = "• Full paper, mathematical proofs, and verification audits"; r_desc3.font.name = FONT_BODY; r_desc3.font.size = Pt(8); r_desc3.font.color.rgb = C_LIGHT
 
-    # Card 2: Summary of Scoring Criteria
+    # Card 2: Summary of Architectural Pillars
     c7_2 = create_card(s7, Inches(0.8), Inches(4.35), col7_w, Inches(2.55), border_color=C_EMERALD)
     s7_ind2 = s7.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.8), Inches(4.35), Inches(0.08), Inches(2.55))
     s7_ind2.fill.solid(); s7_ind2.fill.fore_color.rgb = C_EMERALD; s7_ind2.line.fill.background()
     tf = c7_2.text_frame; tf.word_wrap = True
     tf.margin_left = Inches(0.22); tf.margin_top = Inches(0.12); tf.margin_right = Inches(0.15); tf.margin_bottom = Inches(0.1)
     p = tf.paragraphs[0]
-    r = p.add_run(); r.text = "WHY ATLAS-X EXCELS ACROSS ALL JUDGING CRITERIA\n"; r.font.name = FONT_MONO; r.font.size = Pt(9.5); r.font.bold = True; r.font.color.rgb = C_EMERALD
+    r = p.add_run(); r.text = "CORE ARCHITECTURAL PILLARS & VERIFIED CAPABILITIES\n"; r.font.name = FONT_MONO; r.font.size = Pt(9.5); r.font.bold = True; r.font.color.rgb = C_EMERALD
     criteria = [
-        ("Best Use of Data: ", "Harmonized 37 NASA/USGS/ESA datasets into unified Uber H3 schema; zero data silos."),
-        ("Best Use of Science: ", "Eliminated fake matches through authentic physical delta-vectors (gravity crane, cryo chamber, radiation)."),
-        ("Creativity & Feasibility: ", "Pioneered the 3-Hexagon Base Triad (>1.5 km plume buffer) and Complementary Split-Twin pairing."),
-        ("Validity & Technology: ", "220 / 220 passing tests, Taylor variance propagation, and sub-millisecond local SQLite/Parquet.")
+        ("Harmonized Data Architecture: ", "Harmonized 37 NASA/USGS/ESA datasets into unified Uber H3 schema; zero data silos."),
+        ("Physics-First Fidelity: ", "Eliminated fake matches through authentic physical delta-vectors (gravity crane, cryo chamber, radiation)."),
+        ("Operational Feasibility: ", "Pioneered the 3-Hexagon Base Triad (>1.5 km plume buffer) and Complementary Split-Twin pairing."),
+        ("Rigorous Verification: ", "220 / 220 passing tests, Taylor variance propagation, and sub-millisecond local SQLite/Parquet.")
     ]
     for btitle, bbody in criteria:
         pb = tf.add_paragraph()
