@@ -2,6 +2,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 .DS_Store
+node_modules/
+atlas-x-mission-control-application.zip
 
 # Temporary teamwork and swarm handoff artifacts
 *teamwork*.md
