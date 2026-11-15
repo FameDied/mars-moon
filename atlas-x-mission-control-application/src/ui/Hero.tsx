@@ -22,6 +22,16 @@ export function Hero() {
         style={{ opacity: out ? 0 : 1, transition: `opacity 600ms ${ease}` }}
       >
         <a
+          href="./atlas-x-architecture.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-ghost !text-[#f59e0b] !border-[#f59e0b]/40 hover:!bg-[#f59e0b]/10 flex items-center gap-1.5"
+          title="Open Project Architecture & Research Paper PDF"
+        >
+          <span>📄 Architecture PDF</span>
+          <span className="text-[11px]">↗</span>
+        </a>
+        <a
           href="https://github.com/FameDied/mars-moon"
           target="_blank"
           rel="noopener noreferrer"

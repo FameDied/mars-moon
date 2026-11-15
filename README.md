@@ -7,13 +7,14 @@
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Open Science](https://img.shields.io/badge/Open%20Science-Reproducible%20Pipeline-blueviolet.svg)](#)
 [![Live Mission Control](https://img.shields.io/badge/Live%20Mission%20Control-Online%2024%2F7-brightgreen.svg)](https://famedied.github.io/mars-moon/)
+[![Architecture Paper PDF](https://img.shields.io/badge/Architecture%20Paper-PDF%20Document-red.svg)](https://famedied.github.io/mars-moon/atlas-x-architecture.pdf)
 
 ---
 
 > [!TIP]
-> **Live 3D Mission Control Application (24/7/365 Public Access):**
-> Experience the full interactive 3D planetary explorer, 524 candidate landing sites, 12 terrestrial analogs, Split-Twin radar, and multi-attribute utility tradespace live in your browser:
-> 🌐 **[https://famedied.github.io/mars-moon/](https://famedied.github.io/mars-moon/)**
+> **Live 3D Mission Control & Architecture Documentation (24/7/365 Public Access):**
+> * 🌐 **Live 3D Mission Control Application:** **[https://famedied.github.io/mars-moon/](https://famedied.github.io/mars-moon/)**
+> * 📄 **Project Architecture & Scientific Paper (PDF):** **[Open Live PDF](https://famedied.github.io/mars-moon/atlas-x-architecture.pdf)** | **[GitHub Document Viewer](docs/ATLAS-X_Planetary_Base_Architecture.pdf)**
 
 ---
 

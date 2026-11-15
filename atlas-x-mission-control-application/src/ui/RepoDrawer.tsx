@@ -84,6 +84,25 @@ export function RepoDrawer() {
             <span className="mono text-[10px] text-[#38BDF8] border border-[#38BDF8]/40 px-2 py-0.5 group-hover:border-[#38BDF8] transition-colors">OPEN REPO ↗</span>
           </a>
 
+          <a
+            href="./atlas-x-architecture.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-between p-3 border border-[#f59e0b]/40 bg-[#f59e0b]/5 hover:bg-[#f59e0b]/15 transition-all rounded block group"
+          >
+            <div className="flex items-center gap-2.5">
+              <span className="text-[#f59e0b] text-base">📄</span>
+              <div>
+                <div className="mono text-[12px] font-medium text-white flex items-center gap-1.5">
+                  <span>ATLAS-X Architecture &amp; Analog Engine (PDF)</span>
+                  <span className="text-[#f59e0b] group-hover:translate-x-0.5 transition-transform">↗</span>
+                </div>
+                <div className="text-[10px] text-[#7c8797]">Full Research Paper, Mathematical Calculus &amp; Verification</div>
+              </div>
+            </div>
+            <span className="mono text-[10px] text-[#f59e0b] border border-[#f59e0b]/40 px-2 py-0.5 group-hover:border-[#f59e0b] transition-colors">VIEW PDF ↗</span>
+          </a>
+
           <section>
             <div className="eyebrow">License</div>
             <div className="flex items-baseline justify-between mt-1.5">

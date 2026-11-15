@@ -36,6 +36,16 @@ export function TopBar() {
         <button className={`btn-ghost ${a.focus === 'earth' ? 'active' : ''}`} onClick={a.focusEarth}>🌍 Focus Earth Analogs</button>
         <button className="btn-ghost" onClick={() => a.setRepoOpen(true)}>&lt;/&gt; Repo</button>
         <a
+          href="./atlas-x-architecture.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-ghost !text-[#f59e0b] !border-[#f59e0b]/40 hover:!bg-[#f59e0b]/10 flex items-center gap-1.5"
+          title="Open Project Architecture & Research Paper PDF"
+        >
+          <span>📄 PDF</span>
+          <span className="text-[11px]">↗</span>
+        </a>
+        <a
           href="https://github.com/FameDied/mars-moon"
           target="_blank"
           rel="noopener noreferrer"
